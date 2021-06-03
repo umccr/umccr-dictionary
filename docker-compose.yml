@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  ddvis:
+    image: quay.io/victorskl/ddvis
+    container_name: ddvis
+    volumes:
+     - ./schema:/usr/share/nginx/html/schema:ro
+    ports:
+     - 8080:80
+
+  g3po:
+    image: quay.io/victorskl/g3po
+    command: ["tail", "-f", "/dev/null"]
+    container_name: g3po
+    volumes:
+      - ./schema:/schema:rw
+      - ./dictionary:/dictionary:rw

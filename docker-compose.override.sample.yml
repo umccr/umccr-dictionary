@@ -1,0 +1,13 @@
+# NOTE:
+# This is optional override and docker-compose.override.yml is gitignore
+#
+# Usage:
+#   cp docker-compose.override.sample.yml docker-compose.override.yml
+
+version: '3.1'
+
+services:
+
+  ddvis:
+    ports:
+     - 8888:80

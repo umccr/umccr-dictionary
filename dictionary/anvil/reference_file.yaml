@@ -1,0 +1,472 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "reference_file"
+title: Reference File
+type: object
+namespace: https://gen3.theanvil.io
+category: data_file
+program: '*'
+project: '*'
+description: "Data file containing any type of reference required for a data analysis."
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: reference_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: projects
+        backref: reference_files
+        label: data_from
+        target_type: project
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref: "_definitions.yaml#/data_file_properties"
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - VCF
+      - junc
+      - tbi
+      - txt
+      - tsv
+      - xlsx
+      - bam
+      - bai
+      - fastq
+      - bigWig
+      - crai
+      - cram
+      - bed
+      - bim
+      - fam
+      - pdf
+      - idat
+      - svs
+      - tab
+      - gds
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - Aligned Reads
+      - Analysis Supplement
+      - Unaligned Reads
+      - Annotated Mutation
+      - Allele Specific Expression
+      - Junction Files
+      - Haplotype Phasing
+      - Histology
+      - Clinical Supplement
+      - Transcriptome Expression
+      - Variants Annotation
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Analysis
+      - Sequencing Reads
+      - Single Nucleotide Variation
+      - Simple Nucleotide Variation
+      - Transcriptome Profiling
+      - Clinical
+      - Imaging
+      - Supplemental      
+
+  nucleic_acid_isolation_batch_id:
+    description: >-
+      Nucleic Acid Isolation Batch ID. (GTEx)
+    type: string
+  
+  nucleic_acid_isolation_batch_type:
+    description: >-
+      Type of nucleic acid isolation batch. (GTEx)
+    type: string
+
+  date_nucleic_acid_isolation:
+    description: >-
+      Date of nucleic acid isolation batch. (GTEx)
+    type: string
+
+  genotype_expression_batch_id:
+    description: >-
+      Genotype or Expression Batch ID. (GTEx)
+    type: string
+
+  date_genotype_expression:
+    description: >-
+      Date of genotype or expression batch. (GTEx)
+    type: string
+
+  genotype_expression_batch_type:
+    description: >-
+      Type of genotype or expression batch. (GTEx)
+    type: string
+
+  analyte_type:
+    description: >-
+      Analyte Type. (GTEx)
+    enum:
+      - 'DNA:DNA Genomic'
+      - 'RNA:Total RNA'
+      - 'Tissue:Fresh Frozen Tissue'
+      - 'DNA:DNA Somatic'
+    
+  flagged_for_removal:
+    description: >-
+      Samples flagged for removal from analysis. (GTEx)
+    type: string
+
+  flagged_sample_remarks:
+    description: >-
+      Additional remarks about flagged samples. (GTEx)
+    type: string
+
+  analysis_freeze:
+    description: >-
+      Samples included in the GTEx Analysis Freeze. (GTEx)
+    enum:
+      - 'EXCLUDE'
+      - 'OMNI'
+      - 'RNASEQ'
+      - 'WES'
+      - 'WGS'
+
+  gtc_file_name:
+    description: >-
+      Name of the genotype gtc file. (GTEx)
+    type: string
+
+  end_2_mapping_rate:
+    description: >-
+      End 2 Mapping Rate: the number of End 2 mapped reads divided by the total number of End 1 reads. (GTEx)
+    type: number
+
+  chimeric_pairs:
+    description: >-
+      Chimeric Pairs: Pairs whose mates map to different genes. (GTEx)
+    type: integer
+
+  intragenic_rate:
+    description: >-
+      Intragenic Rate: The fraction of reads that map within genes (within introns or exons). (GTEx)
+    type: number
+
+  number_of_gaps:
+    description: >-
+      Number of Gaps: Number of regions with >=5 bases with zero coverage. (GTEx)
+    type: integer
+
+  mapping_rate:
+    description: >-
+      Mapping Rate: Ratio of total mapped reads to total reads. (GTEx)
+    type: number
+
+  exonic_rate:
+    description: >-
+      Exonic Rate: The fraction of reads that map within exons. (GTEx)
+    type: number
+
+  five_prime_50_base_normalization:
+    description: >-
+      5' 50-based normalization: 50 (this number is the value for the transcript end length parameter) refers to the definition of how many bases are considered at the end; this value is the ratio between the coverage at the 5' end and the average coverage of the full transcript, averaged over all transcripts. (GTEx)
+    type: number
+
+  gene_detected:
+    description: >-
+      Genes Detected: Total number of genes with at least 5 exon mapping reads. (GTEx)
+    type: integer
+
+  unique_rate_of_mapped:
+    description: >-
+      Unique Rate of Mapped: Unique reads divided by all mapped reads. (GTEx)
+    type: number
+
+  three_prime_50_base_normalization:
+    description: >-
+      3' 50-base normalization: the ratio between the coverage at the 3' end and the average coverage of the full transcript, averaged over all transcripts. (GTEx)
+    type: number
+
+  read_length:
+    description: >-
+      Read Length: maximum detected read length found. (GTEx)
+    type: integer
+
+  mean_coverage_per_base:
+    description: >-
+      Mean Coverage Per Base: Coverage is averaged per base across each transcript, and averaged again across all transcripts. (GTEx)
+    type: number
+
+  end_1_mismatch_rate:
+    description: >-
+      End 1 Mismatch Rate: The number of End 1 bases not matching the reference divided by the total number of End 1 bases. (GTEx)
+    type: number
+
+  fragment_length_stddev:
+    description: >-
+      Fragment Length StdDev: The fragment length is the distance between the start of an upstream read and the end of the downstream pair mate. (GTEx)
+    type: integer
+
+  estimated_library_size:
+    description: >-
+      Estimated library size: Number of expected fragments based on the total reads and duplication rate assuming a Poisson distribution. (GTEx)
+    type: integer
+
+  mapped:
+    description: >-
+      Mapped: Total number of reads aligned/mapped. (GTEx)
+    type: integer
+
+  intergenic_rate:
+    description: >-
+      Intergenic Rate: The fraction of reads that map to the genomic space between genes. (GTEx)
+    type: number
+
+  rrna:
+    description: >-
+      RRNA: Number of all reads (duplicate and non-duplicate) aligning to ribosomal RNA regions. (GTEx)
+    type: integer
+
+  total_reads:
+    description: >-
+      Total: Total reads (filtered to exclude reads with vendor fail or alternative alignment flags). (GTEx)
+    type: integer
+
+  failed_vendor_qc_check:
+    description: >-
+      Failed Vendor QC Check: reads having been designated as failed by the sequencer. (GTEx)
+    type: integer
+
+  mean_coefficient_of_variation:
+    description: >-
+      Mean coefficient of variation: standard deviation in base coverage divided by mean coverage. (GTEx)
+    type: number
+
+  transcripts_detected:
+    description: >-
+      Transcripts Detected: Total number of transcripts with at least 5 exon mapping reads. (GTEx)
+    type: integer
+
+  mapped_pairs:
+    description: >-
+      Mapped Pairs:Total number of pairs for which both ends map. (GTEx)
+    type: integer
+
+  cumulative_gap_length:
+    description: >-
+      Cumulative Gap Length: Cumulative length of gap regions. (GTEx)
+    type: integer
+
+  gap_percentage:
+    description: >-
+      Gap Percentage: The total cumulative gap length divided by the total cumulative transcript lengths. (GTEx)
+    type: number
+
+  unpaired_reads:
+    description: >-
+      Unpaired Reads: number of reads lacking a pair mate. (GTEx)
+    type: integer
+
+  intronic_rate:
+    description: >-
+      Intronic Rate: The fraction of reads that map within introns. (GTEx)
+    type: number
+  
+  mapped_unique_rate_of_total:
+    description: >-
+      Mapped Unique Rate of Total: Ratio of mapping of reads that were aligned and were not duplicates to total reads. (GTEx)
+    type: number
+
+  expression_profiling_efficiency:
+    description: >-
+      Expression Profiling Efficiency: Ratio of exon reads to total reads. (GTEx)
+    type: number
+
+  mapped_unique:
+    description: >-
+      Mapped Unique: Number of reads that were aligned and did not have duplicate flags. (GTEx)
+    type: integer
+
+  end_2_mismatch_rate:
+    description: >-
+      End 2 Mismatch Rate: The number of End 2 bases not matching the reference divided by the total number of End 2 bases. (GTEx)
+    type: number
+
+  end_2_antisense:
+    description: >-
+      End 2 Antisense: Number of reads that were sequenced in the antisense direction. (GTEx)
+    type: integer
+
+  alternative_aligments:
+    description: >-
+      Alternative Aligments: duplicate read entries providing alternative coordinates. (GTEx)
+    type: integer
+
+  end_2_sense:
+    description: >-
+      End 2 Sense: Number of End 2 reads that were sequenced in the sense direction. (GTEx)
+    type: integer
+
+  fragment_length_mean:
+    description: >-
+      Fragment Length Mean: The fragment length is the distance between the start of an upstream read and the end of the downstream pair mate. (GTEx)
+    type: integer
+  
+  end_1_antisense:
+    description: >-
+      End 1 Antisense: Number of End 1 reads that were sequenced in the antisense direction. (GTEx)
+    type: integer
+  
+  split_reads:
+    description: >-
+      Split Reads: The number of reads that span an exon-exon boundary. (GTEx)
+    type: integer
+  
+  base_mismatch_rate:
+    description: >-
+      Base Mismatch Rate: Number of bases not matching the reference divided by the total number of bases aligned. (GTEx)
+    type: number
+
+  end_1_sense:
+    description: >-
+      End 1 Sense: Number of End 1 reads that were sequenced in the sense direction. (GTEx)
+    type: integer
+  
+  end_1_percentage_sense:
+    description: >-
+      End 1 % Sense: Percentage of intragenic End 1 reads that were sequenced in the sense direction. (GTEx)
+    type: number
+
+  end_1_mapping_rate:
+    description: >-
+      End 1 Mapping Rate: the number of End 1 mapped reads divided by the total number of End 1 reads. (GTEx)
+    type: number
+
+  number_covered_5_prime:
+    description: >-
+      Number Covered 5': The number of transcripts that have at least one read in their 5' end. (GTEx)
+    type: integer
+
+  rrna_rate:
+    description: >-
+      RRNA Rate: Ratio of all reads aligned to rRNA regions to total reads. (GTEx)
+    type: number
+
+  duplication_rate_of_mapped:
+    description: >-
+      Duplication Rate of Mapped: Duplicate reads divided by total mapped reads. (GTEx)
+    type: number
+
+  end_2_percentage_sense:
+    description: >-
+      End 2 % Sense: Percentage of intragenic End 2 reads that were sequenced in the sense direction. (GTEx)
+    type: number
+
+  alignment_method:
+    description: >-
+      Alignment method used.
+    type: string
+
+  analyte_type:
+    description: >-
+      Sequence data source (DNA, RNA, etc).
+    enum:
+      - DNA
+      - RNA
+
+  capture_region_bed_file:
+    description: >-
+      Capture region bed file (if applicable).
+    type: string
+
+  data_processing_pipeline:
+    description: >-
+      Data processing pipeline used.
+    type: string
+
+  date_data_generation:
+    description: >-
+      Date of data generation.
+    type: string
+
+  experimental_strategy:
+    description: >-
+      The sequencing strategy used to generate the data file referred to by the ga4gh_drs_uri.
+    type: string
+
+  exome_capture_platform:
+    description: >-
+      Exome capture platform (if applicable).
+    type: string
+
+  functional_equivalence_standard:
+    description: >-
+      Is this a functional equivalence standard?
+    type: boolean
+
+  library_prep_kit_method:
+    description: >-
+      Library prep kit used.
+    type: string
+
+  reference_genome_build:
+    description: >-
+      Reference genome used.
+    type: string
+    pattern: "^GRCh"
+
+  seq_filename:
+    description: >-
+      sequence file name without suffix.
+    type: string
+
+  sequencing_assay:
+    description: >-
+      Type of sequencing assay performed.
+    enum:
+      - MEGA
+      - RNA-Seq
+      - WES
+      - WGS
+
+    
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"
+  projects:
+    $ref: "_definitions.yaml#/to_many_project"

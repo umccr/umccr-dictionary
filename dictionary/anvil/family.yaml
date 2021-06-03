@@ -1,0 +1,130 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "family"
+title: Family
+type: object
+namespace: https://gen3.theanvil.io
+category: clinical
+program: '*'
+project: '*'
+description: >-
+  Collection of all data related to the family members and their relationships.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: subjects
+    backref: families
+    label: member_of
+    target_type: subject
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - subjects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  type:
+    enum: [ "family" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+  state:
+    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    type:
+      - string
+      - "null"
+
+  consanguinity:
+    description: >-
+      Indicate if consanguinity is present or suspected within a family
+    enum:
+      - None suspected
+      - Present
+      - Suspected
+      - Unknown
+
+  consanguinity_detail:
+    description: >-
+      Free text description of any additional consanguinity details.
+    type: string
+
+  family_history:
+    description: >-
+      Flag if there is a known family history for the phenotype (useful if only proband
+      sequenced but extended family history suggestion mode of inheritance was reported).
+    enum:
+      - "No"
+      - "Yes"
+
+  family_id:
+    description: >-
+      The family submitter_id.
+    type: string
+
+  family_onset:
+    description: >-
+      Information regarding age of onset for affected individuals in family if relevant
+      for phenotype.
+    type: string
+
+  maternal_id:
+    description: >-
+      The case submitter_id for the mother.
+    type: string
+
+  paternal_id:
+    description: >-
+      The case submitter_id for the father.
+    type: string
+
+  pedigree_detail:
+    description: >-
+      Pedigree relationship information.
+    type: string
+
+  pedigree_image:
+    description: >-
+      Bucket file reference to pedigree image.
+    type: string
+
+  proband_relationship:
+    description: >-
+      Text description of individual relationship to proband in family, especially
+      useful to capture relationships when connecting distant relatives and connecting
+      relatives not studied.
+    type: string
+
+  twin_id:
+    description: >-
+      subject_id for twins, triplets, etc.
+    type: string
+
+  subjects:
+    $ref: "_definitions.yaml#/to_many"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"

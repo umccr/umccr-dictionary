@@ -1,0 +1,154 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "discovery"
+title: Discovery
+type: object
+namespace: https://gen3.theanvil.io
+category: biospecimen
+program: '*'
+project: '*'
+description: >-
+  List of genomic variations captured in the sequencing data.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: samples
+    backref: discoveries
+    label: derived_from
+    target_type: sample
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - samples
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  alt:
+    description: >-
+      Alternate position of variant
+    type: string
+
+  chrom:
+    description: >-
+      Chromosome of variant
+    type: string
+
+  gene:
+    description: >-
+      Candidate Gene Name
+    type: string
+
+  gene_class:
+    description: >-
+      Indicate of the gene listed is a candidate or known
+    enum:
+      - Known
+      - Tier 1 - Candidate
+      - Tier 2 - Candidate
+      - Unknown
+      
+  hgvsc:
+    description: >-
+      HGVS c. description
+    type: string
+
+  hgvsp:
+    description: >-
+      HGVS p. description
+    type: string
+
+  inheritance_description:
+    description: >-
+      Text describing innheritance model
+    type: array
+    items:
+      enum:
+        - Autosomal dominant
+        - Autosomal recessive (compound heterozygous)
+        - Autosomal recessive (homozygous)
+        - Contiguous gene syndrome
+        - Mitochondrial
+        - Somatic mosaicism
+        - Unknown/Other
+        - X-linked
+        - Y-linked
+        - de novo
+
+  pos:
+    description: >-
+      Start position of variant
+    type: number
+
+  ref:
+    description: >-
+      Reference allele of variant
+    type: string
+
+  significance:
+    description: >-
+      Clinical significance of variant described
+    enum:
+      - Benign
+      - Likely benign
+      - Uncertain significance
+      - Suspected pathogenic
+      - Likely pathogenic
+      - Pathogenic
+
+  sv_name:
+    description: >-
+      Text describing structural variant
+    type: string
+
+  sv_type:
+    description: >-
+      Text describing Structural variant type
+    enum:
+      - Deletion
+      - Duplication
+      - Multiallelic CNV
+      - Insertion
+      - Inversion 
+      - Complex SVs
+      - Other
+      - Unknown
+
+  transcript:
+    description: >-
+      Text description of transcript
+    type: string
+
+  variant_genome_build:
+    description: >-
+      The genome build for identifying the variant position
+    type: string
+    pattern: "^GRCh"
+
+  zygosity:
+    description: >-
+      Zygosity of variant
+    enum:
+      - Heterozygous
+      - Homozygous
+      - Unknown
+
+  samples:
+    $ref: "_definitions.yaml#/to_many"

@@ -1,0 +1,2154 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "subject"
+title: subject
+type: object
+namespace: https://gen3.theanvil.io
+category: clinical
+program: '*'
+project: '*'
+description: >-
+  Collection of some of the basics about a subject (e.g., characterization by age,
+  sex, or race).
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: projects
+    backref: subjects
+    label: describes
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - projects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  abnormal_wbc_history:
+    description: >-
+      Did the Donor have a history of Abnormal WBC at time of death (provided by Primary
+      History Source). Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  abused_prescription_pill:
+    description: >-
+      Does the Donor have a history of prescription pill use that are not prescribed
+      to the donor (provided by Primary History Source)? Question asked as part of
+      an informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  active_encephalitis_at_death:
+    description: >-
+      At time of death, did the donor have active encephalitis (provided by Primary
+      History Source). Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  active_meningitis_at_death:
+    description: >-
+      At time of death, did the donor have active meningitis (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  affected_status:
+    description: >-
+      Indicate affected status of individual. (CMG, CCDG)
+    enum:
+      - Affected
+      - Possibly affected
+      - Unaffected
+      - Unknown
+
+  affected_status_detail:
+    description: >-
+      Detail, such as subtype, regarding affected status. (CMG, CCDG)
+    type: string
+
+  age_at_ecg:
+    description: >-
+      Age in years at ECG. (eMERGE)
+    type: number
+    maximum: 89
+    minimum: 0
+
+  age_at_last_observation:
+    description: >-
+      Age at last observation. For conditions with later age of onset, this field
+      lets users know if individuals marked as unaffected were younger or older than
+      the age when the phenotype is expected to appear.
+    type: integer
+
+  age_at_lipids:
+    description: >-
+      Age (years) at lipid lab. (eMERGE)
+    type: integer
+    maximum: 89
+    minimum: 0
+
+  age_of_onset:
+    description: >-
+      Age of onset (if affected with non-congenital disorder). (CMG, CCDG)
+    type: integer
+
+  age_baseline:
+    description: >-
+      Age at baseline. (CCDG)
+    type: integer
+
+  age_unspecified:
+    description: >-
+      Age as given by study, but unspecified as to when. Most likely corresponds to age at the only visit. (CCDG)
+    type: integer
+
+  age_at_dna_collection:
+    description: >-
+      Age at DNA collection. (CCDG)
+    type: integer
+
+  age_type:
+    description: >-
+      Type of age value provided.
+    enum:
+      - Age at last observation
+      - Age at disease onset
+      - Age at sample taken
+
+  age_value:
+    description: >-
+      Available age value.
+    type: integer
+
+  als_history:
+    description: >-
+      Does the donor have a history of Amyotropic Lateral Sclerosis (Lou Gehrig's
+      disease) (provided by Primary History Source)? Question asked as part of an
+      informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  alzheimer_history:
+    description: >-
+      Does the Donor have a History of Alzheimer's Disease (provided by Primary History
+      Source)?. Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  alzheimer_or_dementia_history:
+    description: >-
+      Loss of intellectual abilities interfering with an individual's social and occupational
+      functions. Causes include Alzheimer's disease, brain injuries, brain tumors,
+      and vascular disorders. Alzheimer's Disease: A progressive, neurodegenerative
+      disease characterized by loss of function and death of nerve cells in several
+      areas of the brain leading to loss of cognitive function such as memory and
+      language. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  amputation_type:
+    description: >-
+      If amputated, the amputation type for leg, above the knee or below the knee. (GTEx)
+    enum:
+      - 'No'
+      - 'Yes'
+      - 'Not Reported'
+      - 'Unknown'
+
+  ancestry:
+    description: >-
+      Reported ancestry defined by NIH Racial and Ethnic Categories and Definitions
+      (NOT-OD-15-089).
+    enum:
+      - American Indian or Alaska Native
+      - Asian
+      - Black or African American
+      - Hispanic or Latino
+      - Native Hawaiian or Other Pacific Islander
+      - Other
+      - Unknown
+      - White
+      - Not Hispanic or Latino
+      - Missing
+      - Not Assessed
+      - CEPH
+      - Not Reported
+
+  ancestry_detail:
+    description: >-
+      Additional specific ancestry description free text.
+    type: string
+
+  arthritis_history:
+    description: >-
+      An inflammatory process affecting a joint. Causes include infection, autoimmune
+      processes, degenerative processes, and trauma. Signs and symptoms may include
+      swelling around the affected joint and pain. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  ascites_history:
+    description: >-
+      Did the Donor have a history of Ascites at time of death (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  asthma_history:
+    description: >-
+      A chronic respiratory disease manifested as difficulty breathing due to the
+      narrowing of bronchial passageways. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  autopsy_performed_by_coroner_ME:
+    description: >-
+      Did Coroner / ME Perform an Autopsy? [Determination that] a postmortem examination
+      of the body [was performed] that includes an examination of the internal organs
+      and structures after dissection to determine the cause of death and the nature
+      of pathological changes. (GTEx)
+    enum:
+      - 'No'
+      - 'Yes'
+      - 'Not Reported'
+      - 'Unknown'
+
+  death_certificate_available:
+    description: >-
+      Is death certificate available? Whether the death certificate is available to
+      the collection team at the time of determination of eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - Not Reported
+
+  bacterial_infections_history:
+    description: >-
+      An acute infectious disorder caused by gram positive or gram negative bacteria.
+      Representative examples include pneumococcal, streptococcal, salmonella and
+      meningeal infections. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  bite_from_animal_with_rabies:
+    description: >-
+      Did the Donor have a bite from an animal suspected to have rabies in the last
+      12 months (provided by Primary History Source)? Question asked as part of an
+      informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  bmi_observation_age:
+    description: >-
+      Age of participant when clinical event was entered in record (eMERGE)
+    type: number
+    maximum: 120
+    minimum: 0
+
+  body_mass_index:
+    description: >-
+      Subject's BMI in kg/m2 over time (eMERGE)
+    type: number
+    maximum: 72
+    minimum: 0
+
+  body_refrigerated:
+    description: >-
+      Was the body refrigerated at any time before procurement? Report by the site
+      procurement team on whether the Donor's body was refrigerated where refrigerated
+      (temperature range of refrigeration not defined). (GTEx)
+    enum:
+      - 'No'
+      - 'Yes'
+      - 'Not Reported'
+      - 'Unknown'
+
+  body_temperature:
+    description: >-
+      The temperature of the donor's body, with different methods of colletion based
+      on donor type (postmortem or OPO). Postmortem donor temperature collection is
+      via the liver. Organ donor temperature collection is through the anesthesia
+      probe. Tissue donor temperature collection is via the liver or rectal. (GTEx)
+    type: number
+
+  body_temperature_location:
+    description: >-
+      The method for obtaining core body temperature. (GTEx)
+    type: string
+
+  body_temperature_scale:
+    description: >-
+      The temperature scale (Fahrenheit or Celcius) used when entering core body temperature.
+      (GTEx)
+    enum:
+      - F
+      - C
+
+  brain_ph:
+    description: >-
+      pH of the Donor's brain, measured postmortem in the cerebellum. (GTEx)
+    type: number
+
+  brain_weight:
+    description: >-
+      Postmortem weight of the Donor's brain, in grams. (GTEx)
+    type: number
+
+  cellulites_history:
+    description: >-
+      Did the Donor have a history of Cellulites at time of death provided by Primary
+      History Source? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  cerebrovascular_disease_history:
+    description: >-
+      Cerebrovascular Disease Disorder resulting from inadequate blood flow in the
+      vessels that supply the brain. Representative examples include cerebrovascular
+      ischemia, cerebral embolism, and cerebral infarction. （GTEx）
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  clrd_history:
+    description: >-
+      Did the Donor have a history of Chronic Lower Respiratory Disease Chronic Lower
+      Respiratory Disease (CLRD) (chronic bronchitis, emphysema, asthma). (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  cmv_total_ab:
+    description: >-
+      Requested results from any local serology panel, dictated by the local institution
+      (not the project). Test performed to determine the presence of a genus of the
+      family herpesviridae, subfamily betaherpesvirinae, infecting the salivary glands,
+      liver, spleen, lungs, eyes, and other organs, in which they produce characteristically
+      enlarged cells with intranuclear inclusions. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  cohort:
+    description: >-
+      The study subgroup that the participant belongs to. This indicates whether the
+      participant was a postmortem donor, an organ donor, or a surgical donor. (GTEx)
+    enum:
+      - 'Organ Donor (OPO)'
+      - 'Postmortem'
+      - 'Surgical Donor'
+
+  congenital_status:
+    description: >-
+      Age of onset bucket range (if affected with non-congenital disorder).
+    enum:
+      - Adult onset
+      - Childhood onset
+      - Congenital onset
+      - Embryonal onset
+      - Fetal onset
+      - Infantile onset
+      - Juvenile onset
+      - Late onset
+      - Middle age onset
+      - Neonatal onset
+      - Unknown
+      - Young adult onset
+
+  consent:
+    description: >-
+      Consent Status. (GTEx)
+    enum:
+      - Subjects did not participate in the study, did not complete a consent document and are included only for the pedigree structure and/or genotype controls
+      - General Research Use (GRU)
+
+  subject_source:
+    description: >-
+      Source repository where subjects originate. (GTEx)
+    type: string
+
+  source_subject_id:
+    description: >-
+      Subject ID used in the Source Repository. (GTEx)
+    type: string
+
+  study_nickname:
+    description: >-
+      Study nickname as given in http://tiny.cc/CCDG_CohortConsents. (CCDG)
+    type: string
+
+  sequencing_center:
+    description: >-
+      Name of CCDG center. (CCDG)
+    type: string
+
+  copd_clrd_history:
+    description: >-
+      A chronic and progressive lung disorder characterized by the loss of elasticity
+      of the bronchial tree and the air sacs, destruction of the air sacs wall, thickening
+      of the bronchial wall, and mucous accumulation in the bronchial tree. The pathologic
+      changes result in the disruption of the air flow in the bronchial airways. Signs
+      and symptoms include shortness of breath, wheezing, productive cough, and chest
+      tightness. The two main types of chronic obstructive pulmonary disease are chronic
+      obstructive bronchitis and emphysema. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  creutzfeldt_jakob_history:
+    description: >-
+      Does the Donor have a history or risk factors for Creutzfeldt-Jakob disease
+      or blood relatives who have been diagnosed with Creutzfeldt-Jakob disease (provided
+      by Primary History Source)? Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  current_diagnosed_cancer:
+    description: >-
+      Current diagnosis of cancer (regardless of treatment and location) Did the donor
+      have a diagnosis of cancer at time of death (regardless of treatment and location)
+      (provided by Primary History Source)?Question asked as part of an informational
+      eligibility criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  dbgap_study_id:
+    description: >-
+      PHS ID for study.
+    type: string
+    pattern: "^phs[0-9]{6}"
+
+  dbgap_subject_id:
+    description: >-
+      Subject identifier used in dbGaP (if previously submitted).
+    type: string
+
+  dbgap_submission:
+    description: >-
+      Flag if sample has been submitted to dbGaP.
+    enum:
+      - "No"
+      - "Yes"
+
+  death_pronounced_interval:
+    description: >-
+      Time pronounced dead Interval between Date and time pronounced dead and observed/witnessed
+      death (years). (GTEx)
+    type: string
+
+  death_season:
+    description: >-
+      Season of death. (GTEx)
+    enum:
+      - Fall
+      - Spring
+      - Summer
+      - Winter
+
+  death_time:
+    description: >-
+      Time of death in hours:minutes. (GTEx)
+    type: string
+
+  death_time_point_reference:
+    description: >-
+      Indicates whether the postmortem interval begins at the donor's actual death
+      or presumed death. (GTEx)
+    enum:
+      - Actual Death
+      - Cross Clamp Applied
+      - Presumed Death
+
+  decade_birth:
+    description: >-
+      Decade of birth。 (eMERGE)
+    enum:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+      - Unknown
+      - Missing Value
+
+  dementia_history:
+    description: >-
+      Dementia with unknown cause (not from a previous CVA, infection, head trauma,
+      or brain tumor) Does the Donor have a history of Dementia with unknown cause
+      (not from a previous cerebrovascular accident, infection, head trauma, or brain
+      tumor) (provided by Primary History Source)?Question asked as part of an informational
+      eligibility criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  denied_blood_donation:
+    description: >-
+      Has the donor ever volunteered to donate blood and been denied (provided by
+      Primary History Source)? Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  denied_blood_donation_reason:
+    description: >-
+      Explanation if donor ever volunteered to donate blood and been denied. Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    type: string
+
+  depression_history:
+    description: >-
+      A mood disorder having a clinical course involving one or more episodes of serious
+      psychological depression that last two or more weeks each, do not have intervening
+      episodes of mania or hypomania, and are characterized by a loss of interest
+      or pleasure in almost all activities and by some or all of disturbances of appetite,
+      sleep, or psychomotor functioning, a decrease in energy, difficulties in thinking
+      or making decisions, loss of self-esteem or feelings of guilt, and suicidal
+      thoughts or attempts. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  diabetes_i_history:
+    description: >-
+      A metabolic disorder characterized by abnormally high blood sugar levels due
+      to diminished production of insulin or insulin resistance/desensitization. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  diabetes_ii_history:
+    description: >-
+      A type of diabetes mellitus that is characterized by insulin resistance or desensitization
+      and increased blood glucose levels. This is a chronic disease that can develop
+      gradually over the life of a patient and can be linked to both environmental
+      factors and heredity. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  dialysis_treatment:
+    description: >-
+      Did the donor have dialysis treatment for at least three times a week, for at
+      lease one month prior to death (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  disease_description:
+    description: >-
+      Disease name or free text description of disease (especially if concept code
+      not available). (CMG, CCDG)
+    type: string
+
+  disease_id:
+    description: >-
+      Concept code for disease (e.g. OMIM, Orphanet)
+    type: array
+    items:
+      type: string
+      pattern: "(OMIM|ORPHA):[0-9]{4,6}"
+
+  drink_number:
+    description: >-
+      Units of drink consumed during Drink Period (DRNKPRD). (GTEx)
+    type: number
+
+  drink_comments:
+    description: >-
+      Comments about drinking status of Donor. (GTEx)
+    type: string
+
+  drink_period:
+    description: >-
+      Period of time corresponding to Drink Number (DRNKNMB). (GTEx)
+    type: string
+
+  drink_type:
+    description: >-
+      Did the Donor drink. (GTEx)
+    enum:
+      - 'Beer'
+      - 'Wine'
+      - 'Spirits'
+      - 'Other'
+      - 'Not Reported'
+
+  drink_years:
+    description: >-
+      Number of years the Donor drank. (GTEx)
+    type: number
+
+  drinking_status:
+    description: >-
+      Did the Donor drink. (GTEx)
+    enum:
+      - "No"
+      - "Yes"
+      - 'Unknown'
+
+  drug_abuse_signs:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      signs of drug abuse (venous or skin punctures) (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  ebv_igg_ab:
+    description: >-
+      Requested results from any local serology panel, dictated by the local institution
+      (not the project). Test performed to determine the amount of immunoglobulin
+      G present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  ebv_igm_ab:
+    description: >-
+      Requested results from any local serology panel, dictated by the local institution
+      (not the project). Test performed to determine the amount of immunoglobulin
+      M present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  ecg_hr:
+    description: >-
+      Heartrate in bpm (eMERGE)
+    type: integer
+    maximum: 1000
+    minimum: 0
+
+  ecg_pr_interval:
+    description: >-
+      PR Interval duration in ms (eMERGE)
+    type: integer
+    maximum: 1000
+    minimum: 0
+
+  ecg_qrs_duration:
+    description: >-
+      QRS duration in ms (eMERGE)
+    type: integer
+    maximum: 1000
+    minimum: 0
+
+  ecg_qt_interval:
+    description: >-
+      QT interval duration in ms (eMERGE)
+    type: integer
+    maximum: 1000
+    minimum: 0
+
+  ecg_qtc_bazett:
+    description: >-
+      QT interval in ms, corrected for HR (eMERGE)
+    type: integer
+    maximum: 1000
+    minimum: 0
+
+  eligible_for_study:
+    description: >-
+      A verification field of whether the Donor has met the overall eligibility criteria
+      for GTEx collection based on answers to eligibility questions. All Eligibility
+      conditions require confirmation from the donor procurement team (staff team
+      where tissue collection and data abstraction takes place) and must be met in
+      order for donor to eligible. (GTEx)
+    type: boolean
+
+  exposure_to_toxics:
+    description: >-
+      Does the donor have any known exposure to toxic substances that may have led
+      to chronic conditions (provided by Primary History Source)? Question asked as
+      part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  first_cause_of_death:
+    description: >-
+      A disease or injury, leading to the cause of death listed in immediate_cause_of_death.
+      (GTEx)
+    type: string
+
+  five_years_diagnosed_cancer:
+    description: >-
+      Diagnosis of cancer within the preceding 5 years of death (regardless of treatment
+      and location) (provided by Primary History Source). Question asked as part of
+      an informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  five_years_in_europe:
+    description: >-
+      Did the Donor live in Europe for 5 or more years cumulatively since 1980 (provided
+      by Primary History Source)?Question asked as part of eligibility survey and
+      not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  five_years_intravenous_drug:
+    description: >-
+      Does the donor have a history of intravenous drug abuse in the last 5 years?
+      Eligibility condition. Verification of whether the donor has a history of intravenous
+      drug abuse in the last 5 years (prior to procedure start date/time) as provided
+      by the primary history source. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  five_years_used_cocaine:
+    description: >-
+      Did the Donor use cocaine in the past 5 years provided by Primary History Source?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  foreign_blood_transfusion:
+    description: >-
+      Did the donor ever receive a blood transfusion in a country other than the United
+      States (provided by Primary History Source)? Question asked as part of an informational
+      eligibility criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  fugal_infection_at_death:
+    description: >-
+      Did the Donor have a history of Fungal Infections at time of death (provided
+      by Primary History Source)?Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  general_comments:
+    description: >-
+      General Comments. Any comments the person filling out the eligibility form wishes
+      to make concerning the eligibility of the Donor. (GTEx)
+    type: string
+
+  gonorrhea_at_death:
+    description: >-
+      At time of death, did the Donor have an infection of or treatment in the last
+      12 months for gonorrhea (provided by Primary History Source)? Question asked
+      as part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx）
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  had_non_professional_tattoos:
+    description: >-
+      Does the donor have signs of non-professional tattoos (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  had_professional_tattoos:
+    description: >-
+      Was the Donor professionally Tattooed in the last 12 months in a state that
+      does not regulate tattoo parlors (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hardy_scale:
+    description: >-
+      Death Classification: 4-point Hardy Scale Death classification based on the
+      4-point Hardy Scale. (GTEx) 1) Violent and fast death: Deaths due to accident,
+      blunt force trauma or suicide, terminal phase estimated at < 10 min. 2) Fast
+      death of natural causes: Sudden unexpected deaths of people who had been reasonably
+      healthy, after a terminal phase estimated at < 1 hr (with sudden death from
+      a myocardial infarction as a model cause of death for this category) 3) Intermediate
+      death: Death after a terminal phase of 1 to 24 hrs (not classifiable as 2 or
+      4) patients who were ill but death was unexpected 4) Slow death: Death after
+      a long illness, with a terminal phase longer than 1 day (commonly cancer or
+      chronic pulmonary disease); deaths that are not unexpected 0) Ventilator Case:
+      All cases on a ventilator immediately before death.
+    enum:
+      - Fast death of natural causes
+      - Intermediate death
+      - Slow death
+      - Ventilator Case
+      - Violent and fast death
+
+  hbcab_igm:
+    description: >-
+      Requested results from any local serology panel, dictated by the local institution
+      (not the project). Test performed to determine the amount of Hepatitis B virus
+      core antibody and the amount of immunoglobulin M present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hbcab_total:
+    description: >-
+      HBcAb (Total; IgG+IgM). Requested results from any local serology panel, dictated
+      by the local institution (not the project). Test performed to determine the
+      amount of Hepatitis B virus core antibody present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hbsab:
+    description: >-
+      HBsAb. Requested results from any local serology panel, dictated by the local
+      institution (not the project). Test performed to determine the surface antibody
+      reaction of a sample to the Hepatitis B virus. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hbsag:
+    description: >-
+      HBsAg. Requested results from any local serology panel, dictated by the local
+      institution (not the project). Test performed to determine the presence of hepatitis
+      B virus surface antigen. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hcv1_nat:
+    description: >-
+      HCV_1_NAT. Requested results from any local serology panel, dictated by the
+      local institution (not the project). Any of various amplification and detection
+      strategies applied to detection of virus contamination in donor blood, specifically
+      small, enveloped, positive sense single strand RNA virus in the family Flaviviridae.
+      (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hcvab:
+    description: >-
+      HCV Ab. Requested results from any local serology panel, dictated by the local
+      institution (not the project). Test performed to determine the presence of a
+      small, enveloped, positive sense single strand RNA virus in the family Flaviviridae
+      and protein made by B lymphocytes in response to a foreign substance (antigen).
+      (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hdl:
+    description: >-
+      A value measured which captures the amount of High Density Lipoprotein (HDL)
+      Cholesterol in the blood measured in milligrams per deciliter (mg/dL).; short
+      name = HDL-C (eMERGE)
+    type: number
+    maximum: 1000
+    minimum: 1
+
+  heart_attack_history:
+    description: >-
+      Heart attack, acute myocardial infarction, acute coronary syndrome Gross necrosis
+      of the myocardium, as a result of interruption of the blood supply to the area,
+      as in coronary thrombosis. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  heart_disease_history:
+    description: >-
+      Does the Donor have a history of Heart Disease (Idiopathic) (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  height:
+    description: >-
+      Subject's height at enrollment (eMERGE, GTEx)
+    type: number
+    maximum: 250
+    minimum: 0
+
+  hemophilia_history:
+    description: >-
+      Did the Donor have Hemophilia and/or clotting disorders requiring treatment
+      with human-derived clotting factors (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hepatitis_b_contact:
+    description: >-
+      Was the donor living in close physical contact with someone in the last 12 months
+      who has been diagnosed with Hepatitis B (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hepatitis_c_contact:
+    description: >-
+      Was the donor living in close physical contact with someone in the last 12 months
+      who has been diagnosed with Hepatitis C (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  high_fever_at_death:
+    description: >-
+      Did the Donor have a history of High Unexplained Fever at time of death (provided
+      by Primary History Source)? Question asked as part of an informaitonal eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hiv_ab:
+    description: >-
+      HIV I/II Ab. Requested results from any local serology panel, dictated by the
+      local institution (not the project). Test performed using HIV antibodies produced
+      by B-cells, human immunodeficiency virus (HIV) antibodies that react with HIV
+      antigens. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hiv_physical_contact:
+    description: >-
+      Was the donor living in close physical contact with someone in the last 12 months
+      who has been diagnosed with HIV (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hiv_plus_o_ab:
+    description: >-
+      HIV I/II Plus O Antibody. Requested results from any local serology panel, dictated
+      by the local institution (not the project). Test performed using HIV antibodies
+      produced by B-cells, human immunodeficiency virus (HIV) antibodies that determine
+      the amount of HIV-1 group O antibody present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  hiv1_nat:
+    description: >-
+      HIV-1 NAT. Requested results from any local serology panel, dictated by the
+      local institution (not the project). Any of various amplification and detection
+      strategies applied to detection of virus contamination in donor blood, specifically
+      the virus isolated and recognized as the etiologic agent of AIDS. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  homosexual_male:
+    description: >-
+      Is the Donor a male that has had sex with other men (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  hours_in_refrigeration:
+    description: >-
+      The period of time during which body was refrigerated (hours). (GTEx)
+    type: number
+
+  hours_in_ventilator:
+    description: >-
+      Period of time that donor was assisted by a medical device that facilitates
+      breathing prior to death. (GTEx)
+    type: number
+
+  hypertension_history:
+    description: >-
+      Hypertension Pathological increase in blood pressure; a repeatedly elevated
+      blood pressure exceeding 140 over 90 mmHg. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  icd10_category_of_death:
+    description: >-
+      A logical grouping of causes of death based on the ICD-10 code in the DTHICD10
+      variable. This variable is most suited for use as a covariate in analyses. (GTEx)
+    type: string
+
+  icd10_cause_of_death:
+    description: >-
+      The specific cause of death indicated by the ICD-10 code in the DTHICD10 variable.
+      (GTEx)
+    type: string
+
+  icd10_classification_of_death:
+    description: >-
+      The parent classification of the ICD-10 code in the DTHICD10 variable. (GTEx)
+    type: string
+
+  immediate_cause_of_death:
+    description: >-
+      The final list of diseased, injuries, and/or complications directly causing
+      death. (GTEx)
+    type: string
+
+  infected_lines_at_death:
+    description: >-
+      Did the Donor have a history of Infected Lines at time of death (provided by
+      Primary History Source)?Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  influenza_at_death:
+    description: >-
+      An acute viral infection of the respiratory tract, occurring in isolated cases,
+      in epidemics, or in pandemics; it is caused by serologically different strains
+      of viruses (influenza viruses) designated A, B, and C, has a 3-day incubation
+      period, and usually lasts for 3 to 10 days. It is marked by inflammation of
+      the nasal mucosa, pharynx, and conjunctiva; headache; myalgia; often fever,
+      chills, and prostration; and occasionally involvement of the myocardium or central
+      nervous system. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  interval_to_death_first_cause:
+    description: >-
+      Onset to Death interval from first underlying cause of death to death (hours).
+      (GTEx)
+    type: number
+
+  interval_to_death_immediate_cause:
+    description: >-
+      Onset to Death Interval from immediate cause of death to death (hours). (GTEx)
+    type: number
+
+  interval_to_death_last_cause:
+    description: >-
+      Onset to Death Interval from last underlying cause of death to death (hours).
+      (GTEx)
+    type: number
+
+  ischemic_heart_history:
+    description: >-
+      A disorder of cardiac function caused by insufficient blood flow to the muscle
+      tissue of the heart. The decreased blood flow may be due to narrowing of the
+      coronary arteries, to obstruction by a thrombus, or less commonly, to diffuse
+      narrowing of arterioles and other small vessels within the heart. Severe interruption
+      of the blood supply to the myocardial tissue may result in necrosis of cardiac
+      muscle (myocardial infarction). (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  kidney_inflammation_history:
+    description: >-
+      It is a focal or diffuse proliferative or destructive process which may involve
+      the glomerulus, tubule, or interstitial renal tissue. Nephrotic Syndrome: A
+      collection of symptoms that include severe edema, proteinuria, and hypoalbuminemia;
+      it is indicative of renal dysfunction. Nephrosis: Diseases of the kidney characterized
+      by purely degenerative lesions of the renal tubules without an inflammatory
+      component. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  last_cause_of_death:
+    description: >-
+      Last Underlying Cause of Death. The disease or injury that initiated the chain
+      of events that led directly and inevitably to death listed in immediate_cause_of_death.
+      (GTEx)
+    type: string
+
+  ldl:
+    description: >-
+      A value measured which captures the amount of Low Density Lipoprotein (LDL)
+      Cholesterol in the blood measured in milligrams per deciliter (mg/dL).; short
+      name =  LDL-C (eMERGE)
+    type: number
+    maximum: 1000
+    minimum: 1
+
+  liver_disease_history:
+    description: >-
+      A non-neoplastic or neoplastic disorder that affects the liver parenchyma and
+      intrahepatic bile ducts. Representative examples of non-neoplastic disorders
+      include hepatitis, cirrhosis, cholangitis, and polycystic liver disease. Representative
+      examples of neoplastic disorders include hepatocellular adenoma, hepatocellular
+      carcinoma, intrahepatic cholangiocarcinoma, lymphoma, and angiosarcoma. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  lymphadenopathy_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      unexplained lymphadenopathy lasting more than one month (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  manner_of_death:
+    description: >-
+      Manner of Death An adverse event resulting in death. (GTEx)
+    type: string
+
+  multiple_datasets:
+    description: >-
+      Flag if an individual has data represented in multiple data types (Ex: Yes if
+      both exome and genome data is available for an individual)
+    enum:
+      - "Yes"
+      - "No"
+
+  multiple_sclerosis:
+    description: >-
+      MS Multiple Sclerosis Does the Donor have a history of Multiple Sclerosis (provided
+      by Primary History Source)?Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  night_sweats_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      night sweats (provided by Primary History Source)? Question asked as part of
+      an informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  no_physical_activity_at_death:
+    description: >-
+      At the time of death, was the donor "bed bound" with no physical activity for
+      greater than 4 weeks prior to date/time of donor collection (provided by Primary
+      History Source)? Question asked as part of eligibility survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  non_medical_drug_injection_history:
+    description: >-
+      Did the Donor have drug injection(s) (intravenous, and/or intramuscular, and/or
+      subcutaneous) for non-medical use in the last 5 years (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  non_metastatic_cancer:
+    description: >-
+      Is there a history of non-metastatic cancer? Verification of whether the donor
+      has ever been diagnosed with metastatic cancer as provided by the primary history
+      source. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  on_statins_at_time_of_lab:
+    description: >-
+      Ever on statins from measurement of lipids- 60 days to measurement of lipids.
+      0=not on meds; 1=on meds. (eMERGE)
+    enum:
+      - "0"
+      - "1"
+
+  on_ventilator_immediate:
+    description: >-
+      Was donor on a ventilator immediately prior to Death? (Ascertion that donor
+      was assisted by a medical device that facilitates breathing immediately prior
+      to death). (GTEx)
+    enum:
+      - 'No'
+      - 'Yes'
+      - 'Not Reported'
+      - 'Unknown'
+
+  open_wounds_at_death:
+    description: >-
+      Did the Donor have a history of open wounds at time of death (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  opportunistic_infections_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      opportunistic infections (provided by Primary History Source)? Question asked
+      as part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  osteomyelitis_history:
+    description: >-
+      Does the donor show signs of Osteomyelitis (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  paid_sexual_acts:
+    description: >-
+      Has the donor ever performed sexual acts in exchange for money or drugs? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  parkinson_history:
+    description: >-
+      A progressive degenerative disorder of the central nervous system characterized
+      by loss of dopamine producing neurons in the substantia nigra and the presence
+      of Lewy bodies in the substantia nigra and locus coeruleus. Signs and symptoms
+      include tremor which is most pronounced during rest, muscle rigidity, slowing
+      of the voluntary movements, a tendency to fall back, and a mask-like facial
+      expression. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  participant_id:
+    description: >-
+      Unique identifier that can be used to retrieve more information for a participant.
+    type: string
+
+  patient_disease_list:
+    description: >-
+      A priori list of disease uploaded by site to the CSG prior to sequencing (eMERGE)
+    type: array
+    items:
+      type: string
+
+  person_determined_date_time_of_death:
+    description: >-
+      If death occurred outside of hospital, who determined date/time of death. Type
+      of person who provided the time of death. (GTEx)
+    type: string
+
+  phenotype_absent:
+    description: >-
+      Phenotypes absent (link to concept ids in ontologies such as HPO or EBO)
+    type: array
+    items:
+      type: string
+      pattern: "HP:[0-9]{2}"
+
+  phenotype_description:
+    description: >-
+      Free text description for additional phenotype information
+    type: string
+
+  phenotype_group:
+    description: >-
+      Optional submitter-defined field for samples that could be grouped together
+      in a single analysis based on overlap in phenotypic features.
+    type: string
+
+  phenotype_present:
+    description: >-
+      Phenotypes present (link to concept ids in ontologies such as HPO or EBO)
+    type: array
+    items:
+      type: string
+      pattern: "HP:[0-9]{2}"
+
+  place_of_death:
+    description: >-
+      Location where death occurred. (GTEx)
+    type: string
+
+  pmid_id:
+    description: >-
+      Case specific PubMed ID if applicable. 
+    type: string
+    pattern: "^[0-9]{8}"
+
+  pneumonia_at_death:
+    description: >-
+      Did the Donor have a history of Pneumonia at time of death (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  pneumonia_history:
+    description: >-
+      An acute, acute and chronic, or chronic inflammation focally or diffusely affecting
+      the lung parenchyma, due to infections (viruses, fungi, mycoplasma, or bacteria),
+      treatment (e.g. radiation), or exposure (inhalation) to chemicals. Symptoms
+      include cough, shortness of breath, fevers, chills, chest pain, headache, sweating,
+      and weakness. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  population:
+    description: >
+      CHB Han Chinese in Beijing, China EAS; JPT Japanese in Tokyo, Japan EAS; CHS Southern Han Chinese EAS; CDX Chinese Dai in Xishuangbanna, China EAS; KHV Kinh in Ho Chi Minh City, Vietnam EAS; CEU Utah Residents (CEPH) with Northern and Western European Ancestry EUR; TSI Toscani in Italia EUR; FIN Finnish in Finland EUR; GBR British in England and Scotland EUR; IBS Iberian Population in Spain EUR; YRI Yoruba in Ibadan, Nigeria AFR; LWK Luhya in Webuye, Kenya AFR; GWD Gambian in Western Divisions in the Gambia AFR; MSL Mende in Sierra Leone AFR; ESN Esan in Nigeria AFR; ASW Americans of African Ancestry in SW USA AFR; ACB African Caribbeans in Barbados AFR; MXL Mexican Ancestry from Los Angeles USA AMR; PUR Puerto Ricans from Puerto Rico AMR; CLM Colombians from Medellin, Colombia AMR; PEL Peruvians from Lima, Peru AMR; GIH Gujarati Indian from Houston, Texas SAS; PJL Punjabi from Lahore, Pakistan SAS; BEB Bengali from Bangladesh SAS; STU Sri Lankan Tamil from the UK SAS; ITU Indian Telugu from the UK
+    enum:
+      - "CHB"
+      - "JPT"
+      - "CHS"
+      - "CDX"
+      - "KHV"
+      - "CEU"
+      - "TSI"
+      - "FIN"
+      - "GBR"
+      - "IBS"
+      - "YRI"
+      - "LWK"
+      - "GWD"
+      - "MSL"
+      - "ESN"
+      - "ASW"
+      - "ACB"
+      - "MXL"
+      - "PUR"
+      - "CLM"
+      - "PEL"
+      - "GIH"
+      - "PJL"
+      - "BEB"
+      - "STU"
+      - "ITU"
+      - "other"
+      - "Unknown"
+      - "not reported"
+      - "not allowed to collect"     
+
+  positive_blood_at_death:
+    description: >-
+      Did the Donor have a history of Positive Blood Cultures at time of death (provided
+      by Primary History Source)? Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  primary_history_source:
+    description: >-
+      The Primary source of information from which the data on the case report forms
+      was obtained. If the primary history source is marked Family Report, some of
+      the information may have been reported from the medical record. (GTEx)
+    enum:
+      - Family Report
+      - Medical Record
+
+  prior_testing:
+    description: >-
+      Text description of any genetic testing for individual conducted prior to enrollment
+    type: string
+
+  anvil_project_id:
+    description: >-
+      Information field about project/cohort (original name is project_id).
+    type: string
+
+  prr_vdrl:
+    description: >-
+      PRR/VDRL. Requested results from any local serology panel, dictated by the local
+      institution (not the project). A variety of serologic tests for syphilis. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  received_growth_hormones:
+    description: >-
+      Has the Donor ever received human growth hormone (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  received_organ_transplant:
+    description: >-
+      If the Donor was an Organ Donor, which Organs were donated. (GTEx)
+    type: string
+
+  received_tissue_organ_transplant:
+    description: >-
+      Did the donor ever recieve a human and/or animal tissue and/or organ transplant
+      or xenotransplant (provided by Primary History Source)? Question asked as part
+      of an informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  renal_failure_history:
+    description: >-
+      Acute or chronic condition, characterized by the inability of the kidneys to
+      adequately filter the blood substances, resulting in uremia and electrolyte
+      imbalances. Acute renal failure is usually associated with oliguria or anuria,
+      hyperkalemia, and pulmonary edema. Chronic renal failure is irreversible and
+      requires hemodialysis. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  resided_northern_european_military_base:
+    description: >-
+      Did the Donor reside on a Northern European military base for 6 months from
+      1980-1990 or elsewhere in Europe from 1980-1996 (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  resident_of_state_run_group_home:
+    description: >-
+      Was the Donor a resident of a state run group home at time of death (provided
+      by Primary History Source)? Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  reyes_syndrome_history:
+    description: >-
+      Does the Donor have a history of Reyes Syndrome (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  rheumatoid_arthritis_history:
+    description: >-
+      Does the Donor have a history of Rheumatoid Arthritis (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  rpr:
+    description: >-
+      RPR. Requested results from any local serology panel, dictated by the local
+      institution (not the project). Test performed to determine the antibodies produced
+      by cellular damage caused by Treponema pallidum present in a sample. (GTEx)
+    enum:
+      - 'Negative'
+      - 'Positive'
+      - 'Indeterminate'
+      - 'Not Performed'
+
+  sarcoidosis_history:
+    description: >-
+      Does the Donor have a history of Sarcoidosis (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  sars_diagnosed_or_contact:
+    description: >-
+      Does the donor have a diagnosis of SARS or recent contact with someone who has
+      SARS (provided by Primary History Source)? Question asked as part of an informational
+      eligibility criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  schizophrenia_history:
+    description: >-
+      A major psychotic disorder characterized by abnormalities in the perception
+      or expression of reality. It affects the cognitive and psychomotor functions.
+      Common clinical signs and symptoms include delusions, hallucinations, disorganized
+      thinking, and retreat from reality. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  scleroderma_history:
+    description: >-
+      Does the Donor have a history of scleroderma (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  seizures_history:
+    description: >-
+      Did the Donor have a history of unexplained seizures (provided by Primary History
+      Source)? Question asked as part of eligibility survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  sepsis_at_death:
+    description: >-
+      Did the Donor have a history of documented Sepsis at time of death (provided
+      by Primary History Source)? Question asked as part of an informational eligibility
+      criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  serum_total_cholesterol:
+    description: >-
+      A value measured which captures the amount of Total Cholesterol in the blood
+      measured in milligrams per deciliter (mg/dL); short name = Cho-RF and Chol.
+      (eMERGE)
+    type: number
+    maximum: 1000
+    minimum: 1
+
+  sex:
+    description: >-
+      Reported sex
+    enum:
+      - Female
+      - Intersex
+      - Male
+      - Other
+      - Unknown
+      - Missing
+      - Not Assessed
+
+  sexually_transmitted_disease_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      sexually transmitted diseases (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  skin_spots_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      blue or purple spots on the skin or mucus membranes (symptom typical of Kaposi's
+      sarcoma) (provided by Primary History Source)? Question asked as part of an
+      informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  smallpox_contact:
+    description: >-
+      Did the donor have contact with someone who had smallpox (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  smallpox_vaccination:
+    description: >-
+      Did the donor have a recent smallpox vaccination (working definition >8 weeks)
+      (provided by Primary History Source)? Question asked as part of an informational
+      eligibility criteria survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  smoke_comments:
+    description: >-
+      Comments about smoking status of Donor. (GTEx)
+    type: string
+
+  smoke_number:
+    description: >-
+      Units smoked during Smoke Period (SMKPRD). (GTEx)
+    type: number
+
+  smoke_period:
+    description: >-
+      Period of time corresponding to Smoke Number (SMKNMB). (GTEx)
+    type: string
+
+  smoke_type:
+    description: >-
+      Type primarily smoked by Donor. (GTEx)
+    enum:
+      - 'Cigarette'
+      - 'Cigar'
+      - 'Pipe'
+      - 'Other'
+      - 'Not Reported'
+
+  smoke_years:
+    description: >-
+      Number of years the Donor smoked. (GTEx)
+    type: integer
+
+  smoking_status:
+    description: >-
+      Smoking condition. (GTEx)
+    enum:
+      - "No"
+      - "Yes"
+      - "Unknown"
+
+  solve_state:
+    description: >-
+      Solved state of an individual.
+    enum:
+      - Solved
+      - Tier 1
+      - Tier 2
+      - Unsolved
+
+  syphilis_at_death:
+    description: >-
+      At time of death, did the Donor have an infection of or had treatment in the
+      last 12 months for syphilis (provided by Primary History Source)? Question asked
+      as part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  systemic_lupus_history:
+    description: >-
+      Does the Donor have a history of Systemic Lupus (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  tested_hiv:
+    description: >-
+      Was the Donor ever not able to be tested for HIV infection because of hemodilution
+      where no pre-transfused specimen was available (provided by Primary History
+      Source)? Question asked as part of an informational eligibility criteria survey
+      and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  three_months_uk_presence:
+    description: >-
+      Did the Donor spend three or more months cumulatively in the UK any time from
+      1980-1996 (provided by Primary History Source)? Question asked as part of an
+      informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  tissue_recovery_time_point_reference:
+    description: >-
+      Tissue Recovery Time Point Reference. Indicates whether the tissue ischemic
+      time begins at the donor's actual death, presumed death, or when the cross clamp
+      was applied in the case of surgical donors. (GTEx)
+    enum:
+      - 'Actual Death'
+      - 'Cross Clamp Applied'
+      - 'Presumed Death'
+
+  transplant_comments:
+    description: >-
+      If the donor ever recieved a human and/or animal tissue and/or organ transplant
+      or xenotransplant, the reason why (provided by Primary History Source)?Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    type: string
+
+  triglyceride:
+    description: >-
+      A value measured which captures the amount of Triglycerides in the blood measured
+      in milligrams per deciliter (mg/dL); short name =  Trigs (eMERGE)
+    type: number
+    maximum: 1000
+    minimum: 1
+
+  tuberculosis_history:
+    description: >-
+      Did the Donor have a history of TB (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  unexplained_cough_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      unexplained persistent cough and/or shortness of breath (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  unexplained_temperature_history:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      unexplained temperature >=100.5 F (38.6 C) for more than 10 days (provided by
+      Primary History Source)? Question asked as part of eligibility survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  unexplained_weight_loss:
+    description: >-
+      Does the history, physical examination, medical records, or autopsy report show
+      unexplained weight loss (provided by Primary History Source)? Question asked
+      as part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  unit_height:
+    description: >-
+      harmonization unit for height. (GTEx)
+    type: string
+
+  unit_weight:
+    description: >-
+      harmonization unit for weight. (GTEx)
+    type: string
+    
+  uremia_history:
+    description: >-
+      A clinical syndrome associated with the retention of renal waste products or
+      uremic toxins in the blood. It is usually the result of RENAL INSUFFICIENCY.
+      Most uremic toxins are end products of protein or nitrogen CATABOLISM, such
+      as UREA or CREATININE. Severe uremia can lead to multiple organ dysfunctions
+      with a constellation of symptoms. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  used_heroine:
+    description: >-
+      Did the Donor use Heroin ever by any route (provided by Primary History Source)?
+      Question asked as part of an informational eligibility criteria survey and not
+      used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  used_long_term_steroid:
+    description: >-
+      Did the donor have a history of long term steroid use (not defined, working
+      definition >1 year) (provided by Primary History Source)? Question asked as
+      part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  used_piercing:
+    description: >-
+      Does the Donor have signs of non-professional piercing (provided by Primary
+      History Source)? Question asked as part of an informational eligibility criteria
+      survey and not used to determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  ventilator_less_than_24h:
+    description: >-
+      Did site receive verbal confirmation of ventilator status <24 hours prior to
+      collection start? Verification from the site that the Donor was ventilated (on
+      life support) for < 24 hours prior to the estimated procurement start time.
+      (GTEx)
+    type: boolean
+
+  visit_number:
+    description: >-
+      A database generated unique key created for weight, height, BMI repeated values
+      (eMERGE)
+    type: integer
+    maximum: 1000000000
+    minimum: 0
+
+  weakness_history:
+    description: >-
+      Did the donor show signs of unexplained weakness and fatigue described as flu-like
+      symptoms within the last 3 months (provided by Primary History Source)? Question
+      asked as part of an informational eligibility criteria survey and not used to
+      determine eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  weight:
+    description: >-
+      Subject's weight at enrollment (eMERGE, GTEx)
+    type: number
+    maximum: 300
+    minimum: 0
+
+  witnessed_death:
+    description: >-
+      Whether the death was observed by a witness. (GTEx)
+    enum:
+      - 'No'
+      - 'Yes'
+      - 'Not Reported'
+      - 'Unknown'
+
+  wnv_contact:
+    description: >-
+      Does the Donor have a have a history of contact with a person or animal diagnosed
+      West Nile Virus (WNV) (provided by Primary History Source)? Question asked as
+      part of an informational eligibility criteria survey and not used to determine
+      eligibility. (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  wnv_history:
+    description: >-
+      Does the donor have a history of West Nile Virus (WNV), either suspected and/or
+      diagnosed (provided by Primary History Source)? Question asked as part of an
+      informational eligibility criteria survey and not used to determine eligibility.
+      (GTEx)
+    enum:
+      - "No"
+      - Unknown
+      - "Yes"
+      - 'Not Reported'
+
+  year_birth:
+    description: >-
+      Year of Birth. (eMERGE)
+    type: integer
+    maximum: 2015
+    minimum: 1850
+
+  ischemic_time:
+    description: >-
+      Ischemic Time. (GTEx)
+    type: string
+    
+  ischemic_time_in_minutes:
+    description: >-
+      Ischemic Time (Minutes). (GTEx)
+    type: number
+    
+  chest_incision_time:
+    description: >-
+      Time of Chest Incision. (GTEx)
+    type: string
+    
+  chest_incision_time_in_minutes:
+    description: >-
+      Time of Chest Incision (Minutes). (GTEx)
+    type: number
+  
+  cross_clamp_applied_time:
+    description: >-
+      Time Cross Clamp Applied. (GTEx)
+    type: string
+    
+  cross_clamp_applied_time_in_minutes:
+    description: >-
+      Time Cross Clamp Applied (Minutes). (GTEx)
+    type: number
+  projects:
+    $ref: "_definitions.yaml#/to_one_project"

@@ -1,0 +1,12 @@
+*.DS_Store
+.idea/
+*.iml
+
+.env/
+env/
+.venv/
+venv/
+node_modules/
+build/
+
+docker-compose.override.yml
