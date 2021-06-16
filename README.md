@@ -1,7 +1,8 @@
 # UMCCR Data Dictionary
 
-UMCCR Data Dictionary for Gen3 platform
+This repo contains Docker and Makefile based Data Dictionary Development workflow i.e., packaging around dictionary tools (Docker image) for conversion, visualisation, testing, validation to allow Data Modeller to iteratively develop schema locally. 
 
+Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform. 
 
 ## Development
 
@@ -11,8 +12,8 @@ UMCCR Data Dictionary for Gen3 platform
     - GNU Make comes with most Linux and macOS Xcode
     - Try `make --version` to see whether you already have it in   
     - Otherwise `brew install make` for macOS and try like `gmake --version`
-    - On Ubuntu, `sudo apt-get install build-essential`
-    - If make is not possible then you will need to execute each target in [Makefile](Makefile)
+    - On Ubuntu, try `apt-get install make`
+    - If `make` is not possible then you will need to execute each target in [Makefile](Makefile)
 
 ## Workflow
 
@@ -25,7 +26,12 @@ make up
 
 - Check the stack
 ```
-docker ps -a
+make ps
+```
+
+- Restart the stack 
+```
+make restart
 ```
 
 - Bring it down 
@@ -41,16 +47,15 @@ make down
   - http://localhost:8080/#schema/anvil.json
   - http://localhost:8080/#schema/dcf.json 
   - http://localhost:8080/#schema/gdc.json 
+  - http://localhost:8080/#schema/kf.json
 
-### Modify
+### Modifying Dictionary
 
+- Say you are working on `umccr` dictionary
 - Modify schema yaml files in `dictionary/umccr/`
-
 - Convert into JSON
 ```
 make umccr
 ```
-
 - Visit to: http://localhost:8080/#schema/umccr.json
-
-- Reload the page (do twice if necessary)
+- Reload the page (_**do twice**_ if necessary)

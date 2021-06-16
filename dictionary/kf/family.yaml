@@ -39,7 +39,7 @@ uniqueKeys:
 
 # Case properties
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
 
   external_id:
     description: "Name given to the family by contributor"

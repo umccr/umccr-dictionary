@@ -41,7 +41,7 @@ links:
 constraints: null
 
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
   a260_a280_ratio:
     term:
       $ref: "_terms.yaml#/a260_a280_ratio"
@@ -125,7 +125,7 @@ properties:
       - "Broad Institute"
   shipment_origin:
     term:
-      $ref: "_terms.yaml#shipment_origin"
+      $ref: "_terms.yaml#/shipment_origin"
     type: string
   samples:
     $ref: "_definitions.yaml#/to_one"

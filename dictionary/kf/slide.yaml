@@ -39,7 +39,7 @@ uniqueKeys:
 
 # slide properties
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
   section_location:
     term:
       $ref: "_terms.yaml#/section_location"

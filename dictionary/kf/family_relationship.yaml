@@ -39,7 +39,7 @@ uniqueKeys:
 
 # Case properties
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
 
   relative_to_participant_relation:
     description: "Text describing the nature of the relationship (i.e. father, mother, sister, brother)"
