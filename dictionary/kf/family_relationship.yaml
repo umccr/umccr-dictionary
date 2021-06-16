@@ -1,0 +1,53 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "family_relationship"
+title: Family Relationship
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Represents a relationship between two family members.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+
+links:
+  - name: participants
+    backref: family_relationships
+    label: relative_to
+    target_type: participant
+    multiplicity: many_to_many
+    required: true
+
+required:
+  - type
+  - submitter_id
+  - participants
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+# Case properties
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+
+  relative_to_participant_relation:
+    description: "Text describing the nature of the relationship (i.e. father, mother, sister, brother)"
+    type: string
+
+  participant_to_relative_relation:
+    description: "Text describing the nature of the relationship (i.e. father, mother, sister, brother)"
+    type: string
+
+  participants:
+    $ref: "_definitions.yaml#/to_one"

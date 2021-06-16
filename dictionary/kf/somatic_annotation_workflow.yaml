@@ -1,0 +1,67 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "somatic_annotation_workflow"
+title: Somatic Annotation Workflow
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: analysis
+program: '*'
+project: '*'
+description: >
+  Metadata for the somatic mutation annotation pipeline used to annotate the mutations called in the
+  DNA-Seq pipelines.
+additionalProperties: false
+submittable: false
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: simple_somatic_mutations
+        backref: somatic_annotation_workflows
+        label: performed_on
+        target_type: simple_somatic_mutation
+        multiplicity: many_to_many
+        required: true
+      - name: core_metadata_collections
+        backref: somatic_annotation_workflows
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - type
+  - submitter_id
+  - workflow_link
+  - workflow_type
+  - simple_somatic_mutations
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref_wf: "_definitions.yaml#/workflow_properties"
+  workflow_type:
+    term:
+      $ref: "_terms.yaml#/workflow_type"
+    enum:
+      - MuTect2 Annotation
+      - MuSE Annotation
+      - SomaticSniper Annotation
+      - VarScan2 Annotation
+      - FoundationOne Annotation
+  simple_somatic_mutations:
+    $ref: "_definitions.yaml#/to_many"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"

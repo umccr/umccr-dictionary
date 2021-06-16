@@ -1,0 +1,84 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "somatic_mutation_index"
+title: Somatic Mutation Index
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: index_file
+program: '*'
+project: '*'
+description: "Data file containing the index for a set of somatic variants."
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: simple_somatic_mutations
+        backref: somatic_mutation_indexes
+        label: derived_from
+        target_type: simple_somatic_mutation
+        multiplicity: one_to_one
+        required: false
+      - name: annotated_somatic_mutations
+        backref: somatic_mutation_indexes
+        label: derived_from
+        target_type: annotated_somatic_mutation
+        multiplicity: one_to_one
+        required: false
+      - name: core_metadata_collections
+        backref: somatic_mutation_indexes
+        label: derived_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+        
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - md5sum
+  - data_category
+  - data_type
+  - data_format
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref_file: "_definitions.yaml#/data_file_properties"
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Simple Nucleotide Variation
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum:
+      - Somatic Mutation Index
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - TBI
+  simple_somatic_mutations:
+    $ref: "_definitions.yaml#/to_one"
+  annotated_somatic_mutations:
+    $ref: "_definitions.yaml#/to_one"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"

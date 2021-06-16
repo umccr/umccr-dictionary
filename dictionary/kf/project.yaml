@@ -1,0 +1,157 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "project"
+title: Project
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+program: '*'
+project: '*'
+category: administrative
+description: >
+  Any specifically defined piece of work that is undertaken or attempted to meet a single
+  requirement. (NCIt C47885)
+additionalProperties: false
+submittable: false
+validators: null
+
+systemProperties:
+  - id
+  - state
+  - released
+  - releasable
+  - intended_release_date
+
+required:
+  - code
+  - name
+  - state
+  - programs
+  - dbgap_accession_number
+
+uniqueKeys:
+  - [id]
+  - [code]
+
+links:
+  - name: programs
+    backref: projects
+    label: member_of
+    target_type: program
+    multiplicity: many_to_one
+    required: true
+
+constraints: null
+
+# project properties
+# code, disease_type and primary_site are in the current data model for project
+# and likely shouldn't be
+# primary_site and disease_type removed.
+properties:
+  type:
+    type: string
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+    description: "UUID for the project" # TOREVIEW
+  name:
+    type: string
+    description: "Display name or title for the project" # TOREVIEW
+  data_access_authority:
+    type: string
+    description: "Name of organization which governs data access" # TOREVIEW
+  dbgap_accession_number:
+    type: string
+    description: "The dbgap accession number for the project." # TOREVIEW
+  code:
+    type: string
+    description: "Project code" # TOREVIEW
+  programs:
+    $ref: "_definitions.yaml#/to_one"
+    description: >
+      Indicates that the project is logically part of the indicated project.
+  attribution:
+    type: string
+    description: "Link to attribution prose provided by dbGaP" # TOREVIEW
+  version:
+    type: string
+    description: "dbGaP version" # TOREVIEW
+  state:
+    description: |
+      The possible states a project can be in.  All but `open` are
+      equivalent to some type of locked state.
+    default: open
+    enum:
+        # open: the only state users can perform 'upload' actions
+        # possible actions in `open`:
+        #   - upload (no state change)
+        #   - review -> review
+        #   - release (project.released -> true)
+        - open
+
+        # locked: admin has locked project for review
+        # possible actions in `locked`:
+        #   - open -> open
+        #   - submit -> submitted
+        #   - release (project.released -> true)
+        - review
+
+        # submitted: An admin has submitted project, it is locked against
+        #            upload.
+        # possible actions in `submitted`:
+        #   - process -> processing
+        #   - release (project.released -> true)
+        - submitted
+
+        # processing: The system is processing data in the project and
+        #             is locked against upload and submission
+        #   - (system transition to open)
+        #   - release (project.released -> true)
+        - processing
+
+
+        # closed: The closed state is introduced to replace the
+        #         ``legacy`` state and means that no further action
+        #         can be taken on the project
+        #   - (system transition to open)
+        #   - release (project.released -> true)
+        - closed
+
+        # DEPRECATED(2016-03-01): synonymous with closed. included for
+        #                         backwards compatibility
+        - legacy
+
+  released:
+    description: |
+      To release a project is to include all submitted
+      entities in the next release.
+    default: false
+    type: boolean
+
+  releasable:
+    description: |
+      A project can only be released by the user when `releasable` is true.
+    default: false
+    type: boolean
+
+  release_status:
+    description: "Release status of the study."
+    enum:
+      - Pending
+      - Waiting
+      - Running
+      - Staged
+      - Publishing
+      - Published
+      - Failed
+      - Canceled
+
+  availability_type:
+    description: "Is the project open or restricted?"
+    enum:
+      - Open
+      - Restricted
+
+  intended_release_date:
+    description: Tracks a Project's intended release date.
+    type: string
+    format: date-time

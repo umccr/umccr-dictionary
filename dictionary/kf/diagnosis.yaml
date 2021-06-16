@@ -1,0 +1,112 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "diagnosis"
+title: Diagnosis
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Data from the investigation, analysis and recognition of the presence and nature of disease,
+  condition, or injury from expressed signs and symptoms; also, the scientific determination of any
+  kind; the concise results of such an investigation.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: participants
+    backref: diagnoses
+    label: describes
+    target_type: participant
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - participants
+  - type
+
+uniqueKeys:
+  #unclear if want submitter ID for clinical
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_event_days:
+    term:
+      $ref: "_terms.yaml#/age_at_event_days"
+    type:
+      - integer
+      - "null"
+    maximum: 32872
+    minimum: 0
+
+  diagnosis_category:
+    description: "High level diagnosis categorization."
+    enum:
+      - Structural Birth Defect
+      - Cancer
+      - Other
+
+  tumor_location:
+    description: "Location of the tumor."
+    type: string
+
+  primary_diagnosis:
+    term:
+      $ref: "_terms.yaml#/primary_diagnosis"
+    type: string
+
+  external_id:
+    description: "external id used by contributor"
+    type: string
+
+  source_text_diagnosis:
+    description: "Pathological diagnosis"
+    type: string
+
+  source_text_tumor_location:
+    description: "Location of the tumor"
+    type: string
+
+  mondo_id_diagnosis:
+    description: |
+      The ID of the term from the Monary Disease Ontology
+      which represents a harmonized diagnosis
+    type: string
+
+  icd_id_diagnosis:
+    description: |
+      The ID of the term from the International Classification of Diseases
+      which represents harmonized diagnosis
+    type: string
+
+  uberon_id_tumor_location:
+    term:
+      $ref: "_terms.yaml#/age_at_event_days"
+    type: string
+
+  ncit_id_diagnosis:
+    description: |
+      The ID term from the National Cancer Institute Thesaurus which represents a
+      harmonized diagnosis
+    type: string
+
+  spatial_descriptor:
+    description: |
+      Ontology term that harmonizes the spatial concepts from Biological Spatial Ontology
+    type: string
+
+  participants:
+    $ref: "_definitions.yaml#/to_one"

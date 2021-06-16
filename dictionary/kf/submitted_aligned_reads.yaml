@@ -1,0 +1,94 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "submitted_aligned_reads"
+title: Submitted Aligned Reads
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: data_file
+program: '*'
+project: '*'
+description: >
+  Data file containing aligned reads that are used as input to workflows.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+  - file_state
+  - error_type
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: core_metadata_collections
+        backref: submitted_aligned_reads_files
+        label: data_from
+        target_type: core_metadata_collection
+        multiplicity: many_to_one
+        required: false
+      - name: read_groups
+        backref: submitted_aligned_reads_files
+        label: data_from
+        target_type: read_group
+        multiplicity: one_to_many
+        required: false
+
+required:
+  - type
+  - submitter_id
+  - file_name
+  - file_size
+  - data_format
+  - data_category
+  - data_type
+
+uniqueKeys:
+  - [ id ]
+  - [ project_id, submitter_id ]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref_file: "_definitions.yaml#/data_file_properties"
+
+  data_category:
+    term:
+      $ref: "_terms.yaml#/data_category"
+    enum:
+      - Sequencing Data
+      - Sequencing Reads
+      - Raw Sequencing Data
+
+  data_format:
+    term:
+      $ref: "_terms.yaml#/data_format"
+    enum:
+      - BAM
+      - CRAM
+
+  data_type:
+    term:
+      $ref: "_terms.yaml#/data_type"
+    enum: [ "Aligned Reads" ]
+
+  experimental_strategy:
+    term:
+      $ref: "_terms.yaml#/experimental_strategy"
+    enum:
+      - WGS
+      - WXS
+      - Low Pass WGS
+      - Validation
+      - RNA-Seq
+      - miRNA-Seq
+      - Total RNA-Seq
+
+  read_groups:
+    $ref: "_definitions.yaml#/to_many"
+  core_metadata_collections:
+    $ref: "_definitions.yaml#/to_many"

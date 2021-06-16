@@ -1,0 +1,73 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "outcome"
+title: Outcome
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Outcome event produced in a participant (related or not with one diagnosis)
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: participants
+    backref: outcomes
+    label: describes
+    target_type: participant
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - participants
+  - type
+
+uniqueKeys:
+  #unclear if want submitter ID for clinical
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+
+  age_at_event_days:
+    term:
+      $ref: "_terms.yaml#/age_at_event_days"
+    type:
+      - integer
+      - "null"
+    maximum: 32872
+    minimum: 0
+
+  disease_related:
+    description: |
+      Whether Dead and cause of death was disease related (Yes)
+      or Dead and cause of death was not disease related (No)
+      or Not Reported
+    enum:
+      - "Yes"
+      - "No"
+      - Not Reported
+      - Reported Unknown
+      - Not Applicable
+
+  vital_status:
+    term:
+      $ref: "_terms.yaml#/age_at_event_days"
+    enum:
+      - Dead
+      - Alive
+
+  participants:
+    $ref: "_definitions.yaml#/to_one"

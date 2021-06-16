@@ -1,0 +1,91 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "participant"
+title: Participant
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: administrative
+program: '*'
+project: '*'
+description: >
+  The collection of all data related to a specific subject in the
+  context of a specific project.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+
+links:
+  - name: projects
+    backref: participants
+    label: member_of
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+  - name: families
+    backref: participants
+    label: member_of
+    target_type: family
+    multiplicity: many_to_one
+    required: false
+
+required:
+  - type
+  - submitter_id
+  - projects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+# Case properties
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  days_to_lost_to_followup:
+    term:
+      $ref: "_terms.yaml#/days_to_lost_to_followup"
+    type: integer
+  disease_type:
+    term:
+      $ref: "_terms.yaml#/disease_type"
+    type: string
+  index_date:
+    term:
+      $ref: "_terms.yaml#/index_date"
+    enum:
+      - Diagnosis
+      - First Patient Visit
+      - Study Enrollment
+  lost_to_followup:
+    term:
+      $ref: "_terms.yaml#/lost_to_followup"
+    enum:
+      - "Yes"
+      - "No"
+  primary_site:
+    term:
+      $ref: "_terms.yaml#/primary_site"
+    type: string
+  is_proband:
+    description: "Denotes whether participant is proband of study"
+    type: boolean
+  external_id:
+    term:
+      $ref: "_terms.yaml#/external_id"
+    type: string
+  family_id:
+    description: "Id for the participants grouped by family"
+    type: string
+  consent_type:
+    description: "Type of the consent participant belongs to"
+    type: string
+  projects:
+    $ref: "_definitions.yaml#/to_one_project"
+  families:
+    $ref: "_definitions.yaml#/to_one"

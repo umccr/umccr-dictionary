@@ -1,0 +1,204 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "medical_history"
+title: Medical History
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Standard questionnaire used to collect medical records from the subject
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: participants
+    backref: medical_histories
+    label: describes
+    target_type: participant
+    multiplicity: one_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - participants
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+# HARMONIZED VARIABLES ACROSS GTEX AND TOPMED PROJECTS
+  asthma:
+    description: >
+      Reported Asthma condition in the participant (HARMONIZED)
+    enum:
+      - "Reported Unknown"
+      - "Positive"
+      - "Negative"
+      - "Not Reported"
+      - "Not Applicable"
+    termDef:
+       - term: asthma
+         source: hp
+         term_id: HP:0002099
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Reported Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Positive
+         source: NCI Thesaurus
+         term_id: C38758
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Negative
+         source: NCI Thesaurus
+         term_id: C38757
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Applicable
+         source: NCI Thesaurus
+         term_id: C48660
+         version_date: 19.03d (Release date:2019-03-25)
+
+  hypertension:
+    description: >
+      Reported Hypertension condition in the participant (HARMONIZED)
+    enum:
+      - "Positive"
+      - "Negative"
+      - "Reported Unknown"
+      - "Not Reported"
+      - "Not Applicable"
+    termDef:
+       - term: hypertension
+         source: NCI Thesaurus
+         term_id: C3117
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: hypertension
+         source: hp
+         term_id: HP:0000822
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Positive
+         source: NCI Thesaurus
+         term_id: C38758
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Negative
+         source: NCI Thesaurus
+         term_id: C38757
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Reported Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Applicable
+         source: NCI Thesaurus
+         term_id: C48660
+         version_date: 19.03d (Release date:2019-03-25)
+
+  stroke:
+    description: >
+      Reported Stroke in the participant (HARMONIZED)
+    enum:
+      - "Positive"
+      - "Negative"
+      - "Reported Unknown"
+      - "Not Reported"
+      - "Not Applicable"
+    termDef:
+       - term: stroke
+         source: NCI Thesaurus
+         term_id: C3390
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: stroke
+         source: hp
+         term_id: HP:0001297
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Positive
+         source: NCI Thesaurus
+         term_id: C38758
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Negative
+         source: NCI Thesaurus
+         term_id: C38757
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Reported Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Applicable
+         source: NCI Thesaurus
+         term_id: C48660
+         version_date: 19.03d (Release date:2019-03-25)
+
+  coronary_artery_disease:
+    description: >
+      Reported Coronary Artery disease in the participant (HARMONIZED)
+    enum:
+      - "Positive"
+      - "Negative"
+      - "Reported Unknown"
+      - "Not Reported"
+      - "Not Applicable"
+    termDef:
+       - term: coronary_artery_disease
+         source: NCI Thesaurus
+         term_id: C26732
+         term_version: 19.03d (Release date:2019-03-25)
+    termDef:
+       - term: coronary_artery_disease
+         source: hp
+         term_id: HP:0001677
+         term_version: "2019-04-15"
+    enumDef:
+       - enumeration: Positive
+         source: NCI Thesaurus
+         term_id: C38758
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Negative
+         source: NCI Thesaurus
+         term_id: C38757
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Reported Unknown
+         source: NCI Thesaurus
+         term_id: C17998
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Reported
+         source: NCI Thesaurus
+         term_id: C43234
+         version_date: 19.03d (Release date:2019-03-25)
+       - enumeration: Not Applicable
+         source: NCI Thesaurus
+         term_id: C48660
+         version_date: 19.03d (Release date:2019-03-25)
+    
+  participants:
+    $ref: "_definitions.yaml#/to_one"

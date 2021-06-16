@@ -1,0 +1,2560 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "phenotype"
+title: Phenotype
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: clinical
+program: '*'
+project: '*'
+description: >
+  Phenotype entity to describe the phenotype name given by contributor.
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: participants
+    backref: phenotypes
+    label: describes
+    target_type: participant
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - type
+  - participants
+  - phenotype
+  - observed
+  - submitter_id
+
+uniqueKeys:
+  #unclear if want submitter ID for clinical
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+
+  hpo_id:
+    description: |
+      The ID of the term from Human Phenotype Ontology
+      which represents a harmonized phenotype
+    type: string
+
+  snomed_id_phenotype:
+    description: |
+      The ID of the term from Systematized Nomenclature of Medicine - Clinical Terms
+      which encodes clinical terminology
+    type: string
+
+  phenotype:
+    description: "Name given to Phenotype by contributor"
+    enum:
+      - "2 vessel cord"
+      - "2 vessel umbilical cord"
+      - "3 cm. liver"
+      - "3 facial skin tags"
+      - "3 fontanelles"
+      - "abnormal abdominal situs"
+      - "abnormal aorta"
+      - "abnormal aortic valve"
+      - "abnormal atrial septum"
+      - "abnormal atrioventricular connection"
+      - "abnormal cardiac situs"
+      - "abnormal carotid artery morphology"
+      - "abnormal cerebellum morphology"
+      - "abnormal cervical and thoracic bodies"
+      - "abnormal coronary artery"
+      - "abnormal fetal calvarium"
+      - "abnormal fingers but not thumb"
+      - "abnormal hepatic vein"
+      - "abnormal left atrium"
+      - "abnormal left ventricle"
+      - "abnormal mitral valve"
+      - "abnormal pulmonary artery"
+      - "abnormal pulmonary valve"
+      - "abnormal pulmonary vein"
+      - "abnormal right atrium"
+      - "abnormal right ventricle"
+      - "abnormal systemic vein"
+      - "abnormal thumb"
+      - "abnormal toe"
+      - "abnormal tricuspid valve"
+      - "abnormal ventricular septum"
+      - "abnormal ventriculo-arterial connection"
+      - "abnormality of dental enamel"
+      - "abnormality of the cerebral vasculature"
+      - "abnormality of the optic nerve"
+      - "abnormality of the sternum"
+      - "absent corpus callosum"
+      - "absent or abnormal ear canal"
+      - "absent radius"
+      - "absent sacrum and lumbar spine"
+      - "absent sternal ossification"
+      - "absent thymus"
+      - "agenesis of corpus callosum"
+      - "ambiguous genitalia"
+      - "amblyopia"
+      - "anal skin tag"
+      - "anemia"
+      - "anemia of prematurity"
+      - "ankyloglossia"
+      - "annular pancreas"
+      - "anophthalmia"
+      - "anteriorly placed anus"
+      - "anxiety disorder"
+      - "aortic aneurysm"
+      - "aortic root aneurysm"
+      - "aortic tortuosity"
+      - "arterial stenosis"
+      - "arterial tortuosity"
+      - "ascending tubular aorta aneurysm"
+      - "asplenia"
+      - "assymetric crying facies"
+      - "asthma"
+      - "asymmetric"
+      - "asymmetric mouth movement; hypoplastic left jaw"
+      - "asymmetric sacral cleft, low lying conus terminalis l3"
+      - "asymmetrical gluteal crease"
+      - "atresia of left external ear"
+      - "atresia of the large intestine"
+      - "atrial septal defect"
+      - "atrophic pituitary gland"
+      - "belpharoptosis"
+      - "bicornuate uterus"
+      - "bicuspid aortic valve"
+      - "bifid scrotum"
+      - "bifid sternum"
+      - "bifid uvula"
+      - "bilat toes 2-4 syndactyly"
+      - "bilateral clinodactyly 5th fingers, left hand simian creases"
+      - "bilateral congenital ossicular anomaly"
+      - "bilateral glue ear"
+      - "bilateral left-sidedness"
+      - "bilateral low vision"
+      - "bilateral right-sidedness"
+      - "bile duct paucity"
+      - "biliary atresia"
+      - "bitemporal hallowing"
+      - "bitemporal narrowing"
+      - "born with retinoblastoma"
+      - "brachycephaly"
+      - "branchial cleft cyst"
+      - "broad big toe"
+      - "butterfly vertebrae"
+      - "cafe au lait spots"
+      - "cataracts"
+      - "caudal regression syndrome"
+      - "cecal carcinoma"
+      - "central hypothyrodism"
+      - "cephalohematoma, caput succedaneum"
+      - "cerebellar cyst"
+      - "cerebellar dysplasia"
+      - "cerebellar glioma"
+      - "cerebellar hypoplasia"
+      - "cerebellar vermis hypoplasia"
+      - "cerebral atrophy"
+      - "cerebral hypoplasia"
+      - "cervical instability"
+      - "chiari malformation"
+      - "choanal atresia"
+      - "choanal stenosis"
+      - "cholecystectomy  1994"
+      - "chordee"
+      - "choroid plexus cyst"
+      - "chronic lung disease-prematurity"
+      - "chronic renal insufficiency"
+      - "cleft lip"
+      - "cleft palate"
+      - "clindactyly of fifth digits, l partial simian crease"
+      - "clinodactyly 5th finger"
+      - "clinodactyly, right hand"
+      - "club foot"
+      - "clubbing"
+      - "coarctation of aorta"
+      - "coloboma"
+      - "conductive hearing impairment"
+      - "congenital blindness"
+      - "congenital bulbar palsy"
+      - "congenital cystic adenomatoid malformation"
+      - "congenital deafness, r pinna cupped."
+      - "congenital hemivertebra"
+      - "congenital hip dysplasia"
+      - "congenital hypoglycemia"
+      - "congenital hypothyroidism"
+      - "congenital scar from eye to scalp per mom"
+      - "congenital scoliosis"
+      - "conotruncal left-sided lesion"
+      - "craniosynostosis"
+      - "cupped ears"
+      - "cutaneous cyst"
+      - "cutis aplasia"
+      - "cystic hygroma"
+      - "cystic or polycystic kidney"
+      - "dandy-walker malformation"
+      - "decrease vit k and factor xii deficiency"
+      - "decreased thenar eminence"
+      - "deformity of the right anterolateral abdominal wall"
+      - "delayed puberty-no facial hair,pubic or underarm hair."
+      - "developmental & learning issues"
+      - "developmental delay"
+      - "dextrocardia"
+      - "diaphragmatic hernia"
+      - "dilatation of the cerebral artery"
+      - "distal limb deformities and radial anomaly"
+      - "dolichocephaly with bony synostosis of sagittal structure."
+      - "dolichochocehaly"
+      - "double aortic arch"
+      - "double kidney"
+      - "double left renal collecting systems and ureters"
+      - "downslanting"
+      - "downslanting palepbral fissures"
+      - "duane anomaly"
+      - "duodenal atresia"
+      - "dysmorphic facies"
+      - "dysplastic kidney"
+      - "ear pit"
+      - "ear tag"
+      - "enlarged"
+      - "enlarged tranverse liver"
+      - "epibulbar dermoid"
+      - "epicanthal folds"
+      - "esophageal atresai"
+      - "esophageal atresia"
+      - "esophageal hemangioma"
+      - "esophageal reflux"
+      - "esophagitis.  g-tube."
+      - "esotropia"
+      - "excess nuchal skin"
+      - "exotropia"
+      - "exposed to toxoplasma in utero - born negative"
+      - "extra digit bilat"
+      - "extra rib"
+      - "eye deviation per note"
+      - "facial hemangioma"
+      - "factor v leiden"
+      - "factor v leiden heterozygous, mthfr heterozygous"
+      - "factor xii deficiency"
+      - "flat face"
+      - "foot polydactyly"
+      - "foot syndactyly"
+      - "frequent episodes of migratory atelectasis"
+      - "frontal bossing (occipital protuberance)"
+      - "fused vertebrae"
+      - "gastroesophageal reflux"
+      - "gastroschisis"
+      - "gerd"
+      - "glaucoma"
+      - "global developmental delay, hypotonia"
+      - "gross motor delay"
+      - "hallux valgus"
+      - "hamartoma"
+      - "hand polydactyly"
+      - "hand syndactyly"
+      - "hearing impairment"
+      - "hearing loss"
+      - "hemangioma"
+      - "hemi-vertebrae"
+      - "hemiplegic cerebral palsy; abnormal gait"
+      - "hepatic hemangioma"
+      - "hernia x2 type unk"
+      - "hernia, type unk"
+      - "heterotaxy"
+      - "heterotaxy syndrome"
+      - "high arched"
+      - "high arched and narrowed"
+      - "high palate"
+      - "high riding testicles"
+      - "hirschsprung's disease"
+      - "holoprosencephaly"
+      - "horner syndrome"
+      - "horseshoe kidney"
+      - "hydrocele"
+      - "hydroceles"
+      - "hydrocephalus"
+      - "hydronephrosis"
+      - "hypercholesterolemia"
+      - "hyperechoic renal cortex"
+      - "hyperpigmented lesions"
+      - "hypertelorism"
+      - "hypertonic"
+      - "hypogammaglobulinemia"
+      - "hypoglycemia"
+      - "hypoglycemia, hypoparathyroidism"
+      - "hypogonadotropic hypogonadism"
+      - "hypoplasia l mainstem bronchus"
+      - "hypoplasia of kidney"
+      - "hypoplasia of the brainstem"
+      - "hypoplastic"
+      - "hypoplastic corpus callosum, vermis hypoplasia"
+      - "hypoplastic left heart syndrome"
+      - "hypoplastic left thumb"
+      - "hypoplastic right side, anteriorly displaced"
+      - "hypoplastic thymus"
+      - "hypospadias"
+      - "hypotelorism, downslanted palpebral fissures"
+      - "hypotelorism, downslanting papebral fissures"
+      - "hypothyroid"
+      - "hypothyroidism"
+      - "hypothyroidism (update )"
+      - "hypothyroidism, hyperbilirubinemia"
+      - "hypothyroidism, vit d deficiency"
+      - "hypotonia"
+      - "hypotonia lower extremities"
+      - "hypotonia, pt with head lag, cannot sit on her own"
+      - "idiopathic short stature"
+      - "ileal atresia"
+      - "immune globulin deficiency for unknown reasons"
+      - "imperforate or atretic anus"
+      - "incompletely formed t10"
+      - "indirect hyperbilirubinemia"
+      - "infantile hepatic hemangioma"
+      - "inguinal hernia"
+      - "interrupted aortic arch"
+      - "intestinal hemangioma"
+      - "intraretinal hemorrhages"
+      - "intrathoracic hemangioma"
+      - "inverted bronchial pattern"
+      - "juvenile rheumatoid arthritis"
+      - "klippel-feil syndrome"
+      - "l ureterocele with absent r kidney"
+      - "labial adhesions"
+      - "labial hemangioma"
+      - "laryngeal hemangioma"
+      - "laryngo-bronchio tracheomalacia"
+      - "late onset of puberty/growth hormone deficiency"
+      - "learning disability, adhd"
+      - "left ear microtia"
+      - "left hand single palmar crease, clinodactyly"
+      - "left microphthalmia"
+      - "left pyelectasis"
+      - "left sided auricular skin tags as well as one tag on left cheek."
+      - "left sided hemivertebrae"
+      - "left transverse crease"
+      - "left ventricular outflow tract obstruction"
+      - "left-sided or midline liver"
+      - "leg length discrepancy and short stature"
+      - "liver hepatomegaly"
+      - "low growth factor/idiopathic short stature"
+      - "low lying conus at s1-2 w/ fatty filum"
+      - "low muscle tone"
+      - "low set ears"
+      - "ls myelomeningocele"
+      - "lumbosacral hemangioma"
+      - "lung hypoplasia"
+      - "macrocephaly"
+      - "macroglossia"
+      - "malrotation"
+      - "meatus stenosis"
+      - "medical record indicates that she had a cyst in her brain"
+      - "metatarsus adductus bilaterally"
+      - "metopic prominence"
+      - "microcephaly"
+      - "micrognathia"
+      - "micropenis"
+      - "microphthalmia and cloudy corneas"
+      - "mild global developmental delay"
+      - "mild ligamentous laxity"
+      - "mild rop ou"
+      - "mild upper pole caliectasis"
+      - "mildly high-arched"
+      - "mildly hypoplastic proximal thumbs"
+      - "mildly proptotic eyes"
+      - "mildly short"
+      - "missing rib"
+      - "missing teeth"
+      - "monoparesis of right arm"
+      - "moragni hernia"
+      - "muscle tone"
+      - "myopia"
+      - "narrow forehead"
+      - "neck bent to one side;needed pt"
+      - "neural tube defect"
+      - "neurogenic bladder"
+      - "no humerus, radius/ulna or hand bones on the left side"
+      - "non-functioning rt. kidney, obstruction of bladder outlet, hydroureteral nephrosis of the lt. kidney"
+      - "nystagmus"
+      - "omphalocele"
+      - "optic atrophy"
+      - "optic nerve hypoplasia"
+      - "osteopenia (updated )"
+      - "overfolded superior helices"
+      - "overlapping toes on right- 4th overlaps 5th"
+      - "overriding coronal sutures"
+      - "overriding helices and relatively small"
+      - "palpebral fissures"
+      - "pancreas not seen on ultrasound"
+      - "pancreatitis"
+      - "paraspinal hemangioma"
+      - "parietal encephalocele"
+      - "parietal encephalocele, plagiocephaly"
+      - "patent ductus arteriosus"
+      - "patent foramen ovale"
+      - "pectus carinatum"
+      - "pectus excavatum"
+      - "pelvic kidney"
+      - "pelviectasis"
+      - "periauricular skin tag"
+      - "pericallsol lipoma; splenium of corpus callosum"
+      - "perineal hemangioma"
+      - "periventricular leukomalacia"
+      - "pheochromocytoma   surgery"
+      - "phimosis"
+      - "pituitary gland cyst"
+      - "plagiocephaly"
+      - "plagiocephaly, triangular shaped in coronal plane"
+      - "pointy"
+      - "pointy superiorly"
+      - "polymicrogyria"
+      - "polysplenia"
+      - "port wine stain"
+      - "portacaval shunt"
+      - "posterior embryotoxon"
+      - "posteriorly rotated"
+      - "posteriorly set"
+      - "prominant eyes, long eyelashes, midface hypoplasia"
+      - "prominent"
+      - "prominent labia"
+      - "proptotic, long eyelashes"
+      - "protein losing enteropathy"
+      - "protein-losing enteropathy- celiac confirmed"
+      - "ptosis"
+      - "pulmonary hypertension"
+      - "pulmonary hypertension in newborn period"
+      - "pulmonary lymphangiectasia"
+      - "pvl"
+      - "pyelectasis"
+      - "pyloric stenosis"
+      - "r and l kidneys pelvicaliectasis"
+      - "r ear is smaller in size"
+      - "r ear long and underdeveloped"
+      - "r ear overfolded and posteriorly rotated; l ear slightly pointed"
+      - "r kidney is absent"
+      - "rail road track deformity"
+      - "rectourethral fistula"
+      - "rectovaginal fistula"
+      - "rectovestibular fistula"
+      - "remnants of the hyaloid vascular system"
+      - "renal agenesis"
+      - "retropharyngeal hemangioma"
+      - "reversed pulmonary anatomy (l-sided on r, r on l)"
+      - "rh abo incompatible"
+      - "right aortic arch"
+      - "right sided sternocleidomastoid contracture"
+      - "right-sided stomach"
+      - "rt-sided stomach"
+      - "rt-sided stomach & rt-sided multi-lobulated spleen"
+      - "sacral agenesis with absent coccyx and missing vertebrae at s1"
+      - "sacral dimple"
+      - "sacral hemangioma"
+      - "scimitar syndrome"
+      - "sclerae anicteric"
+      - "segmental abnormality of sacrum"
+      - "segmental anomalies involving upper thoracic spine"
+      - "seizure disorder"
+      - "seizure disorder."
+      - "seizures"
+      - "seizures related to hypocalcemia"
+      - "sensorineural hearing impairment"
+      - "severe developmental delay"
+      - "severe developmental delay, non-verbal, autistic, history of seizures"
+      - "severe seizures"
+      - "shallow acetabula"
+      - "short"
+      - "short achilles tendon on one side"
+      - "short frenulum, hypoplastic left mandible"
+      - "short neck"
+      - "short palpebral fissures"
+      - "short stature"
+      - "short sternum"
+      - "short toe bones 4th/5th digits"
+      - "short, sloping forehead with prominent occiput"
+      - "short, thick"
+      - "shortened long bones"
+      - "single kidney"
+      - "sinus dermal tract"
+      - "situs inversus"
+      - "skin tag on lower part of sternum"
+      - "skin tags"
+      - "skintags after the 5th digit on each hand."
+      - "slight redundancy in helices"
+      - "slightly upslanted palpebral fissures"
+      - "sloped forehead, narrow"
+      - "small"
+      - "small anterior fontanelle"
+      - "small lungs"
+      - "small maxilla/mandible on right side"
+      - "small mouth,thin upper lip"
+      - "small pituitary gland"
+      - "small right kidney"
+      - "spina bifida"
+      - "spleen hemangioma"
+      - "squared helix"
+      - "sternal pit"
+      - "sternum asymmetry"
+      - "stiff musculature"
+      - "strabismus"
+      - "stricture or obstruction and medical nec"
+      - "stridor, left vocal cord paralysis"
+      - "stroke and seizure per physician note"
+      - "subglottic hemangioma"
+      - "subglottic stenosis"
+      - "subject has cp."
+      - "submucosal cleft palate"
+      - "supernumerary nipples"
+      - "supraglottic hemangioma"
+      - "supraumbilical raphe"
+      - "tapering fingers"
+      - "tarsal coalition"
+      - "telangiectasia"
+      - "tethered cord malformation sequence"
+      - "tetralogy of fallot"
+      - "thick helices"
+      - "thickened rib, mild scoliosis, difuse osteopenia"
+      - "thin lips, short philtrum"
+      - "thin upper lip"
+      - "thoracic spinal cord syrinx"
+      - "thrombocytopenia"
+      - "thrush"
+      - "tibial torsion,"
+      - "tongue-tied"
+      - "torticollis"
+      - "tortous retinal vessels"
+      - "tracheal stenosis"
+      - "tracheal web"
+      - "tracheoesophageal fistula"
+      - "umbilical hernia"
+      - "underdeveloped ears"
+      - "underdeveloped pelvis, lower extremity contractures"
+      - "underdeveloped thenar prominence"
+      - "undescended testis"
+      - "unilateral coronal synostosis"
+      - "upslanting palpebrals"
+      - "ureteral abnormalities"
+      - "ureterocele, right vesicoureteric reflux, grade 1"
+      - "ureteropelvic junction obstruction"
+      - "varicoceles and phimosis."
+      - "vascular ring"
+      - "ventral displacement of meatus"
+      - "ventricular septal defect"
+      - "very dry skin"
+      - "visceral hemangioma"
+      - "visual deficit"
+      - "vulvar hemangioma"
+      - "webbed neck"
+      - "wide-spaced big toe"
+      - "wide-spaced nipples"
+    enumDef:
+      - enumeration: 2 vessel cord
+        source: hp
+        term_id: HP:0030658
+        version_date:
+      - enumeration: 2 vessel umbilical cord
+        source: hp
+        term_id: HP:0030658
+        version_date:
+      - enumeration: 3 cm. liver
+        source: hp
+        term_id: HP:0100523
+        version_date:
+      - enumeration: 3 facial skin tags
+        source: hp
+        term_id: HP:0010609
+        version_date:
+      - enumeration: 3 fontanelles
+        source: hp
+        term_id: HP:0012367
+        version_date:
+      - enumeration: abnormal abdominal situs
+        source: hp
+        term_id: HP:0011620
+        version_date:
+      - enumeration: abnormal aorta
+        source: hp
+        term_id: HP:0001679
+        version_date:
+      - enumeration: abnormal aortic valve
+        source: hp
+        term_id: HP:0001646
+        version_date:
+      - enumeration: abnormal atrial septum
+        source: hp
+        term_id: HP:0011994
+        version_date:
+      - enumeration: abnormal atrioventricular connection
+        source: hp
+        term_id: HP:0011546
+        version_date:
+      - enumeration: abnormal cardiac situs
+        source: hp
+        term_id: HP:0004307
+        version_date:
+      - enumeration: abnormal carotid artery morphology
+        source: hp
+        term_id: HP:0005344
+        version_date:
+      - enumeration: abnormal cerebellum morphology
+        source: hp
+        term_id: HP:0001317
+        version_date:
+      - enumeration: abnormal cervical and thoracic bodies
+        source: hp
+        term_id: HP:0002445
+        version_date:
+      - enumeration: abnormal coronary artery
+        source: hp
+        term_id: HP:0006704
+        version_date:
+      - enumeration: abnormal fetal calvarium
+        source: hp
+        term_id: HP:0010539
+        version_date:
+      - enumeration: abnormal fingers but not thumb
+        source: hp
+        term_id: HP:0100807
+        version_date:
+      - enumeration: abnormal hepatic vein
+        source: hp
+        term_id: HP:0006707
+        version_date:
+      - enumeration: abnormal left atrium
+        source: hp
+        term_id: HP:0025579
+        version_date:
+      - enumeration: abnormal left ventricle
+        source: hp
+        term_id: HP:0001711
+        version_date:
+      - enumeration: abnormal mitral valve
+        source: hp
+        term_id: HP:0001633
+        version_date:
+      - enumeration: abnormal pulmonary artery
+        source: hp
+        term_id: HP:0030966
+        version_date:
+      - enumeration: abnormal pulmonary valve
+        source: hp
+        term_id: HP:0001641
+        version_date:
+      - enumeration: abnormal pulmonary vein
+        source: hp
+        term_id: HP:0030968
+        version_date:
+      - enumeration: abnormal right atrium
+        source: hp
+        term_id: HP:0025580
+        version_date:
+      - enumeration: abnormal right ventricle
+        source: hp
+        term_id: HP:0001707
+        version_date:
+      - enumeration: abnormal systemic vein
+        source: hp
+        term_id: HP:0005345
+        version_date:
+      - enumeration: abnormal thumb
+        source: hp
+        term_id: HP:0001172
+        version_date:
+      - enumeration: abnormal toe
+        source: hp
+        term_id: HP:0001780
+        version_date:
+      - enumeration: abnormal tricuspid valve
+        source: hp
+        term_id: HP:0001702
+        version_date:
+      - enumeration: abnormal ventricular septum
+        source: hp
+        term_id: HP:0010438
+        version_date:
+      - enumeration: abnormal ventriculo-arterial connection
+        source: hp
+        term_id: HP:0011563
+        version_date:
+      - enumeration: abnormality of dental enamel
+        source: hp
+        term_id: HP:0000682
+        version_date:
+      - enumeration: abnormality of the cerebral vasculature
+        source: hp
+        term_id: HP:0100659
+        version_date:
+      - enumeration: abnormality of the optic nerve
+        source: hp
+        term_id: HP:0000587
+        version_date:
+      - enumeration: abnormality of the sternum
+        source: hp
+        term_id: HP:0000766
+        version_date:
+      - enumeration: absent corpus callosum
+        source: hp
+        term_id: HP:0007370
+        version_date:
+      - enumeration: absent or abnormal ear canal
+        source: hp
+        term_id: HP:0000413
+        version_date:
+      - enumeration: absent radius
+        source: hp
+        term_id: HP:0011908
+        version_date:
+      - enumeration: absent sacrum and lumbar spine
+        source: hp
+        term_id: HP:0030125
+        version_date:
+      - enumeration: absent sternal ossification
+        source: hp
+        term_id: HP:0006628
+        version_date:
+      - enumeration: absent thymus
+        source: hp
+        term_id: HP:0005359
+        version_date:
+      - enumeration: agenesis of corpus callosum
+        source: hp
+        term_id: HP:0001274
+        version_date:
+      - enumeration: ambiguous genitalia
+        source: hp
+        term_id: HP:0000062
+        version_date:
+      - enumeration: amblyopia
+        source: hp
+        term_id: HP:0000646
+        version_date:
+      - enumeration: anal skin tag
+        source: hp
+        term_id: HP:0000384
+        version_date:
+      - enumeration: anemia
+        source: hp
+        term_id: HP:0001903
+        version_date:
+      - enumeration: anemia of prematurity
+        source: hp
+        term_id: HP:0500049
+        version_date:
+      - enumeration: ankyloglossia
+        source: hp
+        term_id: HP:0010296
+        version_date:
+      - enumeration: annular pancreas
+        source: hp
+        term_id: HP:0001734
+        version_date:
+      - enumeration: anophthalmia
+        source: hp
+        term_id: HP:0000528
+        version_date:
+      - enumeration: anteriorly placed anus
+        source: hp
+        term_id: HP:0001545
+        version_date:
+      - enumeration: anxiety disorder
+        source: hp
+        term_id: HP:0000756
+        version_date:
+      - enumeration: aortic aneurysm
+        source: hp
+        term_id: HP:0004942
+        version_date:
+      - enumeration: aortic root aneurysm
+        source: hp
+        term_id: HP:0002616
+        version_date:
+      - enumeration: aortic tortuosity
+        source: hp
+        term_id: HP:0006687
+        version_date:
+      - enumeration: arterial stenosis
+        source: hp
+        term_id: HP:0100545
+        version_date:
+      - enumeration: arterial tortuosity
+        source: hp
+        term_id: HP:0005116
+        version_date:
+      - enumeration: ascending tubular aorta aneurysm
+        source: hp
+        term_id: HP:0004970
+        version_date:
+      - enumeration: asplenia
+        source: hp
+        term_id: HP:0001746
+        version_date:
+      - enumeration: assymetric crying facies
+        source: hp
+        term_id: HP:0030215
+        version_date:
+      - enumeration: asthma
+        source: hp
+        term_id: HP:0002099
+        version_date:
+      - enumeration: asymmetric
+        source: hp
+        term_id: HP:0100960
+        version_date:
+      - enumeration: asymmetric mouth movement; hypoplastic left jaw
+        source: hp
+        term_id: HP:0005156
+        version_date:
+      - enumeration: asymmetric sacral cleft, low lying conus terminalis l3
+        source: hp
+        term_id: HP:0000960
+        version_date:
+      - enumeration: asymmetrical gluteal crease
+        source: hp
+        term_id: HP:0011311
+        version_date:
+      - enumeration: atresia of left external ear
+        source: hp
+        term_id: HP:0000413
+        version_date:
+      - enumeration: atresia of the large intestine
+        source: hp
+        term_id: HP:0010448
+        version_date:
+      - enumeration: atrial septal defect
+        source: hp
+        term_id: HP:0001631
+        version_date:
+      - enumeration: atrial septal defect
+        source: hp
+        term_id: HP:0001631
+        version_date:
+      - enumeration: atrophic pituitary gland
+        source: hp
+        term_id: HP:0410279
+        version_date:
+      - enumeration: belpharoptosis
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: bicornuate uterus
+        source: hp
+        term_id: HP:0000813
+        version_date:
+      - enumeration: bicuspid aortic valve
+        source: hp
+        term_id: HP:0001647
+        version_date:
+      - enumeration: bifid scrotum
+        source: hp
+        term_id: HP:0000048
+        version_date:
+      - enumeration: bifid sternum
+        source: hp
+        term_id: HP:0010309
+        version_date:
+      - enumeration: bifid uvula
+        source: hp
+        term_id: HP:0000193
+        version_date:
+      - enumeration: bilat toes 2-4 syndactyly
+        source: hp
+        term_id: HP:0010714
+        version_date:
+      - enumeration: bilateral clinodactyly 5th fingers, left hand simian creases
+        source: hp
+        term_id: HP:0004209
+        version_date:
+      - enumeration: bilateral congenital ossicular anomaly
+        source: hp
+        term_id: HP:0008780
+        version_date:
+      - enumeration: bilateral glue ear
+        source: hp
+        term_id: HP:0040262
+        version_date:
+      - enumeration: bilateral left-sidedness
+        source: hp
+        term_id: HP:0100337
+        version_date:
+      - enumeration: bilateral low vision
+        source: hp
+        term_id: HP:0012832
+        version_date:
+      - enumeration: bilateral right-sidedness
+        source: hp
+        term_id: HP:0100337
+        version_date:
+      - enumeration: bile duct paucity
+        source: hp
+        term_id: HP:0005912
+        version_date:
+      - enumeration: biliary atresia
+        source: hp
+        term_id: HP:0005912
+        version_date:
+      - enumeration: bitemporal hallowing
+        source: hp
+        term_id: HP:0025386
+        version_date:
+      - enumeration: bitemporal narrowing
+        source: hp
+        term_id: HP:0000341
+        version_date:
+      - enumeration: born with retinoblastoma
+        source: hp
+        term_id: HP:0009919
+        version_date:
+      - enumeration: brachycephaly
+        source: hp
+        term_id: HP:0000248
+        version_date:
+      - enumeration: branchial cleft cyst
+        source: hp
+        term_id: HP:0009796
+        version_date:
+      - enumeration: broad big toe
+        source: hp
+        term_id: HP:0010055
+        version_date:
+      - enumeration: butterfly vertebrae
+        source: hp
+        term_id: HP:0003316
+        version_date:
+      - enumeration: cafe au lait spots
+        source: hp
+        term_id: HP:0000957
+        version_date:
+      - enumeration: cataracts
+        source: hp
+        term_id: HP:0000518
+        version_date:
+      - enumeration: caudal regression syndrome
+        source: hp
+        term_id: HP:0002376
+        version_date:
+      - enumeration: cecal carcinoma
+        source: hp
+        term_id: HP:0030731
+        version_date:
+      - enumeration: central hypothyrodism
+        source: hp
+        term_id: HP:0030645
+        version_date:
+      - enumeration: cephalohematoma, caput succedaneum
+        source: hp
+        term_id: HP:0012541
+        version_date:
+      - enumeration: cerebellar cyst
+        source: hp
+        term_id: HP:0002350
+        version_date:
+      - enumeration: cerebellar dysplasia
+        source: hp
+        term_id: HP:0007033
+        version_date:
+      - enumeration: cerebellar glioma
+        source: hp
+        term_id: HP:0010795
+        version_date:
+      - enumeration: cerebellar hypoplasia
+        source: hp
+        term_id: HP:0001321
+        version_date:
+      - enumeration: cerebellar vermis hypoplasia
+        source: hp
+        term_id: HP:0001320
+        version_date:
+      - enumeration: cerebral atrophy
+        source: hp
+        term_id: HP:0002059
+        version_date:
+      - enumeration: cerebral hypoplasia
+        source: hp
+        term_id: HP:0006872
+        version_date:
+      - enumeration: cervical instability
+        source: hp
+        term_id: HP:0008462
+        version_date:
+      - enumeration: chiari malformation
+        source: hp
+        term_id: HP:0002308
+        version_date:
+      - enumeration: choanal atresia
+        source: hp
+        term_id: HP:0000453
+        version_date:
+      - enumeration: choanal stenosis
+        source: hp
+        term_id: HP:0000452
+        version_date:
+      - enumeration: cholecystectomy  1994
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: chordee
+        source: hp
+        term_id: HP:0000041
+        version_date:
+      - enumeration: choroid plexus cyst
+        source: hp
+        term_id: HP:0002190
+        version_date:
+      - enumeration: chronic lung disease-prematurity
+        source: hp
+        term_id: HP:0006528
+        version_date:
+      - enumeration: chronic renal insufficiency
+        source: hp
+        term_id: HP:0000083
+        version_date:
+      - enumeration: cleft lip
+        source: hp
+        term_id: HP:0000204
+        version_date:
+      - enumeration: cleft palate
+        source: hp
+        term_id: HP:0000175
+        version_date:
+      - enumeration: clindactyly of fifth digits, l partial simian crease
+        source: hp
+        term_id: HP:0006216
+        version_date:
+      - enumeration: clinodactyly 5th finger
+        source: hp
+        term_id: HP:0004209
+        version_date:
+      - enumeration: clinodactyly, right hand
+        source: hp
+        term_id: HP:0011431
+        version_date:
+      - enumeration: club foot
+        source: hp
+        term_id: HP:0001762
+        version_date:
+      - enumeration: clubbing
+        source: hp
+        term_id: HP:0001217
+        version_date:
+      - enumeration: coarctation of aorta
+        source: hp
+        term_id: HP:0001680
+        version_date:
+      - enumeration: coloboma
+        source: hp
+        term_id: HP:0000589
+        version_date:
+      - enumeration: conductive hearing impairment
+        source: hp
+        term_id: HP:0000405
+        version_date:
+      - enumeration: congenital blindness
+        source: hp
+        term_id: HP:0000618
+        version_date:
+      - enumeration: congenital bulbar palsy
+        source: hp
+        term_id: HP:0001283
+        version_date:
+      - enumeration: congenital cystic adenomatoid malformation
+        source: hp
+        term_id: HP:0010959
+        version_date:
+      - enumeration: congenital deafness, r pinna cupped.
+        source: hp
+        term_id: HP:0008527
+        version_date:
+      - enumeration: congenital hemivertebra
+        source: hp
+        term_id: HP:0002937
+        version_date:
+      - enumeration: congenital hip dysplasia
+        source: hp
+        term_id: HP:0001385
+        version_date:
+      - enumeration: congenital hypoglycemia
+        source: hp
+        term_id: HP:0001943
+        version_date:
+      - enumeration: congenital hypothyroidism
+        source: hp
+        term_id: HP:0000851
+        version_date:
+      - enumeration: congenital scar from eye to scalp per mom
+        source: hp
+        term_id: HP:0007777
+        version_date:
+      - enumeration: congenital scoliosis
+        source: hp
+        term_id: HP:0002650
+        version_date:
+      - enumeration: conotruncal left-sided lesion
+        source: hp
+        term_id: HP:0001710
+        version_date:
+      - enumeration: craniosynostosis
+        source: hp
+        term_id: HP:0001363
+        version_date:
+      - enumeration: cupped ears
+        source: hp
+        term_id: HP:0000378
+        version_date:
+      - enumeration: cutaneous cyst
+        source: hp
+        term_id: HP:0025245
+        version_date:
+      - enumeration: cutis aplasia
+        source: hp
+        term_id: HP:0001057
+        version_date:
+      - enumeration: cystic hygroma
+        source: hp
+        term_id: HP:0000476
+        version_date:
+      - enumeration: cystic or polycystic kidney
+        source: hp
+        term_id: HP:0000113
+        version_date:
+      - enumeration: dandy-walker malformation
+        source: hp
+        term_id: HP:0001305
+        version_date:
+      - enumeration: decrease vit k and factor xii deficiency
+        source: hp
+        term_id: HP:0040239
+        version_date:
+      - enumeration: decreased thenar eminence
+        source: hp
+        term_id: HP:0001245
+        version_date:
+      - enumeration: deformity of the right anterolateral abdominal wall
+        source: hp
+        term_id: HP:0004298
+        version_date:
+      - enumeration: delayed puberty-no facial hair,pubic or underarm hair.
+        source: hp
+        term_id: HP:0100133
+        version_date:
+      - enumeration: developmental & learning issues
+        source: hp
+        term_id: HP:0003110
+        version_date:
+      - enumeration: developmental delay
+        source: hp
+        term_id: HP:0001263
+        version_date:
+      - enumeration: dextrocardia
+        source: hp
+        term_id: HP:0001651
+        version_date:
+      - enumeration: diaphragmatic hernia
+        source: hp
+        term_id: HP:0000776
+        version_date:
+      - enumeration: dilatation of the cerebral artery
+        source: hp
+        term_id: HP:0004944
+        version_date:
+      - enumeration: distal limb deformities and radial anomaly
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: dolichocephaly with bony synostosis of sagittal structure.
+        source: hp
+        term_id: HP:0000268
+        version_date:
+      - enumeration: dolichochocehaly
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: double aortic arch
+        source: hp
+        term_id: HP:0011590
+        version_date:
+      - enumeration: double kidney
+        source: hp
+        term_id: HP:0000073
+        version_date:
+      - enumeration: double left renal collecting systems and ureters
+        source: hp
+        term_id: HP:0000081
+        version_date:
+      - enumeration: downslanting
+        source: hp
+        term_id: HP:0000494
+        version_date:
+      - enumeration: downslanting palepbral fissures
+        source: hp
+        term_id: HP:0000494
+        version_date:
+      - enumeration: duane anomaly
+        source: hp
+        term_id: HP:0009921
+        version_date:
+      - enumeration: duodenal atresia
+        source: hp
+        term_id: HP:0002247
+        version_date:
+      - enumeration: dysmorphic facies
+        source: hp
+        term_id: HP:0000271
+        version_date:
+      - enumeration: dysplastic kidney
+        source: hp
+        term_id: HP:0000110
+        version_date:
+      - enumeration: ear pit
+        source: hp
+        term_id: HP:0004467
+        version_date:
+      - enumeration: ear tag
+        source: hp
+        term_id: HP:0000384
+        version_date:
+      - enumeration: enlarged
+        source: hp
+        term_id: HP:0012081
+        version_date:
+      - enumeration: enlarged tranverse liver
+        source: hp
+        term_id: HP:0002240
+        version_date:
+      - enumeration: epibulbar dermoid
+        source: hp
+        term_id: HP:0001140
+        version_date:
+      - enumeration: epicanthal folds
+        source: hp
+        term_id: HP:0000286
+        version_date:
+      - enumeration: esophageal atresai
+        source: hp
+        term_id: HP:0100681
+        version_date:
+      - enumeration: esophageal atresia
+        source: hp
+        term_id: HP:0002032
+        version_date:
+      - enumeration: esophageal hemangioma
+        source: hp
+        term_id: HP:0410270
+        version_date:
+      - enumeration: esophageal reflux
+        source: hp
+        term_id: HP:0002020
+        version_date:
+      - enumeration: esophagitis.  g-tube.
+        source: hp
+        term_id: HP:0100633
+        version_date:
+      - enumeration: esotropia
+        source: hp
+        term_id: HP:0000565
+        version_date:
+      - enumeration: excess nuchal skin
+        source: hp
+        term_id: HP:0000474
+        version_date:
+      - enumeration: exotropia
+        source: hp
+        term_id: HP:0000577
+        version_date:
+      - enumeration: exposed to toxoplasma in utero - born negative
+        source: hp
+        term_id: HP:0006615
+        version_date:
+      - enumeration: extra digit bilat
+        source: hp
+        term_id: HP:0012367
+        version_date:
+      - enumeration: extra rib
+        source: hp
+        term_id: HP:0005815
+        version_date:
+      - enumeration: eye deviation"" per  note
+        source: hp
+        term_id: HP:0500074
+        version_date:
+      - enumeration: facial hemangioma
+        source: hp
+        term_id: HP:0000329
+        version_date:
+      - enumeration: factor v leiden
+        source: hp
+        term_id: HP:0003225
+        version_date:
+      - enumeration: factor v leiden heterozygous, mthfr heterozygous
+        source: hp
+        term_id: HP:0003225
+        version_date:
+      - enumeration: factor xii deficiency
+        source: hp
+        term_id: HP:0004841
+        version_date:
+      - enumeration: flat face
+        source: hp
+        term_id: HP:0012368
+        version_date:
+      - enumeration: foot polydactyly
+        source: hp
+        term_id: HP:0001829
+        version_date:
+      - enumeration: foot syndactyly
+        source: hp
+        term_id: HP:0001770
+        version_date:
+      - enumeration: frequent episodes of migratory atelectasis
+        source: hp
+        term_id: HP:0100750
+        version_date:
+      - enumeration: frontal bossing (occipital protuberance)
+        source: hp
+        term_id: HP:0002007
+        version_date:
+      - enumeration: fused vertebrae
+        source: hp
+        term_id: HP:0002948
+        version_date:
+      - enumeration: gastroesophageal reflux
+        source: hp
+        term_id: HP:0002020
+        version_date:
+      - enumeration: gastroschisis
+        source: hp
+        term_id: HP:0004299
+        version_date:
+      - enumeration: gerd
+        source: hp
+        term_id: HP:0002020
+        version_date:
+      - enumeration: glaucoma
+        source: hp
+        term_id: HP:0000501
+        version_date:
+      - enumeration: global developmental delay, hypotonia
+        source: hp
+        term_id: HP:0012736
+        version_date:
+      - enumeration: gross motor delay
+        source: hp
+        term_id: HP:0002194
+        version_date:
+      - enumeration: hallux valgus
+        source: hp
+        term_id: HP:0001822
+        version_date:
+      - enumeration: hamartoma
+        source: hp
+        term_id: HP:0010566
+        version_date:
+      - enumeration: hand polydactyly
+        source: hp
+        term_id: HP:0001161
+        version_date:
+      - enumeration: hand syndactyly
+        source: hp
+        term_id: HP:0006101
+        version_date:
+      - enumeration: hearing impairment
+        source: hp
+        term_id: HP:0000365
+        version_date:
+      - enumeration: hearing loss
+        source: hp
+        term_id: HP:0000405
+        version_date:
+      - enumeration: hemangioma
+        source: hp
+        term_id: HP:0001028
+        version_date:
+      - enumeration: hemi-vertebrae
+        source: hp
+        term_id: HP:0002946
+        version_date:
+      - enumeration: hemiplegic cerebral palsy; abnormal gait
+        source: hp
+        term_id: HP:0100021
+        version_date:
+      - enumeration: hepatic hemangioma
+        source: hp
+        term_id: HP:0031207
+        version_date:
+      - enumeration: hernia x2 type unk
+        source: hp
+        term_id: HP:0100790
+        version_date:
+      - enumeration: hernia, type unk
+        source: hp
+        term_id: HP:0100790
+        version_date:
+      - enumeration: heterotaxy
+        source: hp
+        term_id: HP:0030853
+        version_date:
+      - enumeration: heterotaxy syndrome
+        source: hp
+        term_id: HP:0030853
+        version_date:
+      - enumeration: high arched
+        source: hp
+        term_id: HP:0000218
+        version_date:
+      - enumeration: high arched and narrowed
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: high palate
+        source: hp
+        term_id: HP:0000218
+        version_date:
+      - enumeration: high riding testicles
+        source: hp
+        term_id: HP:0000053
+        version_date:
+      - enumeration: hirschsprung's disease
+        source: hp
+        term_id: HP:0002251
+        version_date:
+      - enumeration: holoprosencephaly
+        source: hp
+        term_id: HP:0001360
+        version_date:
+      - enumeration: horner syndrome
+        source: hp
+        term_id: HP:0002277
+        version_date:
+      - enumeration: horseshoe kidney
+        source: hp
+        term_id: HP:0000085
+        version_date:
+      - enumeration: hydrocele
+        source: hp
+        term_id: HP:0000034
+        version_date:
+      - enumeration: hydroceles
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: hydrocephalus
+        source: hp
+        term_id: HP:0000238
+        version_date:
+      - enumeration: hydrocephalus
+        source: hp
+        term_id: HP:0410043
+        version_date:
+      - enumeration: hydronephrosis
+        source: hp
+        term_id: HP:0000126
+        version_date:
+      - enumeration: hypercholesterolemia
+        source: hp
+        term_id: HP:0003124
+        version_date:
+      - enumeration: hyperechoic renal cortex
+        source: hp
+        term_id: HP:0011035
+        version_date:
+      - enumeration: hyperpigmented lesions
+        source: hp
+        term_id: HP:0011355
+        version_date:
+      - enumeration: hypertelorism
+        source: hp
+        term_id: HP:0000316
+        version_date:
+      - enumeration: hypertonic
+        source: hp
+        term_id: HP:0001986
+        version_date:
+      - enumeration: hypogammaglobulinemia
+        source: hp
+        term_id: HP:0005432
+        version_date:
+      - enumeration: hypoglycemia
+        source: hp
+        term_id: HP:0001943
+        version_date:
+      - enumeration: hypoglycemia, hypoparathyroidism
+        source: hp
+        term_id: HP:0000829
+        version_date:
+      - enumeration: hypogonadotropic hypogonadism
+        source: hp
+        term_id: HP:0000044
+        version_date:
+      - enumeration: hypoplasia l mainstem bronchus
+        source: hp
+        term_id: HP:0006539
+        version_date:
+      - enumeration: hypoplasia of kidney
+        source: hp
+        term_id: HP:0000089
+        version_date:
+      - enumeration: hypoplasia of the brainstem
+        source: hp
+        term_id: HP:0002365
+        version_date:
+      - enumeration: hypoplastic
+        source: hp
+        term_id: HP:0000882
+        version_date:
+      - enumeration: hypoplastic corpus callosum, vermis hypoplasia
+        source: hp
+        term_id: HP:0002079
+        version_date:
+      - enumeration: hypoplastic left heart syndrome
+        source: hp
+        term_id: HP:0004383
+        version_date:
+      - enumeration: hypoplastic left thumb
+        source: hp
+        term_id: HP:0009778
+        version_date:
+      - enumeration: hypoplastic right side, anteriorly displaced
+        source: hp
+        term_id: HP:0003252
+        version_date:
+      - enumeration: hypoplastic thymus
+        source: hp
+        term_id: HP:0000778
+        version_date:
+      - enumeration: hypospadias
+        source: hp
+        term_id: HP:0000047
+        version_date:
+      - enumeration: hypotelorism, downslanted palpebral fissures
+        source: hp
+        term_id: HP:0000494
+        version_date:
+      - enumeration: hypotelorism, downslanting papebral fissures
+        source: hp
+        term_id: HP:0000494
+        version_date:
+      - enumeration: hypothyroid
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: hypothyroidism
+        source: hp
+        term_id: HP:0000821
+        version_date:
+      - enumeration: hypothyroidism (update )
+        source: hp
+        term_id: HP:0000821
+        version_date:
+      - enumeration: hypothyroidism, hyperbilirubinemia
+        source: hp
+        term_id: HP:0002904
+        version_date:
+      - enumeration: hypothyroidism, vit d deficiency
+        source: hp
+        term_id: HP:0000821
+        version_date:
+      - enumeration: hypotonia
+        source: hp
+        term_id: HP:0012389
+        version_date:
+      - enumeration: hypotonia lower extremities
+        source: hp
+        term_id: HP:0008968
+        version_date:
+      - enumeration: hypotonia, pt with head lag, cannot sit on her own
+        source: hp
+        term_id: HP:0025605
+        version_date:
+      - enumeration: idiopathic short stature
+        source: hp
+        term_id: HP:0004322
+        version_date:
+      - enumeration: ileal atresia
+        source: hp
+        term_id: HP:0011102
+        version_date:
+      - enumeration: immune globulin deficiency for unknown reasons
+        source: hp
+        term_id: HP:0002720
+        version_date:
+      - enumeration: imperforate or atretic anus
+        source: hp
+        term_id: HP:0002023
+        version_date:
+      - enumeration: incompletely formed t10
+        source: hp
+        term_id: HP:0007027
+        version_date:
+      - enumeration: indirect hyperbilirubinemia
+        source: hp
+        term_id: HP:0008282
+        version_date:
+      - enumeration: infantile hepatic hemangioma
+        source: hp
+        term_id: HP:0031207
+        version_date:
+      - enumeration: inguinal hernia
+        source: hp
+        term_id: HP:0000023
+        version_date:
+      - enumeration: interrupted aortic arch
+        source: hp
+        term_id: HP:0011611
+        version_date:
+      - enumeration: intestinal hemangioma
+        source: hp
+        term_id: HP:0410267
+        version_date:
+      - enumeration: intraretinal hemorrhages
+        source: hp
+        term_id: HP:0031527
+        version_date:
+      - enumeration: intrathoracic hemangioma
+        source: hp
+        term_id: HP:0410287
+        version_date:
+      - enumeration: inverted bronchial pattern
+        source: hp
+        term_id: HP:0030715
+        version_date:
+      - enumeration: juvenile rheumatoid arthritis
+        source: hp
+        term_id: HP:0005681
+        version_date:
+      - enumeration: klippel-feil syndrome
+        source: hp
+        term_id: HP:0004602
+        version_date:
+      - enumeration: l ureterocele with absent r kidney
+        source: hp
+        term_id: HP:0000070
+        version_date:
+      - enumeration: labial adhesions
+        source: hp
+        term_id: HP:0000063
+        version_date:
+      - enumeration: labial hemangioma
+        source: hp
+        term_id: HP:0410269
+        version_date:
+      - enumeration: laryngeal hemangioma
+        source: hp
+        term_id: HP:0410271
+        version_date:
+      - enumeration: laryngo-bronchio tracheomalacia
+        source: hp
+        term_id: HP:0002786
+        version_date:
+      - enumeration: late onset of puberty/growth hormone deficiency
+        source: hp
+        term_id: HP:0003584
+        version_date:
+      - enumeration: learning disability, adhd
+        source: hp
+        term_id: HP:0001328
+        version_date:
+      - enumeration: left ear microtia
+        source: hp
+        term_id: HP:0008551
+        version_date:
+      - enumeration: left hand single palmar crease, clinodactyly
+        source: hp
+        term_id: HP:0000954
+        version_date:
+      - enumeration: left microphthalmia
+        source: hp
+        term_id: HP:0000568
+        version_date:
+      - enumeration: left pyelectasis
+        source: hp
+        term_id: HP:0010945
+        version_date:
+      - enumeration: left sided auricular skin tags as well as one tag on left cheek.
+        source: hp
+        term_id: HP:0010609
+        version_date:
+      - enumeration: left sided hemivertebrae
+        source: hp
+        term_id: HP:0002937
+        version_date:
+      - enumeration: left transverse crease
+        source: hp
+        term_id: HP:0000954
+        version_date:
+      - enumeration: left ventricular outflow tract obstruction
+        source: hp
+        term_id: HP:0011103
+        version_date:
+      - enumeration: left-sided or midline liver
+        source: hp
+        term_id: HP:0011602
+        version_date:
+      - enumeration: leg length discrepancy and short stature
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: liver hepatomegaly
+        source: hp
+        term_id: HP:0002240
+        version_date:
+      - enumeration: low growth factor/idiopathic short stature
+        source: hp
+        term_id: HP:0004322
+        version_date:
+      - enumeration: low lying conus at s1-2 w/ fatty filum
+        source: hp
+        term_id: HP:0008489
+        version_date:
+      - enumeration: low muscle tone
+        source: hp
+        term_id: HP:0008936
+        version_date:
+      - enumeration: low set ears
+        source: hp
+        term_id: HP:0000369
+        version_date:
+      - enumeration: ls myelomeningocele
+        source: hp
+        term_id: HP:0002475
+        version_date:
+      - enumeration: lumbosacral hemangioma
+        source: hp
+        term_id: HP:0410275
+        version_date:
+      - enumeration: lung hypoplasia
+        source: hp
+        term_id: HP:0002089
+        version_date:
+      - enumeration: macrocephaly
+        source: hp
+        term_id: HP:0000256
+        version_date:
+      - enumeration: macroglossia
+        source: hp
+        term_id: HP:0000158
+        version_date:
+      - enumeration: malrotation
+        source: hp
+        term_id: HP:0002566
+        version_date:
+      - enumeration: meatus stenosis
+        source: hp
+        term_id: HP:0010644
+        version_date:
+      - enumeration: medical record indicates that she had a cyst in her brain
+        source: hp
+        term_id: HP:0012683
+        version_date:
+      - enumeration: metatarsus adductus bilaterally
+        source: hp
+        term_id: HP:0001840
+        version_date:
+      - enumeration: metopic prominence
+        source: hp
+        term_id: HP:0011330
+        version_date:
+      - enumeration: microcephaly
+        source: hp
+        term_id: HP:0000252
+        version_date:
+      - enumeration: micrognathia
+        source: hp
+        term_id: HP:0000347
+        version_date:
+      - enumeration: micropenis
+        source: hp
+        term_id: HP:0000054
+        version_date:
+      - enumeration: microphthalmia and cloudy corneas
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: mild global developmental delay
+        source: hp
+        term_id: HP:0011342
+        version_date:
+      - enumeration: mild ligamentous laxity
+        source: hp
+        term_id: HP:0001388
+        version_date:
+      - enumeration: mild rop ou
+        source: hp
+        term_id: HP:0012825
+        version_date:
+      - enumeration: mild upper pole caliectasis
+        source: hp
+        term_id: HP:0012825
+        version_date:
+      - enumeration: mildly high-arched
+        source: hp
+        term_id: HP:0012663
+        version_date:
+      - enumeration: mildly hypoplastic proximal thumbs
+        source: hp
+        term_id: HP:0005726
+        version_date:
+      - enumeration: mildly proptotic eyes
+        source: hp
+        term_id: HP:0012663
+        version_date:
+      - enumeration: mildly short
+        source: hp
+        term_id: HP:0012663
+        version_date:
+      - enumeration: missing rib
+        source: hp
+        term_id: HP:0000921
+        version_date:
+      - enumeration: missing teeth
+        source: hp
+        term_id: HP:0006349
+        version_date:
+      - enumeration: monoparesis of right arm
+        source: hp
+        term_id: HP:0006488
+        version_date:
+      - enumeration: moragni hernia
+        source: hp
+        term_id: HP:0100790
+        version_date:
+      - enumeration: muscle tone
+        source: hp
+        term_id: HP:0003808
+        version_date:
+      - enumeration: myopia
+        source: hp
+        term_id: HP:0000545
+        version_date:
+      - enumeration: narrow forehead
+        source: hp
+        term_id: HP:0000341
+        version_date:
+      - enumeration: neck bent to one side;needed pt
+        source: hp
+        term_id: HP:0000475
+        version_date:
+      - enumeration: neural tube defect
+        source: hp
+        term_id: HP:0045005
+        version_date:
+      - enumeration: neurogenic bladder
+        source: hp
+        term_id: HP:0000011
+        version_date:
+      - enumeration: no humerus, radius/ulna or hand bones on the left side
+        source: hp
+        term_id: HP:0004276
+        version_date:
+      - enumeration: non-functioning rt. kidney, obstruction of bladder outlet, hydroureteral nephrosis of the lt. kidney
+        source: hp
+        term_id: HP:0000085
+        version_date:
+      - enumeration: nystagmus
+        source: hp
+        term_id: HP:0000639
+        version_date:
+      - enumeration: omphalocele
+        source: hp
+        term_id: HP:0001539
+        version_date:
+      - enumeration: optic atrophy
+        source: hp
+        term_id: HP:0000648
+        version_date:
+      - enumeration: optic nerve hypoplasia
+        source: hp
+        term_id: HP:0000609
+        version_date:
+      - enumeration: osteopenia (updated )
+        source: hp
+        term_id: HP:0000938
+        version_date:
+      - enumeration: overfolded superior helices
+        source: hp
+        term_id: HP:0000396
+        version_date:
+      - enumeration: overlapping toes on right- 4th overlaps 5th
+        source: hp
+        term_id: HP:0001845
+        version_date:
+      - enumeration: overriding coronal sutures
+        source: hp
+        term_id: HP:0002623
+        version_date:
+      - enumeration: overriding helices and relatively small
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: palpebral fissures
+        source: hp
+        term_id: HP:0000494
+        version_date:
+      - enumeration: pancreas not seen on ultrasound
+        source: hp
+        term_id: HP:0011425
+        version_date:
+      - enumeration: pancreatitis
+        source: hp
+        term_id: HP:0001733
+        version_date:
+      - enumeration: paraspinal hemangioma
+        source: hp
+        term_id: HP:0410274
+        version_date:
+      - enumeration: parietal encephalocele
+        source: hp
+        term_id: HP:0011816
+        version_date:
+      - enumeration: parietal encephalocele, plagiocephaly
+        source: hp
+        term_id: HP:0011816
+        version_date:
+      - enumeration: patent ductus arteriosus
+        source: hp
+        term_id: HP:0001643
+        version_date:
+      - enumeration: patent foramen ovale
+        source: hp
+        term_id: HP:0001655
+        version_date:
+      - enumeration: pectus carinatum
+        source: hp
+        term_id: HP:0000768
+        version_date:
+      - enumeration: pectus excavatum
+        source: hp
+        term_id: HP:0000767
+        version_date:
+      - enumeration: pelvic kidney
+        source: hp
+        term_id: HP:0000125
+        version_date:
+      - enumeration: pelviectasis
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: periauricular skin tag
+        source: hp
+        term_id: HP:0000384
+        version_date:
+      - enumeration: pericallsol lipoma; splenium of corpus callosum
+        source: hp
+        term_id: HP:0006931
+        version_date:
+      - enumeration: perineal hemangioma
+        source: hp
+        term_id: HP:0031449
+        version_date:
+      - enumeration: periventricular leukomalacia
+        source: hp
+        term_id: HP:0006970
+        version_date:
+      - enumeration: pheochromocytoma   surgery
+        source: hp
+        term_id: HP:0002666
+        version_date:
+      - enumeration: phimosis
+        source: hp
+        term_id: HP:0001741
+        version_date:
+      - enumeration: pituitary gland cyst
+        source: hp
+        term_id: HP:0410278
+        version_date:
+      - enumeration: plagiocephaly
+        source: hp
+        term_id: HP:0001357
+        version_date:
+      - enumeration: plagiocephaly, triangular shaped in coronal plane
+        source: hp
+        term_id: HP:0001357
+        version_date:
+      - enumeration: pointy
+        source: hp
+        term_id: HP:0000307
+        version_date:
+      - enumeration: pointy superiorly
+        source: hp
+        term_id: HP:0008541
+        version_date:
+      - enumeration: polymicrogyria
+        source: hp
+        term_id: HP:0002126
+        version_date:
+      - enumeration: polysplenia
+        source: hp
+        term_id: HP:0001748
+        version_date:
+      - enumeration: port wine stain
+        source: hp
+        term_id: HP:0001052
+        version_date:
+      - enumeration: portacaval shunt
+        source: hp
+        term_id: HP:0012383
+        version_date:
+      - enumeration: posterior embryotoxon
+        source: hp
+        term_id: HP:0000627
+        version_date:
+      - enumeration: posteriorly rotated
+        source: hp
+        term_id: HP:0000358
+        version_date:
+      - enumeration: posteriorly set
+        source: hp
+        term_id: HP:0000368
+        version_date:
+      - enumeration: prominant eyes, long eyelashes, midface hypoplasia
+        source: hp
+        term_id: HP:0000527
+        version_date:
+      - enumeration: prominent
+        source: hp
+        term_id: HP:0012428
+        version_date:
+      - enumeration: prominent labia
+        source: hp
+        term_id: HP:0012428
+        version_date:
+      - enumeration: proptotic, long eyelashes
+        source: hp
+        term_id: HP:0000527
+        version_date:
+      - enumeration: protein losing enteropathy
+        source: hp
+        term_id: HP:0002243
+        version_date:
+      - enumeration: protein-losing enteropathy- celiac confirmed
+        source: hp
+        term_id: HP:0002243
+        version_date:
+      - enumeration: ptosis
+        source: hp
+        term_id: HP:0000508
+        version_date:
+      - enumeration: pulmonary hypertension
+        source: hp
+        term_id: HP:0011726
+        version_date:
+      - enumeration: pulmonary hypertension in newborn period
+        source: hp
+        term_id: HP:0030950
+        version_date:
+      - enumeration: pulmonary lymphangiectasia
+        source: hp
+        term_id: HP:0006521
+        version_date:
+      - enumeration: pvl
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: pyelectasis
+        source: hp
+        term_id: HP:0010945
+        version_date:
+      - enumeration: pyloric stenosis
+        source: hp
+        term_id: HP:0002021
+        version_date:
+      - enumeration: r and l kidneys pelvicaliectasis
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: r ear is smaller in size
+        source: hp
+        term_id: HP:0003755
+        version_date:
+      - enumeration: r ear long and underdeveloped
+        source: hp
+        term_id: HP:0010067
+        version_date:
+      - enumeration: r ear overfolded and posteriorly rotated; l ear slightly pointed
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: r kidney is absent
+        source: hp
+        term_id: HP:0000104
+        version_date:
+      - enumeration: rail road track deformity
+        source: hp
+        term_id: HP:0008110
+        version_date:
+      - enumeration: rectourethral fistula
+        source: hp
+        term_id: HP:0025407
+        version_date:
+      - enumeration: rectovaginal fistula
+        source: hp
+        term_id: HP:0000143
+        version_date:
+      - enumeration: rectovestibular fistula
+        source: hp
+        term_id: HP:0025025
+        version_date:
+      - enumeration: remnants of the hyaloid vascular system
+        source: hp
+        term_id: HP:0007968
+        version_date:
+      - enumeration: renal agenesis
+        source: hp
+        term_id: HP:0000104
+        version_date:
+      - enumeration: retropharyngeal hemangioma
+        source: hp
+        term_id: HP:0410273
+        version_date:
+      - enumeration: reversed pulmonary anatomy (l-sided on r, r on l)
+        source: hp
+        term_id: HP:0030878
+        version_date:
+      - enumeration: rh abo incompatible
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: right aortic arch
+        source: hp
+        term_id: HP:0012020
+        version_date:
+      - enumeration: right sided sternocleidomastoid contracture
+        source: hp
+        term_id: HP:0012834
+        version_date:
+      - enumeration: right-sided stomach
+        source: hp
+        term_id: HP:0011548
+        version_date:
+      - enumeration: rt-sided stomach
+        source: hp
+        term_id: HP:0012126
+        version_date:
+      - enumeration: rt-sided stomach & rt-sided multi-lobulated spleen
+        source: hp
+        term_id: HP:0011548
+        version_date:
+      - enumeration: sacral agenesis with absent coccyx and missing vertebrae at s1
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: sacral dimple
+        source: hp
+        term_id: HP:0000960
+        version_date:
+      - enumeration: sacral hemangioma
+        source: hp
+        term_id: HP:0001028
+        version_date:
+      - enumeration: scimitar syndrome
+        source: hp
+        term_id: HP:0011626
+        version_date:
+      - enumeration: sclerae anicteric
+        source: hp
+        term_id: HP:0000592
+        version_date:
+      - enumeration: segmental abnormality of sacrum
+        source: hp
+        term_id: HP:0005107
+        version_date:
+      - enumeration: segmental anomalies involving upper thoracic spine
+        source: hp
+        term_id: HP:0009812
+        version_date:
+      - enumeration: seizure disorder
+        source: hp
+        term_id: HP:0002281
+        version_date:
+      - enumeration: seizure disorder.
+        source: hp
+        term_id: HP:0002281
+        version_date:
+      - enumeration: seizures
+        source: hp
+        term_id: HP:0001250
+        version_date:
+      - enumeration: seizures related to hypocalcemia
+        source: hp
+        term_id: HP:0002199
+        version_date:
+      - enumeration: sensorineural hearing impairment
+        source: hp
+        term_id: HP:0000407
+        version_date:
+      - enumeration: severe developmental delay
+        source: hp
+        term_id: HP:0011344
+        version_date:
+      - enumeration: severe developmental delay, non-verbal, autistic, history of seizures
+        source: hp
+        term_id: HP:0011344
+        version_date:
+      - enumeration: severe seizures
+        source: hp
+        term_id: HP:0001250
+        version_date:
+      - enumeration: shallow acetabula
+        source: hp
+        term_id: HP:0003182
+        version_date:
+      - enumeration: short
+        source: hp
+        term_id: HP:0000331
+        version_date:
+      - enumeration: short achilles tendon on one side
+        source: hp
+        term_id: HP:0001771
+        version_date:
+      - enumeration: short frenulum, hypoplastic left mandible
+        source: hp
+        term_id: HP:0000200
+        version_date:
+      - enumeration: short neck
+        source: hp
+        term_id: HP:0000470
+        version_date:
+      - enumeration: short palpebral fissures
+        source: hp
+        term_id: HP:0012745
+        version_date:
+      - enumeration: short stature
+        source: hp
+        term_id: HP:0004322
+        version_date:
+      - enumeration: short sternum
+        source: hp
+        term_id: HP:0000879
+        version_date:
+      - enumeration: short toe bones 4th/5th digits
+        source: hp
+        term_id: HP:0010385
+        version_date:
+      - enumeration: short, sloping forehead with prominent occiput
+        source: hp
+        term_id: HP:0000340
+        version_date:
+      - enumeration: short, thick
+        source: hp
+        term_id: HP:0012679
+        version_date:
+      - enumeration: shortened long bones
+        source: hp
+        term_id: HP:0005720
+        version_date:
+      - enumeration: single kidney
+        source: hp
+        term_id: HP:0000122
+        version_date:
+      - enumeration: sinus dermal tract
+        source: hp
+        term_id: HP:0010648
+        version_date:
+      - enumeration: situs inversus
+        source: hp
+        term_id: HP:0011616
+        version_date:
+      - enumeration: skin tag on lower part of sternum
+        source: hp
+        term_id: HP:0004451
+        version_date:
+      - enumeration: skin tags
+        source: hp
+        term_id: HP:0010609
+        version_date:
+      - enumeration: skintags after the 5th digit on each hand.
+        source: hp
+        term_id: HP:0010013
+        version_date:
+      - enumeration: slight redundancy in helices
+        source: hp
+        term_id: HP:0000391
+        version_date:
+      - enumeration: slightly upslanted palpebral fissures
+        source: hp
+        term_id: HP:0000582
+        version_date:
+      - enumeration: sloped forehead, narrow
+        source: hp
+        term_id: HP:0000341
+        version_date:
+      - enumeration: small
+        source: hp
+        term_id: HP:0000385
+        version_date:
+      - enumeration: small anterior fontanelle
+        source: hp
+        term_id: HP:0000237
+        version_date:
+      - enumeration: small lungs
+        source: hp
+        term_id: HP:0006703
+        version_date:
+      - enumeration: small maxilla/mandible on right side
+        source: hp
+        term_id: HP:0012583
+        version_date:
+      - enumeration: small mouth,thin upper lip
+        source: hp
+        term_id: HP:0000219
+        version_date:
+      - enumeration: small pituitary gland
+        source: hp
+        term_id: HP:0012506
+        version_date:
+      - enumeration: small right kidney
+        source: hp
+        term_id: HP:0000085
+        version_date:
+      - enumeration: spina bifida
+        source: hp
+        term_id: HP:0002414
+        version_date:
+      - enumeration: spleen hemangioma
+        source: hp
+        term_id: HP:0410268
+        version_date:
+      - enumeration: squared helix
+        source: hp
+        term_id: HP:0030026
+        version_date:
+      - enumeration: sternal pit
+        source: hp
+        term_id: HP:0410277
+        version_date:
+      - enumeration: sternum asymmetry
+        source: hp
+        term_id: HP:0000324
+        version_date:
+      - enumeration: stiff musculature
+        source: hp
+        term_id: HP:0009742
+        version_date:
+      - enumeration: strabismus
+        source: hp
+        term_id: HP:0000486
+        version_date:
+      - enumeration: stricture or obstruction and medical nec
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: stridor, left vocal cord paralysis
+        source: hp
+        term_id: HP:0012820
+        version_date:
+      - enumeration: stroke and seizure per physician note
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: subglottic hemangioma
+        source: hp
+        term_id: HP:0410264
+        version_date:
+      - enumeration: subglottic stenosis
+        source: hp
+        term_id: HP:0001607
+        version_date:
+      - enumeration: subject has cp.
+        source: hp
+        term_id: HP:0100021
+        version_date:
+      - enumeration: submucosal cleft palate
+        source: hp
+        term_id: HP:0000176
+        version_date:
+      - enumeration: supernumerary nipples
+        source: hp
+        term_id: HP:0002558
+        version_date:
+      - enumeration: supraglottic hemangioma
+        source: hp
+        term_id: HP:0410265
+        version_date:
+      - enumeration: supraumbilical raphe
+        source: hp
+        term_id: HP:0410276
+        version_date:
+      - enumeration: tapering fingers
+        source: hp
+        term_id: HP:0001182
+        version_date:
+      - enumeration: tarsal coalition
+        source: hp
+        term_id: HP:0008368
+        version_date:
+      - enumeration: telangiectasia
+        source: hp
+        term_id: HP:0001009
+        version_date:
+      - enumeration: tethered cord malformation sequence
+        source: hp
+        term_id: HP:0002144
+        version_date:
+      - enumeration: tetralogy of fallot
+        source: hp
+        term_id: HP:0001636
+        version_date:
+      - enumeration: thick helices
+        source: hp
+        term_id: HP:0000391
+        version_date:
+      - enumeration: thickened rib, mild scoliosis, difuse osteopenia
+        source: hp
+        term_id: HP:0000900
+        version_date:
+      - enumeration: thin lips, short philtrum
+        source: hp
+        term_id: HP:0000322
+        version_date:
+      - enumeration: thin upper lip
+        source: hp
+        term_id: HP:0000219
+        version_date:
+      - enumeration: thoracic spinal cord syrinx
+        source: hp
+        term_id: HP:0003396
+        version_date:
+      - enumeration: thrombocytopenia
+        source: hp
+        term_id: HP:0001873
+        version_date:
+      - enumeration: thrush
+        source: hp
+        term_id: HP:0009098
+        version_date:
+      - enumeration: tibial torsion,
+        source: hp
+        term_id: HP:0100694
+        version_date:
+      - enumeration: tongue-tied
+        source: hp
+        term_id: HP:0010296
+        version_date:
+      - enumeration: torticollis
+        source: hp
+        term_id: HP:0000473
+        version_date:
+      - enumeration: tortous retinal vessels
+        source: hp
+        term_id: HP:0012841
+        version_date:
+      - enumeration: tracheal stenosis
+        source: hp
+        term_id: HP:0002777
+        version_date:
+      - enumeration: tracheal web
+        source: hp
+        term_id: HP:0005950
+        version_date:
+      - enumeration: tracheoesophageal fistula
+        source: hp
+        term_id: HP:0002575
+        version_date:
+      - enumeration: umbilical hernia
+        source: hp
+        term_id: HP:0001537
+        version_date:
+      - enumeration: underdeveloped ears
+        source: hp
+        term_id: HP:0008551
+        version_date:
+      - enumeration: underdeveloped pelvis, lower extremity contractures
+        source: hp
+        term_id: HP:0030311
+        version_date:
+      - enumeration: underdeveloped thenar prominence
+        source: hp
+        term_id: HP:0011251
+        version_date:
+      - enumeration: undescended testis
+        source: hp
+        term_id: HP:0000028
+        version_date:
+      - enumeration: unilateral coronal synostosis
+        source: hp
+        term_id: HP:0011315
+        version_date:
+      - enumeration: upslanting palpebrals
+        source: hp
+        term_id: HP:0030819
+        version_date:
+      - enumeration: ureteral abnormalities
+        source: hp
+        term_id: HP:0000069
+        version_date:
+      - enumeration: ureterocele, right vesicoureteric reflux, grade 1
+        source: hp
+        term_id: HP:0000076
+        version_date:
+      - enumeration: ureteropelvic junction obstruction
+        source: hp
+        term_id: HP:0000074
+        version_date:
+      - enumeration: varicoceles and phimosis.
+        source: hp
+        term_id: No Match
+        version_date:
+      - enumeration: vascular ring
+        source: hp
+        term_id: HP:0010775
+        version_date:
+      - enumeration: ventral displacement of meatus
+        source: hp
+        term_id: HP:0100627
+        version_date:
+      - enumeration: ventricular septal defect
+        source: hp
+        term_id: HP:0001629
+        version_date:
+      - enumeration: very dry skin
+        source: hp
+        term_id: HP:0000958
+        version_date:
+      - enumeration: visceral hemangioma
+        source: hp
+        term_id: HP:0410266
+        version_date:
+      - enumeration: visual deficit
+        source: hp
+        term_id: HP:0025405
+        version_date:
+      - enumeration: vulvar hemangioma
+        source: hp
+        term_id: HP:0410272
+        version_date:
+      - enumeration: webbed neck
+        source: hp
+        term_id: HP:0000465
+        version_date:
+      - enumeration: wide-spaced big toe
+        source: hp
+        term_id: HP:0001852
+        version_date:
+      - enumeration: wide-spaced nipples
+        source: hp
+        term_id: HP:0006610
+        version_date:
+
+  observed:
+    description: "Whether phenotype is negative or positive"
+    enum:
+      - Positive
+      - Negative
+      - Not Reported
+      - Not Applicable
+      - Reported Unknown
+
+  age_at_event_days:
+    term:
+      $ref: "_terms.yaml#/age_at_event_days"
+    type:
+      - integer
+      - "null"
+    maximum: 32872
+    minimum: 0
+
+  participants:
+    $ref: "_definitions.yaml#/to_one"

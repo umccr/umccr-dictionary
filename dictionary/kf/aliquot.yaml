@@ -1,0 +1,131 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "aliquot"
+title: Aliquot
+type: object
+namespace: https://dcf-interop.kidsfirstdrc.org/
+category: biospecimen
+program: '*'
+project: '*'
+description: >
+  Pertaining to a portion of the whole; any one of two or more samples of something, of the same
+  volume or weight.
+additionalProperties: false
+submittable: true
+validators: []
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+required:
+  - type
+  - submitter_id
+  - analyte_type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+links:
+  - name: samples
+    backref: aliquots
+    label: derived_from
+    multiplicity: many_to_many
+    target_type: sample
+    required: true
+
+constraints: null
+
+properties:
+  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  a260_a280_ratio:
+    term:
+      $ref: "_terms.yaml#/a260_a280_ratio"
+    type: number
+  aliquot_quantity:
+    term:
+      $ref: "_terms.yaml#/aliquot_quantity"
+    type: number
+  volume:
+    term:
+      $ref: "_terms.yaml#/volume"
+    type: number
+  amount:
+    term:
+      $ref: "_terms.yaml#/amount"
+    type: number
+  analyte_quantity:
+    term:
+      $ref: "_terms.yaml#/analyte_quantity"
+    type: number
+  analyte_type:
+    term:
+      $ref: "_terms.yaml#/analyte_type"
+    enum:
+      - DNA
+      - EBV Immortalized Normal
+      - FFPE DNA
+      - FFPE RNA
+      - GenomePlex (Rubicon) Amplified DNA
+      - Repli-G (Qiagen) DNA
+      - Repli-G Pooled (Qiagen) DNA
+      - Repli-G X (Qiagen) DNA
+      - RNA
+      - Total RNA
+      - Other
+      - Not Reported
+  concentration:
+    term:
+      $ref: "_terms.yaml#/concentration"
+    type: number
+  external_id:
+    term:
+      $ref: "_terms.yaml#/external_id"
+    type: string
+  normal_tumor_genotype_snp_match:
+    term:
+      $ref: "_terms.yaml#/normal_tumor_genotype_snp_match"
+    enum:
+      - "Yes"
+      - "No"
+      - Unknown
+      - Not Reported
+  ribosomal_rna_28s_16s_ratio:
+    term:
+      $ref: "_terms.yaml#/ribosomal_rna_28s_16s_ratio"
+    type: number
+  source_center:
+    term:
+      $ref: "_terms.yaml#/source_center"
+    type: string
+  spectrophotometer_method:
+    term:
+      $ref: "_terms.yaml#/spectrophotometer_method"
+    type: string
+  well_number:
+    term:
+      $ref: "_terms.yaml#/well_number"
+    type: string
+  shipment_date:
+    term:
+      $ref: "_terms.yaml#/shipment_date"
+    type: string
+    pattern: "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  shipment_destination:
+    term:
+      $ref: "_terms.yaml#/shipment_destination"
+    enum:
+      - "Baylor College of Medicine"
+      - "Washington University"
+      - "HudsonAlpha"
+      - "Broad Institute"
+  shipment_origin:
+    term:
+      $ref: "_terms.yaml#shipment_origin"
+    type: string
+  samples:
+    $ref: "_definitions.yaml#/to_one"
