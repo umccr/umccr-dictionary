@@ -31,3 +31,5 @@ test:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make test dd=umccr"; exit 1; }
 	@echo Testing Data Dictionary: $(dd)
 	@docker run --rm -v $(shell pwd)/dictionary/$(dd):/dictionary quay.io/cdis/dictionaryutils:master
+	# Use this way if you are trouble calling this make test target:
+	#   docker run --rm -v $(pwd)/dictionary/umccr:/dictionary quay.io/cdis/dictionaryutils:master

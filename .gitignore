@@ -8,5 +8,8 @@ env/
 venv/
 node_modules/
 build/
+dictionaryutils/
+dist/
+*.egg-info/
 
 docker-compose.override.yml

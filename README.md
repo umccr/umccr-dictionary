@@ -39,7 +39,7 @@ make restart
 make down
 ```
 
-### Visualisation
+### Visualising Dictionary
 
 - Visit to: http://localhost:8080
 - You can switch dictionary as follows:
@@ -48,6 +48,8 @@ make down
   - http://localhost:8080/#schema/dcf.json 
   - http://localhost:8080/#schema/gdc.json 
   - http://localhost:8080/#schema/kf.json
+
+> DEBUG: To debug visualisation, try with Browser built-in developer tools (e.g., [here](https://balsamiq.com/support/faqs/browserconsole/) and [here](https://developer.chrome.com/docs/devtools/console/log/)). Typically, right click > inspect > select "console" tab > reload the page.
 
 ### Modifying Dictionary
 
