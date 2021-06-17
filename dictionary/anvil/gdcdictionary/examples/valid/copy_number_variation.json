@@ -1,0 +1,15 @@
+{
+    "type": "copy_number_variation",
+    "submitter_id": "copy_number_variation_results",
+    "file_name": "cn.copynumber.data.vcf",
+    "file_size": 281653,
+    "md5sum": "d3266f2577584713ea17f94d331f30c4",
+    "data_category": "Copy Number Variation",
+    "data_type": "Gene Level Copy Number",
+    "data_format": "VCF",
+    "experimental_strategy": "Genotyping Array",
+    "platform": "Illumina",
+    "copy_number_workflows": {
+	"submitter_id": "cnv_workflow_a"
+    }
+}

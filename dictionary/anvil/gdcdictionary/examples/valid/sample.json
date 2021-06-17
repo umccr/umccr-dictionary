@@ -1,0 +1,21 @@
+{
+    "type": "sample",
+    "autolysis_score": "Moderate",
+    "collection_kit": "Aqua Kit:Organ and Tissue donation",
+    "collection_site": "B1",
+    "submitter_id": "BLGSP-71-06-00019s",
+    "biospecimen_anatomic_site": "Adipose",
+    "biospecimen_anatomic_site_detail": "Adipose - Visceral (Omentum)",
+    "biospecimen_anatomic_site_uberon_id": "uberon1",
+    "biospecimen_anatomic_site_uberon_term": "term1",
+    "hours_to_collection": 12,
+    "hours_to_sample_procurement": 2,
+    "freezing_method": "OCT",
+    "is_ffpe": true,
+    "oct_embedded": "false",
+    "sample_type": "PAXgene Preserved whole blood",
+    "tissue_type": "Normal",
+    "cases": {
+        "submitter_id": "BLGSP-71-06-00019"
+    }
+}

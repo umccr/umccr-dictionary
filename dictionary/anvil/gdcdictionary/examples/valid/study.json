@@ -1,0 +1,11 @@
+{
+    "type": "study",
+    "submitter_id": "experiment_1",
+    "study_setup": "Expression",
+    "type_of_data": "Raw/Processed",
+    "study_description": "Genotype-Tissue Expression (GTEx) Project",
+    "data_description": "Expression and Genotyping data",
+    "projects": {
+        "submitter_id": "P0001"
+    }
+}

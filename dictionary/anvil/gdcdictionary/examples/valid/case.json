@@ -1,0 +1,11 @@
+{
+    "type": "case",
+    "submitter_id": "BLGSP-71-06-00019",
+    "index_date": "Cross Clamp",
+    "eligibility": true,
+    "cohort_id": "Organ Donor (OPO)",
+    "studies": [
+        {"submitter_id": "GTEx_MidPoint"},
+        {"submitter_id": "GTEx_Pilot"}
+    ]
+}

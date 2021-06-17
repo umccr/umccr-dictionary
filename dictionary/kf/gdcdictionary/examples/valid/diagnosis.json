@@ -1,0 +1,10 @@
+{
+    "type": "diagnosis",
+    "submitter_id": "E9EDB78B-6897-4205-B9AA-0CEF8AAB5A1F_diagnosis",
+    "age_at_diagnosis_days": 470,
+    "primary_diagnosis": "Atrial septal defect",
+    "primary_anatomic_site": "UBERON:0002085",
+    "cases": {
+        "submitter_id": "BLGSP-71-06-00019"
+    }
+}

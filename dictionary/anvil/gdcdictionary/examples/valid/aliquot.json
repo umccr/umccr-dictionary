@@ -1,0 +1,19 @@
+{
+    "type": "aliquot",
+    "submitter_id": "BLGSP-71-06-00019-01A-11D",
+    "aliquot_quantity": 0.4,
+    "aliquot_volume": 5,
+    "amount": 10,
+    "concentration": 0.07,
+    "analyte_type": "Total RNA",
+    "analyte_isolation_batch_id": "isolation-b001",
+    "analyte_isolation_method": "DNA isolation_Whole Blood_QIAGEN Puregene (Manual)",
+    "analyte_isolation_date": "11/13/13",
+    "experiment_batch_id": "isolation-exp001",
+    "experiment_date": "11/15/13",
+    "experimental_strategy": "SNP Array",
+    "exclude": true,
+    "samples": {
+        "submitter_id": "BLGSP-71-06-00019-99A-01D"
+    }
+}

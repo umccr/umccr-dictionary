@@ -1,0 +1,14 @@
+{
+    "type": "allele_expression",
+    "submitter_id": "allele_expression_run_X",
+    "file_name": "allele_expression_quant.txt",
+    "file_size": 1324134,
+    "md5sum": "d3266f2577584713ea17f94d331f30c4",
+    "data_category": "Transcriptome Profiling",
+    "data_type": "Allele Specific Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "RNA-Seq",
+    "rna_expression_workflows": {
+	   "submitter_id": "rna_profiling_output#"
+    }
+}

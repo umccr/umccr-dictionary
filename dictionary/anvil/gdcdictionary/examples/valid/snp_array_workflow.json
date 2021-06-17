@@ -1,0 +1,10 @@
+{
+    "type": "snp_array_workflow",
+    "submitter_id": "gtex-aggregated-snparray-workflow",
+    "workflow_type": "GTEx Array Genotyping",
+    "workflow_link": "github://suer:myworkflow/",
+    "aggregated_snp_array_files": {
+        "submitter_id": "gtex-aggregated-array"
+    }
+
+}

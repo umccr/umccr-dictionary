@@ -1,0 +1,9 @@
+{
+    "type": "alignment_workflow",
+    "submitter_id": "Alignment_RNASeq_A",
+    "workflow_link": "https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/star.wdl",
+    "workflow_type": "STAR",
+    "submitted_aligned_reads_files": {
+	"id": "0cb66276-c29b-4811-a704-38502173c0f8"
+    }
+}

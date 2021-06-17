@@ -1,0 +1,15 @@
+{
+    "type": "snp_array_variation",
+    "submitter_id": "gtex-aggregated-variants",
+    "file_name": "gtex.vcf",
+    "file_size": 28165335141,
+    "md5sum": "d3266f2577584713ea17f94d331f30c4",
+    "data_category": "SNP Array Data",
+    "data_type": "SNP Array Variation",
+    "data_format": "VCF",
+    "experimental_strategy": "SNP Array Genotyping",
+    "platform": "Illumina Infinium HumanExome BeadChip",
+    "snp_array_workflows": {
+        "submitter_id": "gtex-0001-gtc"
+    }
+}

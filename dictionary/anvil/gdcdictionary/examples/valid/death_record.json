@@ -1,0 +1,26 @@
+{
+    "type": "death_record",
+    "id": "7b460e40-27d9-42a5-9dee-8d97f3960c6d",
+    "submitter_id": "GTEx-STST-dr",
+    "body_temperature": 36.5,
+    "body_temperature_scale": "C",
+    "body_temperature_location": "Oral",
+    "death_pronounced_interval": "-28 hour(s), -54 minute(s)",
+    "death_index_time": "Actual Death",
+    "available_death_certificate": "Unknown",
+    "first_cause_of_death": "Cerebral Vascular Accident",
+    "hardy_scale": "Fast death of natural causes",
+    "immediate_cause_of_death": "CVA",
+    "hours_to_death_first_cause": 15,
+    "hours_to_death_immediate_cause": 15,
+    "hours_to_death_last_cause": 15,
+    "last_cause_of_death": "Natural causes",
+    "manner_of_death": "Natural",
+    "determining_person": "Coroner/Medical Examiner (ME)",
+    "place_of_death": "Hospital inpatient",
+    "hours_in_ventilator": 4,
+    "witnessed_death": true,    
+    "cases": {
+        "submitter_id": "GTEx-STST"
+    }
+}

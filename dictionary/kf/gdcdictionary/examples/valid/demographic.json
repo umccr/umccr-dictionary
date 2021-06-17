@@ -1,0 +1,13 @@
+{
+    "gender": "male",
+    "submitter_id": "E9EDB78B-6897-4205-B9AA-0CEF8AAB5A1F_demographic",
+    "cause_of_death":"Disease Related",
+    "vital_status":"Dead",
+    "race": "white",
+    "cases": {
+        "submitter_id": "BLGSP-71-06-00019"
+    },
+    "type": "demographic",
+    "ethnicity": "not hispanic or latino",
+    "age_at_last_follow_up_days" : 1000
+}

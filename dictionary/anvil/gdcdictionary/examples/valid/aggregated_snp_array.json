@@ -1,0 +1,16 @@
+{
+    "type": "aggregated_snp_array",
+    "submitter_id": "gtex-aggregated-array",
+    "file_name": "gtex.ped",
+    "file_size": 28165335141,
+    "md5sum": "d3266f2577584713ea17f94d331f30c4",
+    "data_category": "SNP Array Data",
+    "data_type": "Aggregated SNP Alleles",
+    "data_format": "PED",
+    "experimental_strategy": "SNP Array Genotyping",
+    "platform": "Illumina Infinium HumanExome BeadChip",
+    "submitted_snp_array_files": [
+        {"submitter_id#1": "gtex-0001-gtc"},
+        {"submitter_id#2": "gtex-0002-gtc"}
+    ]
+}

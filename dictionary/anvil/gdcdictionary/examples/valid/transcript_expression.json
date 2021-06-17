@@ -1,0 +1,14 @@
+{
+    "type": "transcript_expression",
+    "submitter_id": "tr_expression_run_X",
+    "file_name": "tr_expression_quant.txt",
+    "file_size": 1324134,
+    "md5sum": "d3266f2577584713ea17f94d331f30c4",
+    "data_category": "Transcriptome Profiling",
+    "data_type": "Transcript Expression Quantification",
+    "data_format": "GCT",
+    "experimental_strategy": "RNA-Seq",
+    "rna_expression_workflows": {
+	"submitter_id": "rna_profiling_output#"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "type": "body_storage",
+    "id": "7b460e40-27d9-42a5-9dee-8d97f3960c6d",
+    "submitter_id": "GTEx-STST-dh",
+    "ischemic_time": 35,
+    "chest_incision_time": 40,
+    "cross_clamp_time": 41,
+    "on_ventilator_lt_24h": true,
+    "total_ischemic_time": 44,
+    "performed_autopsy": "Yes",
+    "refrigerated_body": "Yes",
+    "hours_in_refrigerator": 3,
+    "cases": {
+        "submitter_id": "GTEx-STST"
+    }
+}

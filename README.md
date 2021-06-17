@@ -59,3 +59,15 @@ make umccr
 ```
 - Visit to: http://localhost:8080/#schema/umccr.json
 - Reload the page (_**do twice**_ if necessary)
+
+
+### Testing Dictionary
+
+- To test and validate dictionary:
+```
+make test dd=umccr
+make test dd=kf
+make test dd=gdc
+make test dd=anvil
+make test dd=dcf
+```
