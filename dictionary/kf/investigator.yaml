@@ -40,7 +40,7 @@ uniqueKeys:
   - [ project_id, submitter_id ]
 
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
 
   name:
     type: string

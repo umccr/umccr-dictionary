@@ -49,7 +49,7 @@ links:
     required: false
 
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
 
   age_at_event_days:
     term:

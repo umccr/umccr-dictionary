@@ -80,7 +80,7 @@ uniqueKeys:
 
 # annotation properties
 properties:
-  $ref_ubiq: "_definitions.yaml#/ubiquitous_properties"
+  $ref: "_definitions.yaml#/ubiquitous_properties"
   category:
     enum:
       - Acceptable treatment for TCGA tumor

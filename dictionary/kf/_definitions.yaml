@@ -218,6 +218,7 @@ ubiquitous_properties: #All entities except for program and project
     type: string
 
 data_file_properties:
+  $ref: "#/ubiquitous_properties"
   file_name:
     $ref: "#/file_name"
   file_size:
@@ -242,6 +243,7 @@ data_file_properties:
 
 
 workflow_properties:
+  $ref: "#/ubiquitous_properties"
   workflow_link:
     description: "Link to Github hash for the CWL workflow used."
     type: string
