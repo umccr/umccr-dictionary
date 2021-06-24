@@ -7,7 +7,7 @@ Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform.
 ## Development
 
 - Required:
-  - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop) (at least v 3.2.1)
   - [GNU Make](https://www.gnu.org/software/make/)
     - GNU Make comes with most Linux and macOS Xcode
     - Try `make --version` to see whether you already have it in   
