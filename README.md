@@ -73,3 +73,105 @@ make test dd=gdc
 make test dd=anvil
 make test dd=dcf
 ```
+
+
+### Loading Dictionary
+
+- This will populate database tables into local PostgreSQL server; based on JSON Data Dictionary schema that you have designed from previous steps.
+
+- To load the _minted_ JSON Data Dictionary to Gen3 Metadata Database tables e.g., say `umccr` dictionary
+
+```
+make load dd=umccr
+```
+
+- Get into PSQL console
+
+```
+make psql
+```
+
+- Once inside PSQL console, try like so:
+
+```
+metadata=> \l
+metadata=> \dt
+metadata=> \dt node_*
+metadata=> \dt edge_*
+
+metadata=> select * from node_program;
+ created | acl | _sysan | _props | node_id
+---------+-----+--------+--------+---------
+(0 rows)
+
+metadata=> select * from node_project;
+ created | acl | _sysan | _props | node_id
+---------+-----+--------+--------+---------
+(0 rows)
+
+metadata=> \q
+```
+
+#### Reset Public Schema
+
+- The Data Dictionary is populated into [PostgreSQL Public schema](https://www.postgresql.org/docs/9.6/ddl-schemas.html)
+
+- If you'd like to reset public schema, do like so:
+```
+make reset
+```
+
+- This will reset current `metadata` database; so that you can (re) load data dictionary again. Hence, for example:
+
+```
+make load dd=umccr
+make psql
+metadata=> \dt node_*
+metadata=> \q
+
+make reset
+
+make load dd=anvil
+make psql
+metadata=> \dt node_*
+metadata=> \q
+```
+
+#### Connection Info
+
+- At this point, you have a couple of options to work with local PostgreSQL database. Use connection info as follows:
+```
+Host: localhost
+Port: 5432
+Database: metadata
+Username: metadata
+Password: metadata
+```
+
+- For sa (System Admin) account; use these instead:
+```
+Host: localhost
+Port: 5432
+Username: postgres
+Password: postgres
+```
+
+#### Database Tooling
+
+- Try the following for some GUI-based IDE tooling:
+  - Setup [PyCharm Community Edition](PYCHARM.md)
+  - [SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html) (freeware)
+
+**Screenshot:** _PyCharm_
+<details>
+  <summary>Click to expand!</summary>
+
+  ![pycharm_ce_dbnavigator.png](assets/pycharm_ce_dbnavigator.png)
+</details>
+
+**Screenshot:** _PSQL Console_
+<details>
+  <summary>Click to expand!</summary>
+
+  ![psql_console.png](assets/psql_console.png)
+</details>

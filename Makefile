@@ -12,6 +12,9 @@ restart:
 ps:
 	@docker compose ps
 
+psql:
+	@docker exec -it ddpostgres psql -h localhost -U metadata -w metadata
+
 anvil:
 	@docker compose exec g3po g3po dd convert /dictionary/anvil/gdcdictionary/schemas --out /schema/anvil.json
 
@@ -33,3 +36,13 @@ test:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make test dd=umccr"; exit 1; }
 	@echo Testing Data Dictionary: $(dd)
 	@docker run --rm -v $(shell pwd)/dictionary/$(dd):/dictionary quay.io/cdis/dictionaryutils:master
+
+# Use this way if you are trouble calling this make load target:
+# 	docker exec -it dmutils datamodel_postgres_admin create-all --dict-url http://ddvis/schema/umccr.json
+load:
+	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make load dd=umccr"; exit 1; }
+	@echo Loading Data Dictionary: $(dd)
+	@docker exec -it dmutils datamodel_postgres_admin create-all --dict-url http://ddvis/schema/$(dd).json
+
+reset:
+	@docker exec -it ddpostgres psql -h localhost -U postgres -w metadata -f /sql/reset.sql
