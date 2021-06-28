@@ -74,6 +74,23 @@ make test dd=anvil
 make test dd=dcf
 ```
 
+### Validating Dictionary
+
+- To validate DD graph, do like so:
+
+```
+make validate dd=umccr
+```
+
+### Simulating Dictionary
+
+- To simulate test data for the _minted_ JSON Data Dictionary e.g., say `umccr` dictionary
+
+```
+make simulate dd=umccr
+```
+
+- This will validate the DD's graph and create test mock data into `/data/umccr/` folder.
 
 ### Loading Dictionary
 
@@ -152,6 +169,7 @@ Password: metadata
 ```
 Host: localhost
 Port: 5432
+Database: metadata
 Username: postgres
 Password: postgres
 ```
@@ -175,3 +193,8 @@ Password: postgres
 
   ![psql_console.png](assets/psql_console.png)
 </details>
+
+
+### Importing Simulated Data
+
+TODO: add step `make import dd=umccr` to import simulated test data into local metadata database 

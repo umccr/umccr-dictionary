@@ -39,3 +39,10 @@ services:
       PG_USER: metadata
       PG_PASS: metadata
       PG_NAME: metadata
+
+  ddsim:
+    image: quay.io/cdis/data-simulator:1.3.3
+    container_name: ddsim
+    command: [ "tail", "-f", "/dev/null" ]
+    volumes:
+    - ./data:/data
