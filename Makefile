@@ -30,10 +30,10 @@ kf:
 umccr:
 	@docker compose exec g3po g3po dd convert /dictionary/umccr/gdcdictionary/schemas --out /schema/umccr.json
 
-# Parameterized compose
+# Parameterized compose, remove schema json before regenerating
 convert:
-	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make convert dd=umccr"; exit 1; }
-	rm schema/$(dd).json
+	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make convert dd=umccr"; exit 1; }	
+	rm -f schema/$(dd).json
 	@docker compose exec g3po g3po dd convert /dictionary/$(dd)/gdcdictionary/schemas --out /schema/$(dd).json
 
 # Use this way if you are trouble calling this make test target:
@@ -69,5 +69,5 @@ reset:
 
 import:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make load dd=umccr"; exit 1; }
-	@echo Imporing Simulated Test Data: $(dd)
+	@echo Importing Simulated Test Data: $(dd)
 	@docker exec -it importer sh -c "importer --program ohsu --project $(dd) | sh "
