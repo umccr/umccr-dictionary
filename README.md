@@ -206,8 +206,3 @@ Password: postgres
 
   ![psql_console.png](assets/psql_console.png)
 </details>
-
-
-### Importing Simulated Data
-
-TODO: add step `make import dd=umccr` to import simulated test data into local metadata database 
