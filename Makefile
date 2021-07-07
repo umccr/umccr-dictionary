@@ -30,6 +30,12 @@ kf:
 umccr:
 	@docker compose exec g3po g3po dd convert /dictionary/umccr/gdcdictionary/schemas --out /schema/umccr.json
 
+# Parameterized compose
+convert:
+	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make convert dd=umccr"; exit 1; }
+	rm schema/$(dd).json
+	@docker compose exec g3po g3po dd convert /dictionary/$(dd)/gdcdictionary/schemas --out /schema/$(dd).json
+
 # Use this way if you are trouble calling this make test target:
 #   docker run --rm -v $(pwd)/dictionary/umccr:/dictionary quay.io/cdis/dictionaryutils:master
 test:
