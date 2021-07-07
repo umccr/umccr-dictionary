@@ -46,3 +46,20 @@ services:
     command: [ "tail", "-f", "/dev/null" ]
     volumes:
     - ./data:/data
+
+  importer:
+    container_name: importer
+    command: [ "tail", "-f", "/dev/null" ]
+    environment:
+      PG_HOST: postgres
+      PG_USER: metadata
+      PG_PASS: metadata
+      PG_NAME: metadata
+      PSQL: "psql -h postgres -d metadata -U metadata"
+      PGPASSWORD: metadata
+    build:
+      context: ./importer
+    volumes:
+      - ./output:/importer/output:rw
+      - ./data:/importer/data:ro
+      - ./schema:/importer/schema:ro

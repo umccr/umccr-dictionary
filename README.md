@@ -58,6 +58,8 @@ make down
 - Convert into JSON
 ```
 make umccr
+# or 
+make convert dd=umccr
 ```
 - Visit to: http://localhost:8080/#schema/umccr.json
 - Reload the page (_**do twice**_ if necessary)
@@ -127,6 +129,17 @@ metadata=> select * from node_project;
 (0 rows)
 
 metadata=> \q
+```
+
+### Importing Simulated Data
+
+```
+make import dd=umccr
+
+Importing Simulated Test Data: umccr
+INFO reading data/umccr/project.json
+INFO importing node_project ...
+
 ```
 
 #### Reset Public Schema
