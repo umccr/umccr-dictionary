@@ -70,4 +70,4 @@ reset:
 import:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make load dd=umccr"; exit 1; }
 	@echo Imporing Simulated Test Data: $(dd)
-	@echo TODO
+	@docker exec -it importer sh -c "importer --program ohsu --project $(dd) | sh "
