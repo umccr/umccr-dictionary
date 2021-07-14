@@ -10,6 +10,7 @@ from importer.gen3 import generate_edge_tablename, get_class_tablename_from_id
 
 
 PROJECT_ID = None
+PROGRAM_ID = None
 
 
 def write_edge(link, line, project_id):
@@ -25,6 +26,8 @@ def write_edge(link, line, project_id):
     for edge in edges:
         if link['src_edge_property'] == 'projects':
             dst_id = get_project_node_id(project_id)
+        if link['src_edge_property'] == 'programs':
+            dst_id = get_program_node_id(project_id)
         else:
             dst_id = get_uuid(edge.get('submitter_id', edge.get('code')))
         link['handle'].write('{}\t{}\t{}\t{}\t{}\n'.format(
@@ -41,6 +44,8 @@ def get_node_id(line):
     """Returns uniq submitter_id."""
     if line['type'] == 'project':
         node_id = get_uuid(line['code'])
+    elif line['type'] == 'program':
+        node_id = get_uuid(line['submitter_id'])
     else:
         node_id = get_uuid(line['submitter_id'])
     return node_id
@@ -49,9 +54,12 @@ def get_node_id(line):
 def write_node(handle, line):
     """Writes edge file ready for sql import. Strips edge from submission node."""
     global PROJECT_ID
+    global PROGRAM_ID
     node_id = get_node_id(line)
     if line['type'] == 'project':
         PROJECT_ID = node_id
+    if line['type'] == 'program':
+        PROGRAM_ID = node_id
 
     now = datetime.utcnow().isoformat()
     # ensure timestamps
@@ -94,6 +102,11 @@ def get_project_node_id(project_id):
     return PROJECT_ID
 
 
+def get_program_node_id(project_id):
+    """Returns the node_id"""
+    return PROGRAM_ID
+
+
 DEFAULT_INPUT_DIR = 'data'
 DEFAULT_OUTPUT_DIR = 'output'
 DEFAULT_PROGRAM = None
@@ -116,47 +129,51 @@ def import_graph(path, program, project, delete_first, output_dir):
     assert path
     assert program, "please specify program"
     assert project, "please specify project"
-    schema = json.load(open(f"schema/{project}.json"))
-    imports = open(f"{path}/{project}/DataImportOrder.txt", "r").read().splitlines()
+    schema = json.load(open(f"schema/{program}.json"))
+    imports = open(
+        f"{path}/{program}/{project}/DataImportOrder.txt", "r").read().splitlines()
 
     for name in imports:
-        p = f"{path}/{project}/{name}.json"
+        p = f"{path}/{program}/{project}/{name}.json"
         tables = None
         print(f"echo INFO reading {p}")
         for line in reader(p):
-            if 'project_id' not in line:
-                line['project_id'] = f'{program}-{project}'
-            assert 'project_id' in line, f'must have project_id {line}'
             assert 'type' in line, f'must have type {line}'
+            if 'project_id' not in line and line['type'] != 'project':
+                line['project_id'] = f'{program}-{project}'
             if line['type'] != 'project':
                 assert 'submitter_id' in line, f'must have submitter_id {line}'
             if not tables:
                 tables = get_tables(schema, line)
-                tables['handle'] = open(
-                    '{}/{}/{}.tsv'.format(output_dir, project, tables['node_table']), 'w')
+                assert tables, f"echo No tables for {p} {line}?"
+                tables['handle'] = open(f"{output_dir}/{program}/{project}/{tables['node_table']}.tsv", 'w')
                 for link in tables['links']:
-                    link['handle'] = open(
-                        '{}/{}/{}.tsv'.format(output_dir, project, link['edge_table']), 'w')
+                    link['handle'] = open( f"{output_dir}/{program}/{project}/{link['edge_table']}.tsv", 'w')
                 if delete_first:
-                    print(f"echo INFO deleting {program}-{project}")
+                    print(f"echo INFO deleting {program}-{project} from {tables['node_table']}")
                     print(f"$PSQL -c \"delete from {tables['node_table']} where _props->>'project_id' = '{program}-{project}'  ;\"")
 
             for link in tables['links']:
                 line = write_edge(link, line, f'{program}-{project}')
             write_node(tables['handle'], line)
 
+        assert tables, f"echo No tables for {p}?"
         tables['handle'].close()
-        node_path = '{}/{}/{}.tsv'.format(output_dir,
-                                          project, tables['node_table'])
+        node_path = f'{output_dir}/{program}/{project}/{tables["node_table"]}.tsv'
         print(f"echo INFO importing {tables['node_table']}")
         print(f"cat  {node_path} | $PSQL -c \"copy {tables['node_table']}(node_id, acl, _sysan,  _props) from stdin  csv delimiter E'\\t' quote E'\\x02' ;\"")
         for link in tables['links']:
             link['handle'].close()
-            edge_path = '{}/{}/{}.tsv'.format(output_dir,
-                                              project, link['edge_table'])
+            edge_path = f"{output_dir}/{program}/{project}/{link['edge_table']}.tsv"
             print(f"echo INFO importing {link['edge_table']}")
             print(f"cat  {edge_path} | $PSQL -c \"copy {link['edge_table']}(src_id, dst_id, acl, _sysan, _props) from stdin  csv delimiter E'\\t' quote E'\\x02' ;\"")
 
+    print(f"echo INFO importing transaction_logs")
+    print(
+        f"""$PSQL -c "INSERT INTO transaction_logs(submitter, role, program, project, is_dry_run, state, closed, created_datetime, canonical_json) VALUES ('admin', 'update', \'{program}\', \'{project}\', 'f', 'SUCCEEDED', 'f', current_timestamp, '{{}}');" """)
 
+    
 if __name__ == "__main__":
     import_graph()
+
+

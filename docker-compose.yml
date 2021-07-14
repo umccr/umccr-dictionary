@@ -35,10 +35,10 @@ services:
     container_name: dmutils
     command: [ "tail", "-f", "/dev/null" ]
     environment:
-      PG_HOST: postgres
-      PG_USER: metadata
-      PG_PASS: metadata
-      PG_NAME: metadata
+      PG_HOST: ${PG_HOST}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PGPASSWORD}
+      PG_NAME: ${PG_NAME}
 
   ddsim:
     image: quay.io/cdis/data-simulator:1.3.3
@@ -53,12 +53,12 @@ services:
     container_name: ddimporter
     command: [ "tail", "-f", "/dev/null" ]
     environment:
-      PG_HOST: postgres
-      PG_USER: metadata
-      PG_PASS: metadata
-      PG_NAME: metadata
-      PSQL: "psql -h postgres -d metadata -U metadata"
-      PGPASSWORD: metadata
+      PG_HOST: ${PG_HOST}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PGPASSWORD}
+      PG_NAME: ${PG_NAME}
+      PSQL: ${PSQL}
+      PGPASSWORD: ${PGPASSWORD}
     volumes:
       - ./output:/importer/output:rw
       - ./data:/importer/data:ro
