@@ -27,7 +27,7 @@ def write_edge(link, line, project_id):
             dst_id = get_project_node_id(project_id)
         else:
             dst_id = get_uuid(edge.get('submitter_id', edge.get('code')))
-        link['handle'].write('{}\x01{}\x01{}\x01{}\x01{}\n'.format(
+        link['handle'].write('{}\t{}\t{}\t{}\t{}\n'.format(
             src_id, dst_id, '{}', '{}', '{}'))
     del line[link['src_edge_property']]
     return line
@@ -58,7 +58,7 @@ def write_node(handle, line):
     for p in ['updated_datetime', 'created_datetime']:
         if p not in line:
             line[p] = now
-    handle.write('{}\x01{}\x01{}\x01{}\n'.format(
+    handle.write('{}\t{}\t{}\t{}\n'.format(
         node_id, '{}', '{}', json.dumps(line, separators=(',', ':'))))
     return line
 
@@ -149,13 +149,13 @@ def import_graph(path, program, project, delete_first, output_dir):
         node_path = '{}/{}/{}.tsv'.format(output_dir,
                                           project, tables['node_table'])
         print(f"echo INFO importing {tables['node_table']}")
-        print(f"cat  {node_path} | $PSQL -c \"copy {tables['node_table']}(node_id, acl, _sysan,  _props) from stdin  csv delimiter E'\\x01' quote E'\\x02' ;\"")
+        print(f"cat  {node_path} | $PSQL -c \"copy {tables['node_table']}(node_id, acl, _sysan,  _props) from stdin  csv delimiter E'\\t' quote E'\\x02' ;\"")
         for link in tables['links']:
             link['handle'].close()
             edge_path = '{}/{}/{}.tsv'.format(output_dir,
                                               project, link['edge_table'])
             print(f"echo INFO importing {link['edge_table']}")
-            print(f"cat  {edge_path} | $PSQL -c \"copy {link['edge_table']}(src_id, dst_id, acl, _sysan, _props) from stdin  csv delimiter E'\\x01' quote E'\\x02' ;\"")
+            print(f"cat  {edge_path} | $PSQL -c \"copy {link['edge_table']}(src_id, dst_id, acl, _sysan, _props) from stdin  csv delimiter E'\\t' quote E'\\x02' ;\"")
 
 
 if __name__ == "__main__":

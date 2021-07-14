@@ -54,12 +54,14 @@ make down
 ### Modifying Dictionary
 
 - Say you are working on `umccr` dictionary
-- Modify schema yaml files in `dictionary/umccr/`
-- Convert into JSON
+- Modify schema yaml files in `dictionary/umccr/gdcdictionary/schemas`
+- Compile into JSON
 ```
-make umccr
-# or 
-make convert dd=umccr
+make compile dd=umccr
+make compile dd=kf
+make compile dd=gdc
+make compile dd=anvil
+make compile dd=dcf
 ```
 - Visit to: http://localhost:8080/#schema/umccr.json
 - Reload the page (_**do twice**_ if necessary)
@@ -70,10 +72,6 @@ make convert dd=umccr
 - To test and validate dictionary:
 ```
 make test dd=umccr
-make test dd=kf
-make test dd=gdc
-make test dd=anvil
-make test dd=dcf
 ```
 
 ### Validating Dictionary
@@ -84,7 +82,7 @@ make test dd=dcf
 make validate dd=umccr
 ```
 
-### Simulating Dictionary
+### Generating Simulated Data
 
 - To simulate test data for the _minted_ JSON Data Dictionary e.g., say `umccr` dictionary
 
@@ -96,13 +94,24 @@ make simulate dd=umccr
 
 ### Loading Dictionary
 
-- This will populate database tables into local PostgreSQL server; based on JSON Data Dictionary schema that you have designed from previous steps.
+- This will populate database schema tables into local PostgreSQL server; based on JSON Data Dictionary schema that you have designed from previous steps.
 
 - To load the _minted_ JSON Data Dictionary to Gen3 Metadata Database tables e.g., say `umccr` dictionary
 
 ```
 make load dd=umccr
 ```
+
+### Importing Simulated Data
+
+- To import simulated data based on `umccr` dictionary, do like so:
+```
+make import dd=umccr
+```
+
+- Part of data importing process, it also creates `*.tsv` counterpart of simulated `*.json` data. Please see [output/README.md](output/README.md) for more.
+
+### Accessing Database Console
 
 - Get into PSQL console
 
@@ -118,31 +127,23 @@ metadata=> \dt
 metadata=> \dt node_*
 metadata=> \dt edge_*
 
-metadata=> select * from node_program;
- created | acl | _sysan | _props | node_id
----------+-----+--------+--------+---------
-(0 rows)
+metadata=> \d node_program
+                 Table "public.node_program"
+ Column  |           Type           |       Modifiers
+---------+--------------------------+------------------------
+ created | timestamp with time zone | not null default now()
+ acl     | text[]                   |
+ _sysan  | jsonb                    | default '{}'::jsonb
+ _props  | jsonb                    | default '{}'::jsonb
+ node_id | text                     | not null
 
+metadata=> select * from node_program;
 metadata=> select * from node_project;
- created | acl | _sysan | _props | node_id
----------+-----+--------+--------+---------
-(0 rows)
 
 metadata=> \q
 ```
 
-### Importing Simulated Data
-
-```
-make import dd=umccr
-
-Importing Simulated Test Data: umccr
-INFO reading data/umccr/project.json
-INFO importing node_project ...
-
-```
-
-#### Reset Public Schema
+### Resetting Database
 
 - The Data Dictionary is populated into [PostgreSQL Public schema](https://www.postgresql.org/docs/9.6/ddl-schemas.html)
 
@@ -167,7 +168,7 @@ metadata=> \dt node_*
 metadata=> \q
 ```
 
-#### Connection Info
+### Connection Info
 
 - At this point, you have a couple of options to work with local PostgreSQL database. Use connection info as follows:
 ```
@@ -186,6 +187,14 @@ Database: metadata
 Username: postgres
 Password: postgres
 ```
+
+#### PSQL
+
+If you are new to PSQL, try the following for starter:
+
+- http://postgresguide.com/utilities/psql.html
+- https://www.postgresqltutorial.com/psql-commands/  
+- https://www.postgresqltutorial.com
 
 #### Database Tooling
 

@@ -8,6 +8,11 @@ version: '3.1'
 
 services:
 
-  ddvis:
-    ports:
-     - 8888:80
+#  ddvis:
+#    ports:
+#     - 8888:80
+
+  ddimporter:
+    image: ddimporter:local
+    build:
+      context: ./importer

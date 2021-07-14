@@ -15,26 +15,14 @@ ps:
 psql:
 	@docker exec -it ddpostgres psql -h localhost -U metadata -w metadata
 
-anvil:
-	@docker compose exec g3po g3po dd convert /dictionary/anvil/gdcdictionary/schemas --out /schema/anvil.json
-
-dcf:
-	@docker compose exec g3po g3po dd convert /dictionary/dcf/gdcdictionary/schemas --out /schema/dcf.json
-
-gdc:
-	@docker compose exec g3po g3po dd convert /dictionary/gdc/gdcdictionary/schemas --out /schema/gdc.json
-
-kf:
-	@docker compose exec g3po g3po dd convert /dictionary/kf/gdcdictionary/schemas --out /schema/kf.json
-
-umccr:
-	@docker compose exec g3po g3po dd convert /dictionary/umccr/gdcdictionary/schemas --out /schema/umccr.json
-
-# Parameterized compose, remove schema json before regenerating
+# Use this way if you are trouble calling this make convert target:
+#   docker compose exec g3po g3po dd convert /dictionary/umccr/gdcdictionary/schemas --out /schema/umccr.json
 convert:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make convert dd=umccr"; exit 1; }	
-	rm -f schema/$(dd).json
+	@rm -f schema/$(dd).json
 	@docker compose exec g3po g3po dd convert /dictionary/$(dd)/gdcdictionary/schemas --out /schema/$(dd).json
+
+compile: convert
 
 # Use this way if you are trouble calling this make test target:
 #   docker run --rm -v $(pwd)/dictionary/umccr:/dictionary quay.io/cdis/dictionaryutils:master
@@ -70,4 +58,4 @@ reset:
 import:
 	@[ -n "$(dd)" ] || { echo "Please specify dd argument e.g.  make load dd=umccr"; exit 1; }
 	@echo Importing Simulated Test Data: $(dd)
-	@docker exec -it importer sh -c "importer --program ohsu --project $(dd) | sh "
+	@docker exec -it ddimporter sh -c "importer --program ohsu --project $(dd) | sh "

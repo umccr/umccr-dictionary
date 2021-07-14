@@ -47,8 +47,10 @@ services:
     volumes:
     - ./data:/data
 
-  importer:
-    container_name: importer
+  ddimporter:
+    # See docker-compose.override.sample.yml for override with local image
+    image: quay.io/victorskl/ddimporter
+    container_name: ddimporter
     command: [ "tail", "-f", "/dev/null" ]
     environment:
       PG_HOST: postgres
@@ -57,8 +59,6 @@ services:
       PG_NAME: metadata
       PSQL: "psql -h postgres -d metadata -U metadata"
       PGPASSWORD: metadata
-    build:
-      context: ./importer
     volumes:
       - ./output:/importer/output:rw
       - ./data:/importer/data:ro
