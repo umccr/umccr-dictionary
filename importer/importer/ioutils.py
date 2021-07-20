@@ -14,16 +14,21 @@ class JsonReader:
 
     def __init__(self, path):
         """Open file."""
-        self.path = path
-        if path.endswith(".json.gz"):
-            self.fp = io.TextIOWrapper(io.BufferedReader(gzip.GzipFile(path)))
-        else:
-            self.fp = open(path, "r", encoding='utf-8')
+
+        def _open_path():
+            self.path = path
+            if path.endswith(".json.gz"):
+                self.fp = io.TextIOWrapper(io.BufferedReader(gzip.GzipFile(path)))
+            else:
+                self.fp = open(path, "r", encoding='utf-8')
+                
+        _open_path()
         self.records = None
         try:
             json.loads(self.fp.readline())
+            _open_path()
         except json.decoder.JSONDecodeError:
-            self.fp = open(path, "r", encoding='utf-8')
+            _open_path()
             self.records = json.load(self.fp)
             if not isinstance(self.records, list):
                 self.records = [self.records]
