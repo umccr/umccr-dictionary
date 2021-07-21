@@ -39,6 +39,20 @@ make restart
 make down
 ```
 
+### Environment Variables
+
+- By default, it uses `.env-sample` for PostgreSQL connection and credentials.
+- You may override it by simply make a copy of file name in `.env` like so:
+
+```
+cp .env-sample .env
+```
+
+- You can then modify `.env` for your own custom values.
+- This `.env` is ignored for GitHub.
+
+> NOTE: You do not need to do this, if you are happy with default values in `.env-sample`. However, if you do, you need to `make down` and `make up` to take effect on changes.
+
 ### Visualising Dictionary
 
 - Visit to: http://localhost:8080

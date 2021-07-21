@@ -5,10 +5,19 @@
 program ?= $(dd)
 project ?= simulated
 
-# read environmental variables from same config file `.env` shared with docker-compose
-include .env
-export $(shell sed 's/=.*//' .env)
+# read environmental variables from same config file that shared with docker-compose
+ifneq ("$(wildcard .env)","")
+  $(info Using .env)
+  include .env
+  export $(shell sed 's/=.*//' .env)
+else
+  $(info Using .env-sample)
+  include .env-sample
+  export $(shell sed 's/=.*//' .env-sample)
+endif
 
+
+# -- Base targets
 
 up:
 	@docker compose up -d
@@ -22,8 +31,21 @@ restart:
 ps:
 	@docker compose ps
 
+
+# -- DBA targets: may require SA (sysadmin) privilege for PostgreSQL
+
 psql:
-	@docker exec -it ddpostgres psql -h localhost -U metadata -w metadata
+	@docker exec -e PGPASSWORD=$(PG_PASS) -it ddpostgres psql -h $(PG_HOST) -d $(PG_NAME) -U $(PG_USER)
+
+reset:
+	@docker exec -e PGPASSWORD=$(POSTGRES_PASSWORD) -it ddpostgres \
+		psql \
+		 --set=postgres_user=$(POSTGRES_USER) \
+		 --set=pg_user=$(PG_USER) \
+		 -h $(PG_HOST) -d $(PG_NAME) -U $(POSTGRES_USER) -f /sql/reset.sql
+
+
+# -- DD targets
 
 # Use this way if you are trouble calling this make convert target:
 #   docker compose exec g3po g3po dd convert /dictionary/umccr/gdcdictionary/schemas --out /schema/umccr.json
@@ -32,9 +54,9 @@ convert:
 	@rm -f schema/$(program).json
 	@docker compose exec g3po g3po dd convert /dictionary/$(program)/gdcdictionary/schemas --out /schema/$(program).json
 
+# alias to convert
 compile: convert
 
-compile: convert
 
 # Use this way if you are trouble calling this make test target:
 #   docker run --rm -v $(pwd)/dictionary/umccr:/dictionary quay.io/cdis/dictionaryutils:master
@@ -44,6 +66,7 @@ test:
 	@echo Testing Data Dictionary: $(program)
 	@docker run --rm -v $(shell pwd)/dictionary/$(program):/dictionary quay.io/cdis/dictionaryutils:master
 
+
 # Use this way if you are trouble calling this make validate target:
 #   docker exec -it ddsim data-simulator validate --url http://ddvis/schema/umccr.json
 validate:
@@ -51,6 +74,7 @@ validate:
 	@[ -n "$(project)" ] || { echo "Please specify project argument e.g.  make validate program=umccr project=simulated"; exit 1; }
 	@echo Validating Data Dictionary: $(program)
 	@docker exec -it ddsim data-simulator validate --url http://ddvis/schema/$(program).json
+
 
 # Use this way if you are trouble calling this make simulate target:
 #   docker exec -it ddsim data-simulator simulate --url http://ddvis/schema/umccr.json --path /data --program program1 --project project1 --max_samples 10
@@ -81,9 +105,6 @@ load:
 	@echo Loading Data Dictionary: $(program)
 	@docker exec -it dmutils datamodel_postgres_admin create-all --dict-url http://ddvis/schema/$(program).json
 
-reset:
-	@[ -n "$(PGPASSWORD)" ] || { echo "Please create .env file with PGPASSWORD variable"; exit 1; }
-	@docker exec -it ddpostgres sh -c "$(PSQL) -f /sql/reset.sql"
 
 import:
 	@[ -n "$(program)" ] || { echo "Please specify program argument e.g.  make import program=umccr project=simulated"; exit 1; }

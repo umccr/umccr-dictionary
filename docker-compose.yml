@@ -1,3 +1,7 @@
+# You can use docker-compose.override.yml for any overrides
+# to settings in this base compose file including environment
+# variables. See docker-compose.override.sample.yml
+
 version: '3.1'
 
 services:
@@ -24,11 +28,15 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./sql/init.sh:/docker-entrypoint-initdb.d/init.sh
       - ./sql:/sql
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PG_HOST: ${PG_HOST}
+      PG_USER: ${PG_USER}
+      PG_PASS: ${PG_PASS}
+      PG_NAME: ${PG_NAME}
 
   dmutils:
     image: quay.io/victorskl/datamodelutils
@@ -37,7 +45,7 @@ services:
     environment:
       PG_HOST: ${PG_HOST}
       PG_USER: ${PG_USER}
-      PG_PASS: ${PGPASSWORD}
+      PG_PASS: ${PG_PASS}
       PG_NAME: ${PG_NAME}
 
   ddsim:
@@ -45,7 +53,7 @@ services:
     container_name: ddsim
     command: [ "tail", "-f", "/dev/null" ]
     volumes:
-    - ./data:/data
+      - ./data:/data
 
   ddimporter:
     # See docker-compose.override.sample.yml for override with local image
@@ -55,10 +63,10 @@ services:
     environment:
       PG_HOST: ${PG_HOST}
       PG_USER: ${PG_USER}
-      PG_PASS: ${PGPASSWORD}
+      PG_PASS: ${PG_PASS}
       PG_NAME: ${PG_NAME}
       PSQL: ${PSQL}
-      PGPASSWORD: ${PGPASSWORD}
+      PGPASSWORD: ${PG_PASS}
     volumes:
       - ./output:/importer/output:rw
       - ./data:/importer/data:ro
