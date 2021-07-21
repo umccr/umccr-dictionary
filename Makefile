@@ -19,7 +19,10 @@ endif
 
 # -- Base targets
 
-up:
+pull:
+	@docker compose pull
+
+up: pull
 	@docker compose up -d
 
 down:

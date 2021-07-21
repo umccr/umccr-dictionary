@@ -19,6 +19,11 @@ Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform.
 
 ### Basic
 
+- Download all the latest images in the stack
+```
+make pull
+```
+
 - Bring up the stack
 ```
 make up
