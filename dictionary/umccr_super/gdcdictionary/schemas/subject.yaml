@@ -1,0 +1,71 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "subject"
+title: Subject
+type: object
+namespace: http://gdc.nci.nih.gov
+category: administrative
+program: '*'
+project: '*'
+description: >
+  The collection of all data related to a specific subject in the
+  context of a specific experiment. 
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+  - state
+
+links:
+  - name: projects 
+    backref: subjects
+    label: member_of
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - projects
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+# Subject properties
+properties:
+  type:
+    type: string
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+  state:
+    $ref: "_definitions.yaml#/state"
+  submitter_id:
+    type:
+      - string
+      - "null"
+  consent_codes:
+    type: array
+    items:
+      type: string
+  primary_site:
+    description: "Primary site for the subject."
+    type: string
+  disease_type:
+    description: "Name of the disease for the subject."
+    type: string
+  projects: 
+    $ref: "_definitions.yaml#/to_one_project"
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
