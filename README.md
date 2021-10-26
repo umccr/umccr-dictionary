@@ -9,7 +9,7 @@ Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform.
 ### Design Notes
 
 - Read [design_notes.md](https://github.com/uc-cdis/datadictionary/blob/develop/design_notes.md)
-- Read [search-query.md](https://github.com/umccr/gen3-doc/blob/main/user-guide/search-query.md) for how metadata (in Graph) will get queried through GraphQL API. Hence, multiple Data Dictionary with single Gen3 instance is not possible.
+- Read [search-query.md](https://github.com/umccr/gen3-doc/blob/main/user-guide/search-query.md)
 
 ### Context
 
