@@ -6,14 +6,30 @@ Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform.
 
 ## Development
 
-- Required:
-  - [Docker Desktop](https://www.docker.com/products/docker-desktop) (at least v 3.2.1)
-  - [GNU Make](https://www.gnu.org/software/make/)
-    - GNU Make comes with most Linux and macOS Xcode
-    - Try `make --version` to see whether you already have it in   
-    - Otherwise `brew install make` for macOS and try like `gmake --version`
-    - On Ubuntu, try `apt-get install make`
-    - If `make` is not possible then you will need to execute each target in [Makefile](Makefile)
+### Context
+
+How do I develop Gen3 Data Dictionary?
+
+- Read pointers from this [FAQ](https://gen3.org/resources/faq/#data-dictionary).
+- Gen3 Data Dictionary are essentially authored in YAML file as DSL (Domain-Specific Language). However, there are tools available from Excel/CSV/TSV to YAML to JSON conversion. So, to start with, it can be as simple as modelling in Excel for metadata requirement for Data Dictionary. i.e. to have rough idea on determining base entities (a node in a Graph), their properties (node attributes) and links (edge/relation).
+- Alternatively, you can pick the baseline dictionary that _closely_ suit for your need and work out from there. By default, this is the [GDC dictionary](dictionary/gdc). You can search around in **_uc-cdis_** repos, keywords such as:
+  - [datadictionary](https://github.com/orgs/uc-cdis/repositories?q=datadictionary&type=&language=&sort=)
+  - [data dictionary](https://github.com/orgs/uc-cdis/repositories?q=data+dictionary&type=&language=&sort=)
+- Or, have a look:
+  - http://mindset-gen3-gallery.s3-website-us-east-1.amazonaws.com
+  - and, browse around [deployed sites](https://github.com/uc-cdis/cdis-manifest)
+
+In this repo, we selected few data dictionaries in [dictionary folder](dictionary) to work with the following data dictionary development workflow.
+
+### Prerequisite
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) (at least v3.2.1)
+- [GNU Make](https://www.gnu.org/software/make/)
+  - GNU Make comes with most Linux and macOS Xcode
+  - Try `make --version` to see whether you already have it in   
+  - Otherwise `brew install make` for macOS and try like `gmake --version`
+  - On Ubuntu, try `apt-get install make`
+  - If `make` is not possible then you will need to execute each target in [Makefile](Makefile)
 
 ## Workflow
 
@@ -222,15 +238,9 @@ If you are new to PSQL, try the following for starter:
   - [SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html) (freeware)
 
 **Screenshot:** _PyCharm_
-<details>
-  <summary>Click to expand!</summary>
 
-  ![pycharm_ce_dbnavigator.png](assets/pycharm_ce_dbnavigator.png)
-</details>
+![pycharm_ce_dbnavigator.png](assets/pycharm_ce_dbnavigator.png)
 
 **Screenshot:** _PSQL Console_
-<details>
-  <summary>Click to expand!</summary>
 
-  ![psql_console.png](assets/psql_console.png)
-</details>
+![psql_console.png](assets/psql_console.png)
