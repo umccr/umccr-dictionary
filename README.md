@@ -6,12 +6,17 @@ Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform.
 
 ## Development
 
+### Design Notes
+
+- Read [design_notes.md](https://github.com/uc-cdis/datadictionary/blob/develop/design_notes.md)
+- Read [search-query.md](https://github.com/umccr/gen3-doc/blob/main/user-guide/search-query.md) for how metadata (in Graph) will get queried through GraphQL API. Hence, multiple Data Dictionary with single Gen3 instance is not possible.
+
 ### Context
 
 How do I develop Gen3 Data Dictionary?
 
 - Read pointers from this [FAQ](https://gen3.org/resources/faq/#data-dictionary).
-- Gen3 Data Dictionary are essentially authored in YAML file as DSL (Domain-Specific Language). However, there are tools available from Excel/CSV/TSV to YAML to JSON conversion. So, to start with, it can be as simple as modelling in Excel for metadata requirement for Data Dictionary. i.e. to have rough idea on determining base entities (a node in a Graph), their properties (node attributes) and links (edge/relation).
+- Gen3 Data Dictionary are essentially authored in YAML file as DSL (Domain-Specific Language). However, there are tools available from Excel/CSV/TSV to YAML to JSON conversion. So, to start with, it can be as simple as modelling in Excel for metadata requirement for Data Dictionary. i.e. to have rough idea on determining base entities (a node in a Graph), their attributes (node properties) and links (edge/relation). See [README.md](https://github.com/uc-cdis/datadictionary/blob/develop/README.md)
 - Alternatively, you can pick the baseline dictionary that _closely_ suit for your need and work out from there. By default, this is the [GDC dictionary](dictionary/gdc). You can search around in **_uc-cdis_** repos, keywords such as:
   - [datadictionary](https://github.com/orgs/uc-cdis/repositories?q=datadictionary&type=&language=&sort=)
   - [data dictionary](https://github.com/orgs/uc-cdis/repositories?q=data+dictionary&type=&language=&sort=)
