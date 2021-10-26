@@ -7,15 +7,15 @@ version: '3.1'
 services:
 
   ddvis:
-    image: quay.io/victorskl/ddvis
+    image: quay.io/umccr/ddvis
     container_name: ddvis
     volumes:
       - ./schema:/usr/share/nginx/html/schema:ro
     ports:
-      - 8080:80
+      - "8080:80"
 
   g3po:
-    image: quay.io/victorskl/g3po
+    image: quay.io/umccr/g3po
     command: [ "tail", "-f", "/dev/null" ]
     container_name: g3po
     volumes:
@@ -26,7 +26,7 @@ services:
     image: postgres:9.6
     container_name: ddpostgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - ./sql/init.sh:/docker-entrypoint-initdb.d/init.sh
       - ./sql:/sql
@@ -39,7 +39,7 @@ services:
       PG_NAME: ${PG_NAME}
 
   dmutils:
-    image: quay.io/victorskl/datamodelutils
+    image: quay.io/umccr/datamodelutils
     container_name: dmutils
     command: [ "tail", "-f", "/dev/null" ]
     environment:
@@ -57,7 +57,7 @@ services:
 
   ddimporter:
     # See docker-compose.override.sample.yml for override with local image
-    image: quay.io/victorskl/ddimporter
+    image: quay.io/umccr/ddimporter
     container_name: ddimporter
     command: [ "tail", "-f", "/dev/null" ]
     environment:
