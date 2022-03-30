@@ -1,0 +1,142 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comments: "TODO: Add other values from https://github.com/phenopackets/phenopacket-schema/blob/v2/docs/time-element.rst"
+
+id: "time_element"
+title: Time Element
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of a wrapper for various time descriptors."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: true
+    required: true
+    subgroup:
+      - name: age
+        backref: time_element_age
+        label: data_from
+        target_type: age
+        multiplicity: one_to_one
+        required: false
+      - name: age_range
+        backref: time_element_age_range
+        label: data_from
+        target_type: age_range
+        multiplicity: one_to_one
+        required: false
+      - name: gestational_age
+        backref: time_element_gestational_age
+        label: data_from
+        target_type: gestational_age
+        multiplicity: one_to_one
+        required: false
+      - name: time_interval
+        backref: time_element
+        label: data_from
+        target_type: time_interval
+        multiplicity: one_to_one
+        required: false
+      - name: age_group
+        backref: time_element_age_group
+        label: data_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "time_element" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  age:
+    description: "Represents age as a ISO8601 duration (e.g., P40Y10M05D)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      iso8601duration: P32Y6M1D
+
+  age_range:
+    description: "Represents age as a ISO8601 duration (e.g., P40Y10M05D)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      start:
+        iso8601duration: P18Y
+      end:
+        iso8601duration: P59Y
+
+  gestational_age:
+    description: "Measure of the age of a pregnancy."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - weeks: 33
+        days: 2
+
+  timestamp:
+    description: "Time in date-time ISO8601 string format."
+    type: string
+    format: date-time
+    examples:
+      - "1999-08-05T17:21:00+01:00"
+      - "2002-09-21T02:37:00-08:00"
+
+  time_interval:
+    description: "(Link to one time_interval object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  age_group:
+    description: "Indicates the age of the individual as an ontology class. Recommended from NCIT Age Group ontology term (NCIT:C20587) descendants."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: NCIT:C27954
+        label: Adolescent
+      - id: NCIT:C49685
+        label: Adult 18-65 Years Old

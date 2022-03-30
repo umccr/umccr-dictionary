@@ -1,0 +1,92 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "data_availability"
+title: Data Availability
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Aggregated information of geographic location obtained from individual level info in database."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_commons
+    backref: data_availability
+    label: data_from
+    target_type: beacon_common
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_commons
+  - availability
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "data_availability" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_commons:
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  availability:
+    description: "data availability"
+    type: boolean
+
+  availability_count:
+    description: "count of individuals with data available"
+    type: integer
+
+  distribution:
+    description: "List of categories and results or counts for each category."
+    type: string
+# FIXME a blank free-form json object? just store as JSON raw string for now
+#    type: object
+#    properties: {}
+#    additionalProperties:
+#      type: object
+#    examples:
+#      - genders:
+#          male: 50
+#          female: 51

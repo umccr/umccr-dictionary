@@ -1,0 +1,87 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "age_range"
+title: Age Range
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Age range definition. Provenance: GA4GH Phenopackets v2 `AgeRange`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: start
+        backref: start_age
+        label: start_age_from
+        target_type: age
+        multiplicity: one_to_one
+        required: false
+      - name: end
+        backref: end_age
+        label: end_age_from
+        target_type: age
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - start
+  - end
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "age_range" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  start:
+    description: "Represents age as an ISO8601 duration (e.g., P18Y)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  end:
+    description: "Represents age as an ISO8601 duration (e.g., P59Y)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"

@@ -1,0 +1,131 @@
+$schema: "http://json-schema.org/draft-07/schema"
+$comment: "version: ga4gh-beacon-biosample-v2.0.0"
+
+id: "analysis"
+title: Analysis Pipeline
+type: object
+program: '*'
+project: '*'
+category: analysis
+description: "Schema for a sequencing bioinformatics analysis."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_core
+    backref: analyses
+    label: performed_for
+    target_type: beacon_core
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_core
+  - analysis_id
+  - analysis_date
+  - pipeline_name
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "analysis" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_core:
+    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  analysis_id:
+    description: "Analysis reference ID (external accession or internal ID)"
+    type: string
+
+  run_id:
+    description: "Run identifier (external accession or internal ID)."
+    type: string
+    examples:
+      - SRR10903401
+
+  biosample_id:
+    description: "Reference to Biosample ID."
+    type: string
+    examples:
+      - S0001
+
+  individual_id:
+    description: "Reference to Individual ID."
+    type: string
+    examples:
+      - P0001
+
+  analysis_date:
+    description: "Date at which analysis was performed."
+    type: string
+    format: date
+    examples:
+      - "2021-10-17"
+
+  pipeline_name:
+    description: "Analysis pipeline and version if a standardized pipeline was used"
+    type: string
+    examples:
+      - Pipeline-panel-0001-v1
+
+  pipeline_ref:
+    description: "Link to Analysis pipeline resource"
+    type: string
+    examples:
+      - https://doi.org/10.48511/workflowhub.workflow.111.1
+
+  aligner:
+    description: "Reference to mapping/alignment software"
+    type: string
+    examples:
+      - bwa-0.7.8
+
+  variant_caller:
+    description: "Reference to variant calling software / pipeline"
+    type: string
+    examples:
+      - GATK4.0
+
+#  info:
+#    $ref: https://raw.githubusercontent.com/ga4gh-beacon/beacon-framework-v2/main/common/beaconCommonComponents.json#/definitions/Info

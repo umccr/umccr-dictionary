@@ -1,0 +1,76 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "age"
+title: Age
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Age value definition. Provenance: GA4GH Phenopackets v2 `Age`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_commons
+    backref: ages
+    label: data_from
+    target_type: beacon_common
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_commons
+  - iso8601duration
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "age" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_commons:
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  iso8601duration:
+    description: "Represents age as a ISO8601 duration (e.g., P40Y10M05D)."
+    type: string
+    example: P32Y6M1D

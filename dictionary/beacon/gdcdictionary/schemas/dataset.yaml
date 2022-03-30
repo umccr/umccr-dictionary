@@ -1,0 +1,137 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comment: "version: ga4gh-beacon-dataset-v2.0.0"
+
+id: "dataset"
+title: Dataset
+type: object
+program: '*'
+project: '*'
+category: administrative
+description: "A dataset available in the beacon"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_core
+    backref: datasets
+    label: member_of
+    target_type: beacon_core
+    multiplicity: many_to_one
+    required: true
+  - exclusive: false
+    required: false
+    subgroup:
+      - name: data_use_conditions
+        backref: dataset
+        label: data_from
+        target_type: data_use_condition
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - beacon_core
+  - dataset_id
+  - name
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "dataset" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_core:
+    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+
+# --- Beacon
+
+  dataset_id:
+    type: string
+    description: "Unique identifier of the dataset"
+    examples:
+      - ds01010101
+
+  name:
+    type: string
+    description: "Name of the dataset"
+    examples:
+      - Dataset with synthetic data
+
+  description:
+    type: string
+    description: "Description of the dataset"
+    examples:
+      - This dataset provides examples of the actual data in this Beacon instance.
+
+  create_date_time:
+    type: string
+    format: date-time
+    description: "The time the dataset was created (ISO 8601 format)"
+    examples:
+      - "2012-07-29"
+      - "2017-01-17T20:33:40Z"
+
+  update_date_time:
+    type: string
+    format: date-time
+    description: "The time the dataset was updated in (ISO 8601 format)"
+    examples:
+      - "2012-07-19"
+      - "2017-01-17T20:33:40Z"
+
+  version:
+    type: string
+    description: "Version of the dataset"
+    examples:
+      - v1.1
+
+  external_url:
+    type: string
+    description: "URL to an external system providing more dataset information (RFC 3986 format)."
+    examples:
+      - http://example.org/wiki/Main_Page
+
+  data_use_conditions:
+    description: "(Link to many data_use_condition objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+#  info:
+#    $ref: https://raw.githubusercontent.com/ga4gh-beacon/beacon-framework-v2/main/common/beaconCommonComponents.json#/definitions/Info

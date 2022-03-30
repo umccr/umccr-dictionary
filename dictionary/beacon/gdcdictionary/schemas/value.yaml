@@ -1,0 +1,80 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "value"
+title: Value
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of a value class. Provenance: GA4GH Phenopackets v2 `Value`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: true
+    required: true
+    subgroup:
+      - name: value_ptr
+        backref: value
+        label: value_ptr_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: value_ptr
+        backref: value
+        label: value_ptr_from
+        target_type: quantity
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "value" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  value_ptr:
+    description: "(Link to one quantity object or one ontology_term)"
+    type: object
+    $ref: "_definitions.yaml#/to_one"

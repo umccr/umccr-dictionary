@@ -1,0 +1,92 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "reference_range"
+title: Reference Range
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of a range class."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: unit
+        backref: reference_range
+        label: data_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - unit
+  - low
+  - high
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "reference_range" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  unit:
+    description: "The kind of unit. (Link to one ontology_term object)"
+    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: NCIT:C49670
+        label: Millimeter of Mercury
+
+  low:
+    description: "Lower range end of normal"
+    type: number
+    examples:
+      - 85
+
+  high:
+    description: "Upper range end of normal"
+    type: number
+    examples:
+      - 135

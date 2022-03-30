@@ -1,0 +1,203 @@
+$schema: "http://json-schema.org/draft-07/schema"
+$comment: "version: ga4gh-beacon-individual-v2.0.0"
+
+id: "individual"
+title: Individual
+type: object
+program: '*'
+project: '*'
+category: administrative
+description: "Schema for an individual entry."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_core
+    backref: individuals
+    label: member_of
+    target_type: beacon_core
+    multiplicity: many_to_one
+    required: true
+  - exclusive: false
+    required: false
+    subgroup:
+      - name: cohorts
+        backref: individuals
+        label: relates_to
+        target_type: cohort
+        multiplicity: many_to_many
+        required: false
+
+      - name: sex
+        backref: individual_sex
+        label: sex_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: ethnicity
+        backref: individual_ethnicity
+        label: ethnicity_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: geographic_origin
+        backref: individual_geographic_origin
+        label: geographic_origin_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: diseases
+        backref: individual_diseases
+        label: data_from
+        target_type: disease
+        multiplicity: many_to_one
+        required: false
+      - name: pedigrees
+        backref: individual_pedigrees
+        label: data_from
+        target_type: pedigree
+        multiplicity: many_to_one
+        required: false
+      - name: phenotypic_features
+        backref: individual_phenotypic_features
+        label: data_from
+        target_type: phenotypic_feature
+        multiplicity: many_to_one
+        required: false
+      - name: treatments
+        backref: individual_treatments
+        label: data_from
+        target_type: treatment
+        multiplicity: many_to_one
+        required: false
+      - name: interventions_or_procedures
+        backref: individual_procedures
+        label: data_from
+        target_type: procedure
+        multiplicity: many_to_one
+        required: false
+      - name: measures
+        backref: individual_measures
+        label: data_from
+        target_type: measurement
+        multiplicity: many_to_one
+        required: false
+      - name: exposures
+        backref: individual_exposures
+        label: data_from
+        target_type: exposure
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - beacon_core
+  - individual_id
+  - sex
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "individual" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_core:
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  cohorts:
+    $ref: "_definitions.yaml#/to_many"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  # original id
+  individual_id:
+    description: "Individual identifier (internal ID)."
+    type: string
+    example: P0001
+
+  sex:
+    description: "Sex of the individual. Value from NCIT General Qualifier (NCIT:C27993): ''unknown'' (not assessed or not available) (NCIT:C17998), ''female'' (NCIT:C16576), or ''male'', (NCIT:C20197).'"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  karyotypic_sex:
+    description: "The chromosomal sex of an individual represented from a selection of options."
+    $ref: "_definitions.yaml#/karyotypic_sex"
+
+  ethnicity:
+    description: "Ethnic background of the individual. Value from NCIT Race (NCIT:C17049) ontology term descendants, e.g. NCIT:C126531 (Latin American). A geographic ancestral origin category that is assigned to a population group based mainly on physical characteristics that are thought to be distinct and inherent. [ NCI ] "
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  geographic_origin:
+    description: "Individual's country or region of origin (birthplace or residence place regardless of ethnic origin). Value from GAZ Geographic Location ontology (GAZ:00000448), e.g. GAZ:00002459 (United States of America)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  diseases:
+    description: "List of disease(s) been diagnosed to the individual, defined by disease ontology ID(s), age of onset, stage and the presence of family history."
+    $ref: "_definitions.yaml#/to_many"
+
+  pedigrees:
+    description: "(Link to many pedigree objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  phenotypic_features:
+    description: "(Link to many phenotypic_feature objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  treatments:
+    description: "(Link to many treatment objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  interventions_or_procedures:
+    description: "(Link to many procedure objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  measures:
+    description: "(Link to many measurement objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  exposures:
+    description: "(Link to many exposure objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+#  info:
+#    $ref: https://raw.githubusercontent.com/ga4gh-beacon/beacon-framework-v2/main/common/beaconCommonComponents.json#/definitions/Info

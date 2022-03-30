@@ -4,6 +4,36 @@ This repo contains Docker and Makefile based Data Dictionary Development workflo
 
 Our aim is to develop **UMCCR Data Dictionary** for Gen3 platform. 
 
+## TL;DR
+
+- https://umccr.github.io/umccr-dictionary/
+
+### Beacon
+
+> [Beacon v2](https://github.com/ga4gh-beacon/beacon-v2) Model as [Gen3](https://gen3.org) Data Dictionary
+
+```
+git clone https://github.com/umccr/umccr-dictionary.git
+cd umccr-dictionary
+
+make test dd=beacon 
+make compile dd=beacon
+make validate dd=beacon
+make simulate dd=beacon
+make load dd=beacon
+make import dd=beacon
+make psql
+metadata=> \dt node_*
+metadata=> select * from node_cohort;
+metadata=> \q
+```
+
+An example Node to Edge linking:
+- https://github.com/umccr/umccr-dictionary/blob/main/assets/gen3_beacon_age_demo.svg
+
+![gen3_beacon_age_demo.svg](assets/gen3_beacon_age_demo.svg)
+
+
 ## Development
 
 ### Design Notes

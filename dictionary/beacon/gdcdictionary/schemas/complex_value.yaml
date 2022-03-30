@@ -1,0 +1,73 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "complex_value"
+title: Complex Value
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of a complex value class. Provenance: GA4GH Phenopackets v2 `TypedQuantity`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: typed_quantities
+        backref: complex_value
+        label: date_from
+        target_type: typed_quantity
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "complex_value" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  typed_quantities:
+    description: "List of quantities required to fully describe the complex value (Link to many typed_quantity objects)"
+    $ref: "_definitions.yaml#/to_many"

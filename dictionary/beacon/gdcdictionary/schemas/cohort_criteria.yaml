@@ -1,0 +1,125 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comment: "version: ga4gh-beacon-cohort-v2.0.0"
+
+id: "cohort_criteria"
+title: Cohort Criteria
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Beacon Cohort Criteria"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: locations
+        backref: cohort_criteria_locations
+        label: locations_from
+        target_type: ontology_term
+        multiplicity: many_to_one
+        required: false
+      - name: genders
+        backref: cohort_criteria_genders
+        label: genders_from
+        target_type: ontology_term
+        multiplicity: many_to_one
+        required: false
+      - name: ethnicities
+        backref: cohort_criteria_ethnicities
+        label: ethnicities_from
+        target_type: ontology_term
+        multiplicity: many_to_one
+        required: false
+      - name: disease_conditions
+        backref: cohort_criteria_diseases
+        label: diseases_from
+        target_type: disease
+        multiplicity: many_to_one
+        required: false
+      - name: phenotypic_conditions
+        backref: cohort_criteria_phenotypic_conditions
+        label: phenotypic_conditions_from
+        target_type: phenotypic_feature
+        multiplicity: many_to_one
+        required: false
+      - name: age_range
+        backref: cohort_criteria_age_range
+        label: age_range_from
+        target_type: age_range
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "cohort_criteria" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  locations:
+    description: "Geographic location(s) in cohort inclusion criteria"
+    $ref: "_definitions.yaml#/to_many"
+
+  genders:
+    description: "Gender(s) in cohort inclusion criteria"
+    $ref: "_definitions.yaml#/to_many"
+
+  ethnicities:
+    description: "Ethnias in cohort inclusion criteria"
+    $ref: "_definitions.yaml#/to_many"
+
+  disease_conditions:
+    description: "Diseases in cohort inclusion criteria"
+    $ref: "_definitions.yaml#/to_many"
+
+  phenotypic_conditions:
+    description: "Phenotypic condition(s) in cohort inclusion criteria"
+    $ref: "_definitions.yaml#/to_many"
+
+  age_range:
+    description: "Individual age range in cohort inclusion criteria"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"

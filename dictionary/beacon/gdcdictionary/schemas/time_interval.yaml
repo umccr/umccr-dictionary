@@ -1,0 +1,86 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comments: "From https://github.com/phenopackets/phenopacket-schema/blob/v2/docs/time-interval.rst"
+
+id: "time_interval"
+title: Time Interval
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Time interval with start and end defined as ISO8601 time stamps."
+
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_commons
+    backref: time_intervals
+    label: data_from
+    target_type: beacon_common
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_commons
+  - start
+  - end
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "time_interval" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_commons:
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  start:
+    type: string
+    format: datetime
+    examples:
+      - "1999-08-05T17:21:00+01:00"
+      - "2002-09-21T02:37:00-08:00"
+
+  end:
+    type: string
+    format: datetime
+    examples:
+      - "2022-03-10T15:25:07Z"

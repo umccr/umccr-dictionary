@@ -1,0 +1,92 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "evidence"
+title: Evidence
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of an evidence class. Provenance: GA4GH Phenopackets v2 Evidence"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: evidence_code
+        backref: evidence_code
+        label: evidence_code_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: reference
+        backref: evidence
+        label: data_from
+        target_type: external_reference
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - evidence_code
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "evidence" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  evidence_code:
+    description: "An ontology class that represents the evidence type"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      id: ECO:0006017
+      label: author statement from published clinical study used in manual assertion
+
+  reference:
+    description: "Representation of the source of the evidence. (Link to external_reference)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      id: PMID:30962759
+      label: "Recurrent Erythema Nodosum in a Child with a SHOC2 Gene Mutation"

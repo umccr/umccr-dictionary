@@ -1,0 +1,78 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "ontology_term"
+title: Ontology Term
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of an ontology term."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_commons
+    backref: ontology_terms
+    label: data_from
+    target_type: beacon_common
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_commons
+  - ontology_term_id
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "ontology_term" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_commons:
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  ontology_term_id:
+    $ref: "_definitions.yaml#/CURIE"
+
+  ontology_term_label:
+    type: string
+    description: "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context."

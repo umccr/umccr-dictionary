@@ -1,0 +1,115 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "procedure"
+title: Procedure
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Class describing a clinical procedure or intervention. Provenance: GA4GH Phenopackets v2 `Procedure`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: procedure_code
+        backref: procedure_code
+        label: procedure_code_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: body_site
+        backref: procedure_body_site
+        label: body_site_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: age_at_procedure
+        backref: procedure
+        label: data_from
+        target_type: time_element
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - procedure_code
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "procedure" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  procedure_code:
+    description: "Clinical procedure performed with recommended values from Medical Action Ontology (MAXO) 'Medical action' term tree (MAXO:0000001). Compares to Phenopackets v2 `Procedure.code`"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: MAXO:0001175
+        label: liver transplantation
+      - id: MAXO:0000136
+        label: high-resolution microendoscopy
+      - id: OBI:0002654
+        label: needle biopsy
+
+  body_site:
+    description: "Specific body site where the procedure was performed. Recommended valuee from Uber-anatomy ontology (UBERON)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: UBERON:0003403
+        label: Skin of forearm
+      - id: UBERON:0003214
+        label: mammary gland alveolus
+
+  date_of_procedure:
+    description: "Date of procedure, in ISO8601 format"
+    type: string
+    format: date
+    example: "2010-07-10"
+
+  age_at_procedure:
+    description: "Compares to Phenopackets v2 `Procedure.performed` (Link to time_element object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"

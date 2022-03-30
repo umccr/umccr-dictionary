@@ -1,0 +1,92 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "quantity"
+title: Quantity
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: 'Definition of a quantity class. Provenance: GA4GH Phenopackets v2 `Quantity`'
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: unit
+        backref: quantity
+        label: quantity_unit_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: reference_range
+        backref: quantity
+        label: data_from
+        target_type: reference_range
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - unit
+  - value
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "quantity" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  unit:
+    description: "The kind of unit. Recommended from NCIT Unit of Category ontology term (NCIT:C42568) descendants"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  value:
+    description: "The value of the quantity in the units"
+    type: number
+
+  reference_range:
+    description: "The normal range for the value (Link to one reference_range object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example: {}

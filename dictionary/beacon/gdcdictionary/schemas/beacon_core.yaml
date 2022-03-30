@@ -1,0 +1,47 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "beacon_core"
+title: Beacon Core
+type: object
+program: '*'
+project: '*'
+category: administrative
+description: "Beacon Core"
+
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - state
+  - created_datetime
+  - updated_datetime
+
+links:
+  - name: projects
+    backref: beacon_core
+    label: relates_to
+    target_type: project
+    multiplicity: many_to_one
+    required: true
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+required:
+  - submitter_id
+  - type
+  - projects
+
+properties:
+  $ref: "_definitions.yaml#/ubiquitous_properties"
+
+  type:
+    enum: [ "beacon_core" ]
+
+  projects:
+    type: object
+    $ref: "_definitions.yaml#/to_one_project"

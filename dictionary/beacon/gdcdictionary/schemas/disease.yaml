@@ -1,0 +1,157 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "disease"
+title: Disease
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Diseases diagnosed e.g. to an individual, defined by diseaseID, age of onset, stage, level of severity, outcome and the presence of family history. Similarities to GA4GH Phenopackets v2 Disease"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: disease_code
+        backref: disease_code
+        label: disease_code_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: stage
+        backref: disease_stage
+        label: stage_data_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: severity
+        backref: disease_severity_level
+        label: severity_level_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: age_of_onset
+        backref: disease_age_of_onset
+        label: data_from
+        target_type: time_element
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - id
+  - disease_code
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "disease" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  disease_code:
+    description: "Disease identifier. Value from disease ontologies such as HPO, OMIM, Orphanet, MONDO, e.g. lactose intolerance (HP:0004789, ICD10CM:E73). Provenance: GA4GH Phenopackets v2 Disease.term"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: HP:0004789
+        label: lactose intolerance
+      - id: ICD10CM:E73
+        label: lactose intolerance
+      - id: OMIM:164400
+        label: Spinocerebellar ataxia 1
+
+  stage:
+    description: "Ontology term from Ontology for General Medical Science (OGMS), e.g. acute onset (OGMS:0000119). Provenance: GA4GH Phenopackets v2 Disease.disease_stage"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: OGMS:0000119
+        label: acute onset
+      - id: OGMS:0000117
+        label: asymptomatic
+      - id: OGMS:0000106
+        label: remission
+
+  severity:
+    description: "Level/severity ontology when and as applicable to phenotype observed. Value from Human Phenotype Ontology (HP:0012824), e.g mild. The intensity or degree of a manifestation. [ HPO:probinson ] "
+#    type: object
+    $ref: '_definitions.yaml#/to_one'
+    examples:
+      - id: HP:0012825
+        label: Severe
+      - id: HP:0012829
+        label: Profound
+      - id: HP:0012826
+        label: Moderate
+      - id: HP:0012825
+        label: Mild
+      - id: HP:0012827
+        label: Bordeline
+
+  age_of_onset:
+    description: "Link to one time_element"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - ageGroup:
+          id: NCIT:C49685
+          label: Adult 18-65 Years Old
+        age:
+          iso8601duration: P32Y6M1D
+      - ageRange:
+          start:
+            iso8601duration: P18Y
+          end:
+            iso8601duration: P59Y
+      - age:
+          iso8601duration: P2M4D
+
+  family_history:
+    description: "Boolean indicating determined or self-reported presence of family history of the disease."
+    type: boolean
+    example: true
+
+  notes:
+    description: "Unstructured text to describe additional properties of this disease instance."
+    type: string
+    example: Some free text

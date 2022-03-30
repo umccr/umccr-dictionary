@@ -1,0 +1,80 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "duo_data_use_modifier"
+title: DUO Data Use Modifier
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "DUO Data Use Modifier"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: modifiers
+        backref: duo_data_use_modifiers
+        label: data_from
+        target_type: ontology_term
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - version
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "duo_data_use_modifier" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  modifiers:
+    description: "(Link to many ontology_term objects)"
+    $ref: "_definitions.yaml#/to_many"
+
+  version:
+    type: string
+    format: date
+    examples:
+      - 17-07-2016

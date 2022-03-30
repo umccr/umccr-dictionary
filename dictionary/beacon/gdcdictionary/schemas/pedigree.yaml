@@ -1,0 +1,97 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "pedigree"
+title: Pedigree
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Pedigree studies in which the individual is part of."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: disease
+        backref: pedigree_disease
+        label: data_from
+        target_type: disease
+        multiplicity: one_to_one
+        required: false
+      - name: members
+        backref: pedigree_members
+        label: data_from
+        target_type: pedigree_member
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - pedigree_id
+  - disease
+  - members
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "pedigree" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  pedigree_id:
+    description: "Pedigree identifier."
+    type: string
+    example: Pedigree1001
+
+  disease:
+    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  num_subjects:
+    description: "Total number of subjects in pedigree."
+    type: integer
+    example: 10
+
+  members:
+    description: "List of members of the pedigree. If the current pedigree definition is attached to the proband, it contains the whole list of pedigree members, including the proband. If the definition is attached to an individual different than the proband, it only contains two entries: one that describes that member, e.g. the proband mother or father, and one that points to the proband."
+    $ref: "_definitions.yaml#/to_many"
+    minItems: 1

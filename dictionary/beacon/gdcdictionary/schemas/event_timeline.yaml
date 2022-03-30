@@ -1,0 +1,90 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "event_timeline"
+title: Event Timeline
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Aggregated information of dates of visit/diagnostic/inclusion in study obtained from individual level info in database. Will coincide with collection event date for multi-time"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_commons
+    backref: event_timelines
+    label: data_from
+    target_type: beacon_common
+    multiplicity: many_to_one
+    required: true
+
+required:
+  - submitter_id
+  - type
+  - beacon_commons
+  - start
+  - end
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "event_timeline" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_commons:
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  start:
+    description: "earliest date of visit"
+    type: string
+    format: datetime
+    examples:
+      - "2018-10-01T13:23:45Z"
+      - "2019-04-23T09:11:13Z"
+      - "2017-01-17T20:33:40Z"
+
+  end:
+    description: "latest date of visit"
+    type: string
+    format: datetime
+    examples:
+      - "2018-10-01T13:23:45Z"
+      - "2019-04-23T09:11:13Z"
+      - "2017-01-17T20:33:40Z"

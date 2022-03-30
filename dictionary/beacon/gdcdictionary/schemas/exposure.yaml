@@ -1,0 +1,119 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "exposure"
+title: Exposure
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Exposures (lifestyle, behavioural exposures) occurred to individual,defined by exposure ID, date and age of onset, dose, and duration."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: exposure_code
+        backref: exposure_code
+        label: exposure_code_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: unit
+        backref: exposure_unit
+        label: exposure_unit_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: age_at_exposure
+        backref: exposure
+        label: data_from
+        target_type: age
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - exposure_code
+  - age_at_exposure
+  - unit
+  - duration
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "exposure" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  exposure_code:
+    description: "Exposure ID. Value from Environment Exposure Ontology."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: CHEBI:46661
+        label: asbestos
+      - id: ENVO:21001217
+        label: X-ray radiation
+
+  value:
+    description: "Quantification of the exposure."
+    type: number
+
+  unit:
+    description: "Unit of the exposure. Recommended from NCIT Unit of Category ontology term (NCIT:C42568) descendants."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  duration:
+    description: "Exposure duration in ISO8601 format"
+    type: string
+    example: P32Y6M1D
+
+  date:
+    description: "Date of the exposure in ISO8601 format."
+    type: string
+    format: date
+
+  age_at_exposure:
+    description: "(Link to one age object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"

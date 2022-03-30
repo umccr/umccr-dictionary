@@ -1,0 +1,173 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comment: "version: ga4gh-beacon-cohort-v2.0.0"
+
+id: "cohort"
+title: Cohort
+type: object
+program: '*'
+project: '*'
+category: administrative
+description: "A cohort available in the beacon."
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - name: beacon_core
+    backref: cohorts
+    label: member_of
+    target_type: beacon_core
+    multiplicity: many_to_one
+    required: true
+  - exclusive: false
+    required: false
+    subgroup:
+      - name: collection_events
+        backref: cohorts
+        label: relates_to
+        target_type: collection_event
+        multiplicity: many_to_many
+        required: false
+      - name: inclusion_criteria
+        backref: cohort_inclusion_criteria
+        label: cohort_inclusion_criteria_from
+        target_type: cohort_criteria
+        multiplicity: one_to_one
+        required: false
+      - name: exclusion_criteria
+        backref: cohort_exclusion_criteria
+        label: cohort_exclusion_criteria_from
+        target_type: cohort_criteria
+        multiplicity: one_to_one
+        required: false
+      - name: cohort_design
+        backref: cohort_design
+        label: cohort_design_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: cohort_data_types
+        backref: cohort_data_types
+        label: cohort_data_types_from
+        target_type: ontology_term
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - beacon_core
+  - cohort_id
+  - cohort_name
+  - cohort_type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "cohort" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  beacon_core:
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  cohort_id:
+    description: "Cohort identifier. For study-defined or beacon-defined cohorts this field is set by the implementer. For ´user-defined´ this unique identifier could be generated upon the query that defined the cohort, but could be later edited by the user."
+    type: string
+    examples:
+      - cohort-T2D-2010
+
+  cohort_name:
+    description: "Name of the cohort. For user-defined this field could be generated upon the query, e.g. a value that is a concatenationor some representation of the user query."
+    type: string
+    examples:
+      - Wellcome Trust Case Control Consortium
+      - GCAT Genomes for Life
+
+  cohort_type:
+    description: "Cohort type by its definition. If a cohort is declared ´study-defined´ or ´beacon-defined´ criteria are to be entered in cohort_inclusion_criteria; if a cohort is declared ‘user-defined' cohort_inclusion_criteria could be automatically populated from the parameters used to perform the query."
+    enum:
+      - study-defined
+      - beacon-defined
+      - user-defined
+    default: beacon-defined
+
+  cohort_size:
+    description: "Count of unique Individuals in cohort (individuals meeting criteria for ´user-defined´ cohorts). If not previously known, it could be calculated by counting the individuals in the cohort."
+    type: integer
+    examples:
+      - 14765
+      - 20000
+
+  cohort_design:
+    description: "Cohort type by its design. A plan specification comprised of protocols (which may specify how and what kinds of data will be gathered) that are executed as part of an investigation and is realized during a study design execution. Value from Ontologized MIABIS (OMIABIS) Study design ontology term tree (OBI:0500000)."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: OMIABIS:0001017
+        label: case control study design
+      - id: OMIABIS:0001019
+        label: longitudinal study design
+      - id: OMIABIS:0001024
+        label: twin study design
+
+  inclusion_criteria:
+    description: "Inclusion criteria used for defining the cohort. It is assumed that all cohort participants will match such criteria."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  exclusion_criteria:
+    description: "Exclusion criteria used for defining the cohort. It is assumed that NONE of the cohort participants will match such criteria."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  cohort_data_types:
+    description: "Type of information. Preferably values from Genomics Cohorts Knowledge Ontology (GeCKO) or others when GeCKO is not applicable."
+    $ref: "_definitions.yaml#/to_many"
+    examples:
+      - id: OGMS:0000015
+        label: clinical history
+      - id: OBI:0000070
+        label: genotyping assay
+      - id: OMIABIS:0000060
+        label: survey data
+
+  collection_events:
+    description: "TBD"
+    $ref: "_definitions.yaml#/to_many"

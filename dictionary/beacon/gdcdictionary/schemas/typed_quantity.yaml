@@ -1,0 +1,95 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "typed_quantity"
+title: Typed Quantity
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Definition of a complex value class. Provenance: GA4GH Phenopackets v2 `TypedQuantity`"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: quantity_type
+        backref: typed_quantity
+        label: data_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+      - name: quantity
+        backref: typed_quantity
+        label: data_from
+        target_type: quantity
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - quantity_type
+  - quantity
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "complex_value" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  quantity_type:
+    description: "OntologyClass to describe the type of the measurement. Renamed compared to GA4GH Phenopackets v2 `ComplexValue.TypedQuantity.type`"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      id: NCIT:C25298
+      label: Systolic Blood Pressure
+
+  quantity:
+    description: "Quantity denoting the outcome of the measurement"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    example:
+      quentity:
+        unit:
+          id: NCIT:C49670
+          label: Millimeter of Mercury

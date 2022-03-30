@@ -1,0 +1,103 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comments: "From https://github.com/phenopackets/phenopacket-schema/blob/v2/docs/dose-interval.rst"
+
+id: "dose_interval"
+title: Dose Interval
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "This element represents a block of time in which the dosage of a medication was constant. For example, to represent a period of 30 mg twice a day for an interval of 10 days, we would use a Quantity element to represent the individual 30 mg dose, and OntologyClass element to represent twice a day, and an Interval element to represent the 10-day interval. Provenance: Phenopackets v2"
+
+additionalProperties: false
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: quantity
+        backref: dose_interval
+        label: data_from
+        target_type: quantity
+        multiplicity: one_to_one
+        required: false
+      - name: interval
+        backref: dose_interval
+        label: data_from
+        target_type: time_interval
+        multiplicity: one_to_one
+        required: false
+      - name: schedule_frequency
+        backref: dose_interval
+        label: data_from
+        target_type: ontology_term
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - quantity
+  - interval
+  - schedule_frequency
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "dose_interval" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  quantity:
+    description: "(Link to one quantity object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  interval:
+    description: "The specific interval over which the dosage was administered in the indicated quantity. (Link to one time_interval object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  schedule_frequency:
+    description: "How often doses are administered per day or other indicated duration (Link to one ontology_term object)"
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+    examples:
+      - id: NCIT:C64496
+        label: Twice Daily

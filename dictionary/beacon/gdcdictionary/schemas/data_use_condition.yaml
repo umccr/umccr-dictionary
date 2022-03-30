@@ -1,0 +1,75 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+
+id: "data_use_condition"
+title: Data Use Condition
+type: object
+program: '*'
+project: '*'
+category: clinical
+description: "Data use conditions"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: duo_data_use
+        backref: data_use_conditions
+        label: data_from
+        target_type: duo_data_use
+        multiplicity: many_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+  - duo_data_use
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "data_use_condition" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  duo_data_use:
+    description: "(Link to many duo_data_use objects)"
+    $ref: "_definitions.yaml#/to_many"
+    minItems: 1

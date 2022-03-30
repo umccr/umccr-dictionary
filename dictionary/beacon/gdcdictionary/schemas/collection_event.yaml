@@ -1,0 +1,190 @@
+$schema: "http://json-schema.org/draft-04/schema#"
+$comment: "version: ga4gh-beacon-cohort-v2.0.0"
+
+id: "collection_event"
+title: Collection Event
+type: object
+program: '*'
+project: '*'
+category: notation
+description: "Beacon Collection Event"
+
+additionalProperties: true
+submittable: true
+validators: null
+
+systemProperties:
+  - id
+  - project_id
+  - created_datetime
+  - updated_datetime
+#  - state
+
+links:
+  - exclusive: false
+    required: true
+    subgroup:
+      - name: event_timeline
+        backref: collection_event
+        label: data_from
+        target_type: event_timeline
+        multiplicity: one_to_one
+        required: false
+      - name: event_locations
+        backref: collection_event_locations
+        label: collection_event_locations_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_genders
+        backref: collection_event_genders
+        label: collection_event_genders_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_ethnicities
+        backref: collection_event_ethnicities
+        label: collection_event_ethnicities_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_age_range
+        backref: collection_event_age_range
+        label: collection_event_age_range_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_diseases
+        backref: collection_event_diseases
+        label: collection_event_diseases_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_phenotypes
+        backref: collection_event_phenotypes
+        label: collection_event_phenotypes_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+      - name: event_data_types
+        backref: collection_event_data_types
+        label: collection_event_data_types_from
+        target_type: data_availability
+        multiplicity: one_to_one
+        required: false
+
+required:
+  - submitter_id
+  - type
+
+uniqueKeys:
+  - [id]
+  - [project_id, submitter_id]
+
+properties:
+
+# --- Gen3 Project
+  type:
+    enum: [ "collection_event" ]
+
+  id:
+    $ref: "_definitions.yaml#/UUID"
+    systemAlias: node_id
+
+#  state:
+#    $ref: "_definitions.yaml#/state"
+
+  submitter_id:
+    description: "Gen3 node linking ID"
+    type:
+      - string
+      - "null"
+
+  project_id:
+    $ref: "_definitions.yaml#/project_id"
+
+  created_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+  updated_datetime:
+    $ref: "_definitions.yaml#/datetime"
+
+# --- Beacon properties
+
+  event_num:
+    description: "cardinality of the collection event / data point in a series"
+    type: integer
+    examples:
+      - 1
+      - 2
+      - 3
+      - 4
+
+  event_date:
+    description: "date of collection event/data point"
+    type: string
+    format: datetime
+    examples:
+      - "2018-10-01T13:23:45Z"
+      - "2019-04-23T09:11:13Z"
+      - "2017-01-17T20:33:40Z"
+
+  event_timeline:
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_size:
+    description: "Count of individuals in cohort at data point (for ´user-defined´ cohorts, this is individuals meeting criteria) obtained from individual level info in database."
+    type: integer
+    examples:
+      - 1543
+      - 42
+
+  event_cases:
+    description: "count of cases"
+    type: integer
+    examples:
+      - 543
+      - 20
+
+  event_controls:
+    description: "count of controls"
+    type: integer
+    examples:
+      - 1000
+      - 22
+
+  event_locations:
+    description: "Aggregated information of geographic location obtained from individual level info in database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_genders:
+    description: "Aggregated information of gender(s) obtained from individual level info in the database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_ethnicities:
+    description: "Aggregated information of ethnicity obtained from individual level info in database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_age_range:
+    description: "Individual age range, obtained from individual level info in database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_diseases:
+    description: "Aggregated information of disease/condition(s) obtained from individual level info in the database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_phenotypes:
+    description: "Aggregated information of phenotype(s) obtained from individual level info in the database."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
+
+  event_data_types:
+    description: "Aggregated data type information available for each cohort data type as declared in cohortDataTypes, and obtained from individual level info."
+#    type: object
+    $ref: "_definitions.yaml#/to_one"
