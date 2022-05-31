@@ -1,0 +1,2755 @@
+{
+  "Organization.yaml": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "category": "Administrative",
+    "description": "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.",
+    "id": "Organization",
+    "links": [
+      {
+        "backref": "Organizations",
+        "label": "Organizations",
+        "multiplicity": "many_to_many",
+        "name": "Organizations",
+        "required": false,
+        "target_type": "Organization"
+      }
+    ],
+    "namespace": "http://hl7.org/fhir",
+    "program": "*",
+    "project": "*",
+    "properties": {
+      "alias_0": {
+        "description": "A list of alternate names that the organization is known as, or was known as in the past.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "created_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "id": {
+        "description": "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_system": {
+        "description": "Identifies this organization  across multiple systems. Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_value": {
+        "description": "Identifies this organization  across multiple systems. The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_1_system": {
+        "description": "Identifies this organization  across multiple systems. Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_1_value": {
+        "description": "Identifies this organization  across multiple systems. The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_2_system": {
+        "description": "Identifies this organization  across multiple systems. Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_2_value": {
+        "description": "Identifies this organization  across multiple systems. The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_lastUpdated": {
+        "description": "Metadata about the resource. When the resource last changed - e.g. when the version changed.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_source": {
+        "description": "Metadata about the resource. A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_versionId": {
+        "description": "Metadata about the resource. The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "name": {
+        "description": "A name associated with the organization.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project_id": {
+        "$ref": "_definitions.yaml#/project_id"
+      },
+      "resourceType": {
+        "description": "A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "$ref": "_definitions.yaml#/state"
+      },
+      "submitter_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": "string"
+      },
+      "updated_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      }
+    },
+    "required": [
+      "submitter_id",
+      "type"
+    ],
+    "submittable": true,
+    "systemProperties": [
+      "id",
+      "project_id",
+      "created_datetime",
+      "updated_datetime",
+      "state"
+    ],
+    "title": "Organization",
+    "type": "object",
+    "uniqueKeys": [
+      [
+        "id"
+      ],
+      [
+        "project_id",
+        "submitter_id"
+      ]
+    ],
+    "validators": null
+  },
+  "ResearchStudy.yaml": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "category": "Administrative",
+    "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.",
+    "id": "ResearchStudy",
+    "links": [
+      {
+        "backref": "ResearchStudies",
+        "label": "ResearchStudies",
+        "multiplicity": "many_to_many",
+        "name": "ResearchStudies",
+        "required": false,
+        "target_type": "ResearchStudy"
+      },
+      {
+        "backref": "ResearchStudies",
+        "label": "Practitioners",
+        "multiplicity": "many_to_many",
+        "name": "Practitioners",
+        "required": false,
+        "target_type": "Practitioner"
+      },
+      {
+        "backref": "ResearchStudies",
+        "label": "Organizations",
+        "multiplicity": "many_to_many",
+        "name": "Organizations",
+        "required": false,
+        "target_type": "Organization"
+      }
+    ],
+    "namespace": "http://hl7.org/fhir",
+    "program": "*",
+    "project": "*",
+    "properties": {
+      "category_0_coding_0_code": {
+        "description": "Classifications for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "category_0_coding_0_display": {
+        "description": "Classifications for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "category_0_coding_0_system": {
+        "description": "Classifications for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "category_0_text": {
+        "description": "Classifications for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_0_coding_0_code": {
+        "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+        "term": {
+          "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+          "termDef": {
+            "cde_id": "condition-code",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "condition-code",
+            "term_url": "http://hl7.org/fhir/ValueSet/condition-code"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_0_coding_0_display": {
+        "description": "Condition being studied. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_0_coding_0_system": {
+        "description": "Condition being studied. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_0_text": {
+        "description": "Condition being studied. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_1_coding_0_code": {
+        "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+        "term": {
+          "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+          "termDef": {
+            "cde_id": "condition-code",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "condition-code",
+            "term_url": "http://hl7.org/fhir/ValueSet/condition-code"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_1_coding_0_display": {
+        "description": "Condition being studied. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_1_coding_0_system": {
+        "description": "Condition being studied. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_1_text": {
+        "description": "Condition being studied. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_2_coding_0_code": {
+        "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+        "term": {
+          "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+          "termDef": {
+            "cde_id": "condition-code",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "condition-code",
+            "term_url": "http://hl7.org/fhir/ValueSet/condition-code"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_2_coding_0_display": {
+        "description": "Condition being studied. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_2_coding_0_system": {
+        "description": "Condition being studied. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_2_text": {
+        "description": "Condition being studied. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_3_coding_0_code": {
+        "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+        "term": {
+          "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+          "termDef": {
+            "cde_id": "condition-code",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "condition-code",
+            "term_url": "http://hl7.org/fhir/ValueSet/condition-code"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_3_coding_0_display": {
+        "description": "Condition being studied. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_3_coding_0_system": {
+        "description": "Condition being studied. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_3_text": {
+        "description": "Condition being studied. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_4_coding_0_code": {
+        "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+        "term": {
+          "description": "Condition being studied. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/condition-code",
+          "termDef": {
+            "cde_id": "condition-code",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "condition-code",
+            "term_url": "http://hl7.org/fhir/ValueSet/condition-code"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_4_coding_0_display": {
+        "description": "Condition being studied. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_4_coding_0_system": {
+        "description": "Condition being studied. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "condition_4_text": {
+        "description": "Condition being studied. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "created_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "description": {
+        "description": "A full description of how the study is being conducted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "enrollment_0_reference": {
+        "description": "Inclusion & exclusion criteria. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_0_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_0_valueUrl": {
+        "description": "Additional content defined by implementations. Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_1_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_1_valueDate": {
+        "description": "Additional content defined by implementations. Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_2_extension_0_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_2_extension_0_valueCoding_code": {
+        "description": "Additional content defined by implementations. Value of extension. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_2_extension_0_valueCoding_display": {
+        "description": "Additional content defined by implementations. Value of extension. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_2_extension_0_valueCoding_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_2_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_0_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_0_valueCount_code": {
+        "description": "Additional content defined by implementations. Value of extension. A computer processable form of the unit in some unit representation system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_0_valueCount_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_0_valueCount_value": {
+        "description": "Additional content defined by implementations. Value of extension. The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "extension_3_extension_1_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_1_valueCount_code": {
+        "description": "Additional content defined by implementations. Value of extension. A computer processable form of the unit in some unit representation system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_1_valueCount_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_2_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_2_valueCount_code": {
+        "description": "Additional content defined by implementations. Value of extension. A computer processable form of the unit in some unit representation system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_2_valueCount_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_2_valueCount_value": {
+        "description": "Additional content defined by implementations. Value of extension. The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "extension_3_extension_3_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_3_valueCount_code": {
+        "description": "Additional content defined by implementations. Value of extension. A computer processable form of the unit in some unit representation system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_3_valueCount_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_3_valueCount_value": {
+        "description": "Additional content defined by implementations. Value of extension. The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "extension_3_extension_4_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_4_valueCount_code": {
+        "description": "Additional content defined by implementations. Value of extension. A computer processable form of the unit in some unit representation system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_extension_4_valueCount_system": {
+        "description": "Additional content defined by implementations. Value of extension. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_3_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "focus_0_coding_0_code": {
+        "description": "Drugs, devices, etc. under study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "focus_0_coding_0_display": {
+        "description": "Drugs, devices, etc. under study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "focus_0_coding_0_system": {
+        "description": "Drugs, devices, etc. under study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "focus_0_text": {
+        "description": "Drugs, devices, etc. under study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_type_coding_0_code": {
+        "description": "Business Identifier for study. Description of identifier. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/identifier-type DL|PPN|BRN|MR|MCN|EN|TAX|NIIP|PRN|MD|DR|ACSN|UDI|SNO|SB|PLAC|FILL|JHN",
+        "term": {
+          "description": "Business Identifier for study. Description of identifier. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/identifier-type DL|PPN|BRN|MR|MCN|EN|TAX|NIIP|PRN|MD|DR|ACSN|UDI|SNO|SB|PLAC|FILL|JHN",
+          "termDef": {
+            "cde_id": "identifier-type",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "extensible",
+            "term": "identifier-type",
+            "term_url": "http://hl7.org/fhir/ValueSet/identifier-type"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_type_coding_0_display": {
+        "description": "Business Identifier for study. Description of identifier. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_type_coding_0_system": {
+        "description": "Business Identifier for study. Description of identifier. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_value": {
+        "description": "Business Identifier for study. The portion of the identifier typically relevant to the user and which is unique within the context of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_0_coding_0_code": {
+        "description": "Used to search for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_0_coding_0_display": {
+        "description": "Used to search for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_0_coding_0_system": {
+        "description": "Used to search for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_0_text": {
+        "description": "Used to search for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_1_coding_0_code": {
+        "description": "Used to search for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_1_coding_0_display": {
+        "description": "Used to search for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_1_coding_0_system": {
+        "description": "Used to search for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_1_text": {
+        "description": "Used to search for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_2_coding_0_code": {
+        "description": "Used to search for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_2_coding_0_display": {
+        "description": "Used to search for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_2_coding_0_system": {
+        "description": "Used to search for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_2_text": {
+        "description": "Used to search for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_3_coding_0_code": {
+        "description": "Used to search for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_3_coding_0_display": {
+        "description": "Used to search for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_3_coding_0_system": {
+        "description": "Used to search for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_3_text": {
+        "description": "Used to search for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_4_coding_0_code": {
+        "description": "Used to search for the study. Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_4_coding_0_display": {
+        "description": "Used to search for the study. Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_4_coding_0_system": {
+        "description": "Used to search for the study. Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "keyword_4_text": {
+        "description": "Used to search for the study. A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_lastUpdated": {
+        "description": "Metadata about the resource. When the resource last changed - e.g. when the version changed.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_code": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+        "term": {
+          "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+          "termDef": {
+            "cde_id": "security-labels",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "extensible",
+            "term": "security-labels",
+            "term_url": "http://hl7.org/fhir/ValueSet/security-labels"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_display": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_system": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_source": {
+        "description": "Metadata about the resource. A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_versionId": {
+        "description": "Metadata about the resource. The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project_id": {
+        "$ref": "_definitions.yaml#/project_id"
+      },
+      "resourceType": {
+        "description": "A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sponsor_display": {
+        "description": "Organization that initiates and is legally responsible for the study. Plain text narrative that identifies the resource in addition to the resource reference.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sponsor_reference": {
+        "description": "Organization that initiates and is legally responsible for the study. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "sponsor_type": {
+        "description": "Organization that initiates and is legally responsible for the study. The expected type of the target of the reference. If both Reference.type and Reference.reference are populated and Reference.reference is a FHIR URL, both SHALL be consistent.\n\nThe type is the Canonical URL of Resource Definition that is the type this reference refers to. References are URLs that are relative to http://hl7.org/fhir/StructureDefinition/ e.g. \"Patient\" is a reference to http://hl7.org/fhir/StructureDefinition/Patient. Absolute URLs are only allowed for logical models (and can only be used in references in logical models, not resources).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "$ref": "_definitions.yaml#/state"
+      },
+      "status": {
+        "description": "The current state of the study.. http://hl7.org/fhir/ValueSet/research-study-status|4.0.1",
+        "enum": [
+          "active",
+          "active-but-not-recruiting",
+          "administratively-completed",
+          "approved",
+          "closed-to-accrual",
+          "closed-to-accrual-and-intervention",
+          "completed",
+          "disapproved",
+          "enrolling-by-invitation",
+          "in-review",
+          "not-yet-recruiting",
+          "recruiting",
+          "temporarily-closed-to-accrual",
+          "temporarily-closed-to-accrual-and-intervention",
+          "terminated",
+          "withdrawn"
+        ],
+        "term": {
+          "description": "The current state of the study.. http://hl7.org/fhir/ValueSet/research-study-status|4.0.1",
+          "termDef": {
+            "cde_id": "research-study-status",
+            "cde_version": "4.0.1",
+            "source": "fhir",
+            "strength": "required",
+            "term": "research-study-status",
+            "term_url": "http://hl7.org/fhir/ValueSet/research-study-status|4.0.1"
+          }
+        }
+      },
+      "submitter_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "title": {
+        "description": "A short, descriptive user-friendly label for the study.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": "string"
+      },
+      "updated_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      }
+    },
+    "required": [
+      "submitter_id",
+      "type",
+      "status"
+    ],
+    "submittable": true,
+    "systemProperties": [
+      "id",
+      "project_id",
+      "created_datetime",
+      "updated_datetime",
+      "state"
+    ],
+    "title": "ResearchStudy",
+    "type": "object",
+    "uniqueKeys": [
+      [
+        "id"
+      ],
+      [
+        "project_id",
+        "submitter_id"
+      ]
+    ],
+    "validators": null
+  },
+  "Patient.yaml": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "category": "Administrative",
+    "description": "Demographics and other administrative information about an individual or animal receiving care or other health-related services.",
+    "id": "Patient",
+    "links": [
+      {
+        "backref": "Patients",
+        "label": "Organizations",
+        "multiplicity": "many_to_many",
+        "name": "Organizations",
+        "required": true,
+        "target_type": "Organization"
+      }
+    ],
+    "namespace": "http://hl7.org/fhir",
+    "program": "*",
+    "project": "*",
+    "properties": {
+      "created_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "gender": {
+        "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.. http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1",
+        "enum": [
+          "male",
+          "female",
+          "other",
+          "unknown"
+        ],
+        "term": {
+          "description": "Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.. http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1",
+          "termDef": {
+            "cde_id": "administrative-gender",
+            "cde_version": "4.0.1",
+            "source": "fhir",
+            "strength": "required",
+            "term": "administrative-gender",
+            "term_url": "http://hl7.org/fhir/ValueSet/administrative-gender|4.0.1"
+          }
+        }
+      },
+      "id": {
+        "description": "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_id": {
+        "description": "An identifier for this patient. Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "identifier_0_system": {
+        "description": "An identifier for this patient. Establishes the namespace for the value - that is, a URL that describes a set values that are unique.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_lastUpdated": {
+        "description": "Metadata about the resource. When the resource last changed - e.g. when the version changed.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_source": {
+        "description": "Metadata about the resource. A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_versionId": {
+        "description": "Metadata about the resource. The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project_id": {
+        "$ref": "_definitions.yaml#/project_id"
+      },
+      "resourceType": {
+        "description": "Demographics and other administrative information about an individual or animal receiving care or other health-related services.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "$ref": "_definitions.yaml#/state"
+      },
+      "submitter_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text_div": {
+        "description": "Text summary of the resource, for human interpretation. The actual narrative content, a stripped down version of XHTML.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "text_status": {
+        "description": "Text summary of the resource, for human interpretation. The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.. http://hl7.org/fhir/ValueSet/narrative-status|4.0.1",
+        "enum": [
+          "generated",
+          "extensions",
+          "additional",
+          "empty"
+        ],
+        "term": {
+          "description": "Text summary of the resource, for human interpretation. The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.. http://hl7.org/fhir/ValueSet/narrative-status|4.0.1",
+          "termDef": {
+            "cde_id": "narrative-status",
+            "cde_version": "4.0.1",
+            "source": "fhir",
+            "strength": "required",
+            "term": "narrative-status",
+            "term_url": "http://hl7.org/fhir/ValueSet/narrative-status|4.0.1"
+          }
+        }
+      },
+      "type": {
+        "type": "string"
+      },
+      "updated_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      }
+    },
+    "required": [
+      "submitter_id",
+      "type"
+    ],
+    "submittable": true,
+    "systemProperties": [
+      "id",
+      "project_id",
+      "created_datetime",
+      "updated_datetime",
+      "state"
+    ],
+    "title": "Patient",
+    "type": "object",
+    "uniqueKeys": [
+      [
+        "id"
+      ],
+      [
+        "project_id",
+        "submitter_id"
+      ]
+    ],
+    "validators": null
+  },
+  "ResearchSubject.yaml": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "category": "Administrative",
+    "description": "A physical entity which is the primary unit of operational and/or administrative interest in a study.",
+    "id": "ResearchSubject",
+    "links": [
+      {
+        "backref": "ResearchSubjects",
+        "label": "Patients",
+        "multiplicity": "many_to_many",
+        "name": "Patients",
+        "required": true,
+        "target_type": "Patient"
+      },
+      {
+        "backref": "ResearchSubjects",
+        "label": "ResearchStudies",
+        "multiplicity": "many_to_many",
+        "name": "ResearchStudies",
+        "required": true,
+        "target_type": "ResearchStudy"
+      }
+    ],
+    "namespace": "http://hl7.org/fhir",
+    "program": "*",
+    "project": "*",
+    "properties": {
+      "created_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "id": {
+        "description": "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "individual_reference": {
+        "description": "Who is part of study. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string"
+        ]
+      },
+      "meta_lastUpdated": {
+        "description": "Metadata about the resource. When the resource last changed - e.g. when the version changed.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_code": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+        "term": {
+          "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+          "termDef": {
+            "cde_id": "security-labels",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "extensible",
+            "term": "security-labels",
+            "term_url": "http://hl7.org/fhir/ValueSet/security-labels"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_display": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_system": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_source": {
+        "description": "Metadata about the resource. A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_versionId": {
+        "description": "Metadata about the resource. The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project_id": {
+        "$ref": "_definitions.yaml#/project_id"
+      },
+      "resourceType": {
+        "description": "A physical entity which is the primary unit of operational and/or administrative interest in a study.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "$ref": "_definitions.yaml#/state"
+      },
+      "status": {
+        "description": "The current state of the subject.. http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1",
+        "term": {
+          "description": "The current state of the subject.. http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1",
+          "termDef": {
+            "cde_id": "research-subject-status",
+            "cde_version": "4.0.1",
+            "source": "fhir",
+            "strength": "required",
+            "term": "research-subject-status",
+            "term_url": "http://hl7.org/fhir/ValueSet/research-subject-status|4.0.1"
+          }
+        },
+        "type": [
+          "string"
+        ]
+      },
+      "study_reference": {
+        "description": "Study subject is part of. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string"
+        ]
+      },
+      "submitter_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": "string"
+      },
+      "updated_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      }
+    },
+    "required": [
+      "submitter_id",
+      "type",
+      "status",
+      "study_reference",
+      "individual_reference"
+    ],
+    "submittable": true,
+    "systemProperties": [
+      "id",
+      "project_id",
+      "created_datetime",
+      "updated_datetime",
+      "state"
+    ],
+    "title": "ResearchSubject",
+    "type": "object",
+    "uniqueKeys": [
+      [
+        "id"
+      ],
+      [
+        "project_id",
+        "submitter_id"
+      ]
+    ],
+    "validators": null
+  },
+  "Observation.yaml": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "additionalProperties": false,
+    "category": "Clinical",
+    "description": "Measurements and simple assertions made about a patient, device or other subject.",
+    "id": "Observation",
+    "links": [
+      {
+        "backref": "Observations",
+        "label": "ResearchStudies",
+        "multiplicity": "many_to_many",
+        "name": "ResearchStudies",
+        "required": false,
+        "target_type": "ResearchStudy"
+      },
+      {
+        "backref": "Observations",
+        "label": "Specimen",
+        "multiplicity": "many_to_many",
+        "name": "Specimen",
+        "required": false,
+        "target_type": "Specimen"
+      },
+      {
+        "backref": "Observations",
+        "label": "Patients",
+        "multiplicity": "many_to_many",
+        "name": "Patients",
+        "required": false,
+        "target_type": "Patient"
+      }
+    ],
+    "namespace": "http://hl7.org/fhir",
+    "program": "*",
+    "project": "*",
+    "properties": {
+      "code_coding_0_code": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/observation-codes",
+        "term": {
+          "description": "Type of observation (code / type). Code defined by a terminology system. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/observation-codes",
+          "termDef": {
+            "cde_id": "observation-codes",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "observation-codes",
+            "term_url": "http://hl7.org/fhir/ValueSet/observation-codes"
+          }
+        },
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_display": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_0_url": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_0_valueReference_reference": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Value of extension. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_1_url": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_1_valueCoding_code": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Value of extension. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/observation-codes",
+        "term": {
+          "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Value of extension. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/observation-codes",
+          "termDef": {
+            "cde_id": "observation-codes",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "example",
+            "term": "observation-codes",
+            "term_url": "http://hl7.org/fhir/ValueSet/observation-codes"
+          }
+        },
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_1_valueCoding_display": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Value of extension. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_extension_1_valueCoding_system": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. Additional content defined by implementations. Value of extension. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string"
+        ]
+      },
+      "code_coding_0_system": {
+        "description": "Type of observation (code / type). Code defined by a terminology system. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string"
+        ]
+      },
+      "created_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "extension_0_url": {
+        "description": "Additional content defined by implementations. Source of the definition for the extension code - a logical name or a URL.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "extension_0_valueUri": {
+        "description": "Additional content defined by implementations. Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "id": {
+        "description": "The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_lastUpdated": {
+        "description": "Metadata about the resource. When the resource last changed - e.g. when the version changed.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_code": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+        "term": {
+          "description": "Metadata about the resource. Security Labels applied to this resource. A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).. http://hl7.org/fhir/ValueSet/security-labels",
+          "termDef": {
+            "cde_id": "security-labels",
+            "cde_version": null,
+            "source": "fhir",
+            "strength": "extensible",
+            "term": "security-labels",
+            "term_url": "http://hl7.org/fhir/ValueSet/security-labels"
+          }
+        },
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_display": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. A representation of the meaning of the code in the system, following the rules of the system.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_security_0_system": {
+        "description": "Metadata about the resource. Security Labels applied to this resource. The identification of the code system that defines the meaning of the symbol in the code.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_source": {
+        "description": "Metadata about the resource. A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "meta_versionId": {
+        "description": "Metadata about the resource. The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "project_id": {
+        "$ref": "_definitions.yaml#/project_id"
+      },
+      "resourceType": {
+        "description": "Measurements and simple assertions made about a patient, device or other subject.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "state": {
+        "$ref": "_definitions.yaml#/state"
+      },
+      "subject_reference": {
+        "description": "Who and/or what the observation is about. A reference to a location at which the other resource is found. The reference may be a relative reference, in which case it is relative to the service base URL, or an absolute URL that resolves to the location where the resource is found. The reference may be version specific or not. If the reference is not to a FHIR RESTful server, then it should be assumed to be version specific. Internal fragment references (start with '#') refer to contained resources.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "submitter_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "type": {
+        "type": "string"
+      },
+      "updated_datetime": {
+        "$ref": "_definitions.yaml#/datetime"
+      },
+      "valueQuantity_system": {
+        "description": "Actual result. The identification of the system that provides the coded form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "valueQuantity_unit": {
+        "description": "Actual result. A human-readable form of the unit.",
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "valueQuantity_value": {
+        "description": "Actual result. The value of the measured amount. The value includes an implicit precision in the presentation of the value.",
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "required": [
+      "submitter_id",
+      "type",
+      "code_coding_0_extension_0_url",
+      "code_coding_0_extension_0_valueReference_reference",
+      "code_coding_0_extension_1_url",
+      "code_coding_0_extension_1_valueCoding_system",
+      "code_coding_0_extension_1_valueCoding_code",
+      "code_coding_0_extension_1_valueCoding_display",
+      "code_coding_0_system",
+      "code_coding_0_code",
+      "code_coding_0_display"
+    ],
+    "submittable": true,
+    "systemProperties": [
+      "id",
+      "project_id",
+      "created_datetime",
+      "updated_datetime",
+      "state"
+    ],
+    "title": "Observation",
+    "type": "object",
+    "uniqueKeys": [
+      [
+        "id"
+      ],
+      [
+        "project_id",
+        "submitter_id"
+      ]
+    ],
+    "validators": null
+  },
+  "_definitions.yaml": {
+    "id": "_definitions",
+    "UUID": {
+      "term": {
+        "$ref": "_terms.yaml#/UUID"
+      },
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    },
+    "parent_uuids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/UUID"
+      },
+      "uniqueItems": true
+    },
+    "foreign_key_project": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$ref": "#/UUID"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "to_one_project": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/foreign_key_project",
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        {
+          "$ref": "#/foreign_key_project"
+        }
+      ]
+    },
+    "to_many_project": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/foreign_key_project",
+            "minItems": 1
+          }
+        },
+        {
+          "$ref": "#/foreign_key_project"
+        }
+      ]
+    },
+    "foreign_key": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "$ref": "#/UUID"
+        },
+        "submitter_id": {
+          "type": "string"
+        }
+      }
+    },
+    "to_one": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/foreign_key",
+            "minItems": 1,
+            "maxItems": 1
+          }
+        },
+        {
+          "$ref": "#/foreign_key"
+        }
+      ]
+    },
+    "to_many": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/foreign_key",
+            "minItems": 1
+          }
+        },
+        {
+          "$ref": "#/foreign_key"
+        }
+      ]
+    },
+    "datetime": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "term": {
+        "$ref": "_terms.yaml#/datetime"
+      }
+    },
+    "file_name": {
+      "type": "string",
+      "term": {
+        "$ref": "_terms.yaml#/file_name"
+      }
+    },
+    "file_size": {
+      "type": "integer",
+      "term": {
+        "$ref": "_terms.yaml#/file_size"
+      }
+    },
+    "file_format": {
+      "type": "string",
+      "term": {
+        "$ref": "_terms.yaml#/file_format"
+      }
+    },
+    "ga4gh_drs_uri": {
+      "type": "string",
+      "term": {
+        "$ref": "_terms.yaml#/ga4gh_drs_uri"
+      }
+    },
+    "md5sum": {
+      "type": "string",
+      "term": {
+        "$ref": "_terms.yaml#/md5sum"
+      },
+      "pattern": "^[a-f0-9]{32}$"
+    },
+    "object_id": {
+      "type": "string",
+      "description": "The GUID of the object in the index service."
+    },
+    "release_state": {
+      "description": "Release state of an entity.",
+      "default": "unreleased",
+      "enum": [
+        "unreleased",
+        "released",
+        "redacted"
+      ]
+    },
+    "data_bundle_state": {
+      "description": "State of a data bundle.",
+      "default": "submitted",
+      "enum": [
+        "submitted",
+        "validated",
+        "error",
+        "released",
+        "suppressed",
+        "redacted"
+      ]
+    },
+    "data_file_error_type": {
+      "term": {
+        "$ref": "_terms.yaml#/data_file_error_type"
+      },
+      "enum": [
+        "file_size",
+        "file_format",
+        "md5sum"
+      ]
+    },
+    "state": {
+      "term": {
+        "$ref": "_terms.yaml#/state"
+      },
+      "default": "validated",
+      "downloadable": [
+        "uploaded",
+        "md5summed",
+        "validating",
+        "validated",
+        "error",
+        "invalid",
+        "released"
+      ],
+      "public": [
+        "live"
+      ],
+      "oneOf": [
+        {
+          "enum": [
+            "uploading",
+            "uploaded",
+            "md5summing",
+            "md5summed",
+            "validating",
+            "error",
+            "invalid",
+            "suppressed",
+            "redacted",
+            "live"
+          ]
+        },
+        {
+          "enum": [
+            "validated",
+            "submitted",
+            "released"
+          ]
+        }
+      ]
+    },
+    "file_state": {
+      "term": {
+        "$ref": "_terms.yaml#/file_state"
+      },
+      "default": "registered",
+      "enum": [
+        "registered",
+        "uploading",
+        "uploaded",
+        "validating",
+        "validated",
+        "submitted",
+        "processing",
+        "processed",
+        "released",
+        "error"
+      ]
+    },
+    "qc_metrics_state": {
+      "term": {
+        "$ref": "_terms.yaml#/qc_metric_state"
+      },
+      "enum": [
+        "FAIL",
+        "PASS",
+        "WARN"
+      ]
+    },
+    "project_id": {
+      "type": "string",
+      "term": {
+        "$ref": "_terms.yaml#/project_id"
+      }
+    },
+    "data_file_properties": {
+      "$ref": "#/ubiquitous_properties",
+      "file_name": {
+        "$ref": "#/file_name"
+      },
+      "file_size": {
+        "$ref": "#/file_size"
+      },
+      "file_format": {
+        "$ref": "#/file_format"
+      },
+      "md5sum": {
+        "$ref": "#/md5sum"
+      },
+      "object_id": {
+        "$ref": "#/object_id"
+      },
+      "file_state": {
+        "$ref": "#/file_state"
+      },
+      "error_type": {
+        "$ref": "#/data_file_error_type"
+      },
+      "ga4gh_drs_uri": {
+        "$ref": "#/ga4gh_drs_uri"
+      }
+    },
+    "workflow_properties": {
+      "$ref": "#/ubiquitous_properties",
+      "workflow_link": {
+        "description": "Link to Github hash for the CWL workflow used.",
+        "type": "string"
+      },
+      "workflow_version": {
+        "description": "Major version for a GDC workflow.",
+        "type": "string"
+      },
+      "workflow_start_datetime": {
+        "$ref": "#/datetime"
+      },
+      "workflow_end_datetime": {
+        "$ref": "#/datetime"
+      }
+    },
+    "ubiquitous_properties": {
+      "type": {
+        "type": "string"
+      },
+      "id": {
+        "$ref": "#/UUID",
+        "systemAlias": "node_id"
+      },
+      "submitter_id": {
+        "type": [
+          "string"
+        ],
+        "description": "A project-specific identifier for a node. This property is the calling card/nickname/alias for a unit of submission. It can be used in place of the UUID for identifying or recalling a node.\n"
+      },
+      "state": {
+        "$ref": "#/state"
+      },
+      "project_id": {
+        "$ref": "#/project_id"
+      },
+      "created_datetime": {
+        "$ref": "#/datetime"
+      },
+      "updated_datetime": {
+        "$ref": "#/datetime"
+      }
+    }
+  },
+  "_settings.yaml": {
+    "enable_case_cache": false,
+    "_dict_commit": "520a25999fd183f6c5b7ddef2980f3e839517da5",
+    "_dict_version": "0.2.1-9-g520a259"
+  },
+  "_terms.yaml": {
+    "id": "_terms",
+    "data_category": {
+      "description": "Broad categorization of the contents of the data file.\n"
+    },
+    "data_file_error_type": {
+      "description": "Type of error for the data file object.\n"
+    },
+    "data_format": {
+      "description": "Format of the data files.\n"
+    },
+    "data_type": {
+      "description": "Specific content type of the data file. (CMG)\n"
+    },
+    "datetime": {
+      "description": "A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm]\n"
+    },
+    "encoding": {
+      "description": "Version of ASCII encoding of quality values found in the file.\n",
+      "termDef": {
+        "term": "Encoding",
+        "source": "FastQC",
+        "cde_id": null,
+        "cde_version": null,
+        "term_url": "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/1%20Basic%20Statistics.html"
+      }
+    },
+    "file_format": {
+      "description": "The format of the data file object.\n"
+    },
+    "file_name": {
+      "description": "The name (or part of a name) of a file (of any type).\n"
+    },
+    "file_size": {
+      "description": "The size of the data file (object) in bytes.\n"
+    },
+    "file_state": {
+      "description": "The current state of the data file object.\n"
+    },
+    "md5sum": {
+      "description": "The 128-bit hash value expressed as a 32 digit hexadecimal number used as a file's digital fingerprint.\n"
+    },
+    "project_id": {
+      "description": "Unique ID for any specific defined piece of work that is undertaken or attempted to meet a single requirement.\n"
+    },
+    "state": {
+      "description": "The current state of the object.\n"
+    },
+    "UUID": {
+      "description": "A 128-bit identifier. Depending on the mechanism used to generate it, it is either guaranteed to be different from all other UUIDs/GUIDs generated until 3400 AD or extremely likely to be different. Its relatively small size lends itself well to sorting, ordering, and hashing of all sorts, storing in databases, simple allocation, and ease of programming in general.\n",
+      "termDef": {
+        "term": "Universally Unique Identifier",
+        "source": "NCIt",
+        "cde_id": "C54100",
+        "cde_version": null,
+        "term_url": "https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI_Thesaurus&version=16.02d&ns=NCI_Thesaurus&code=C54100"
+      }
+    },
+    "microsatellite_instability_abnormal": {
+      "description": "The yes/no indicator to signify the status of a tumor for microsatellite instability.\n",
+      "termDef": {
+        "term": "Microsatellite Instability Occurrence Indicator",
+        "source": "caDSR",
+        "cde_id": 3123142,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3123142&version=1.0"
+      }
+    },
+    "morphology": {
+      "description": "The third edition of the International Classification of Diseases for Oncology, published in 2000 used principally in tumor and cancer registries for coding the site (topography) and the histology (morphology) of neoplasms. The study of the structure of the cells and their arrangement to constitute tissues and, finally, the association among these to form organs. In pathology, the microscopic process of identifying normal and abnormal morphologic characteristics in tissues, by employing various cytochemical and immunocytochemical stains. A system of numbered categories for representation of data.\n",
+      "termDef": {
+        "term": "International Classification of Diseases for Oncology, Third Edition ICD-O-3 Histology Code",
+        "source": "caDSR",
+        "cde_id": 3226275,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3226275&version=1.0"
+      }
+    },
+    "new_event_anatomic_site": {
+      "description": "Text term to specify the anatomic location of the return of tumor after treatment.\n",
+      "termDef": {
+        "term": "New Neoplasm Event Occurrence Anatomic Site",
+        "source": "caDSR",
+        "cde_id": 3108271,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3108271&version=2.0"
+      }
+    },
+    "new_event_type": {
+      "description": "Text term to identify a new tumor event.\n",
+      "termDef": {
+        "term": "New Neoplasm Event Type",
+        "source": "caDSR",
+        "cde_id": 3119721,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3119721&version=1.0"
+      }
+    },
+    "normal_tumor_genotype_snp_match": {
+      "description": "Text term that represents whether or not the genotype of the normal tumor matches or if the data is not available.\n",
+      "termDef": {
+        "term": "Normal Tumor Genotype Match Indicator",
+        "source": "caDSR",
+        "cde_id": 4588156,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=4588156&version=1.0"
+      }
+    },
+    "number_proliferating_cells": {
+      "description": "Numeric value that represents the count of proliferating cells determined during pathologic review of the sample slide(s).\n",
+      "termDef": {
+        "term": "Pathology Review Slide Proliferating Cell Count",
+        "source": "caDSR",
+        "cde_id": 5432636,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432636&version=1.0"
+      }
+    },
+    "oct_embedded": {
+      "description": "Indicator of whether or not the sample was embedded in Optimal Cutting Temperature (OCT) compound.\n",
+      "termDef": {
+        "term": "Tissue Sample Optimal Cutting Temperature Compound Embedding Indicator",
+        "source": "caDSR",
+        "cde_id": 5432538,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432538&version=1.0"
+      }
+    },
+    "years_smoked": {
+      "description": "Numeric value (or unknown) to represent the number of years a person has been smoking (HARMONIZED). If the number of years is greater than 89, see 'years_smoked_gt89'.\n",
+      "termDef": {
+        "term": "Person Smoking Duration Year Count",
+        "source": "caDSR",
+        "cde_id": 3137957,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3137957&version=1.0"
+      }
+    },
+    "percent_eosinophil_infiltration": {
+      "description": "Numeric value to represent the percentage of infiltration by eosinophils in a tumor sample or specimen.\n",
+      "termDef": {
+        "term": "Specimen Eosinophilia Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2897700,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2897700&version=2.0"
+      }
+    },
+    "percent_gc_content": {
+      "description": "The overall %GC of all bases in all sequences.\n",
+      "termDef": {
+        "term": "%GC",
+        "source": "FastQC",
+        "cde_id": null,
+        "cde_version": null,
+        "term_url": "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/1%20Basic%20Statistics.html"
+      }
+    },
+    "percent_granulocyte_infiltration": {
+      "description": "Numeric value to represent the percentage of infiltration by granulocytes in a tumor sample or specimen.\n",
+      "termDef": {
+        "term": "Specimen Granulocyte Infiltration Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2897705,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2897705&version=2.0"
+      }
+    },
+    "percent_inflam_infiltration": {
+      "description": "Numeric value to represent local response to cellular injury, marked by capillary dilatation, edema and leukocyte infiltration; clinically, inflammation is manifest by reddness, heat, pain, swelling and loss of function, with the need to heal damaged tissue.\n",
+      "termDef": {
+        "term": "Specimen Inflammation Change Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2897695,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2897695&version=1.0"
+      }
+    },
+    "percent_lymphocyte_infiltration": {
+      "description": "Numeric value to represent the percentage of infiltration by lymphocytes in a solid tissue normal sample or specimen.\n",
+      "termDef": {
+        "term": "Specimen Lymphocyte Infiltration Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2897710,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2897710&version=2.0"
+      }
+    },
+    "percent_monocyte_infiltration": {
+      "description": "Numeric value to represent the percentage of monocyte infiltration in a sample or specimen.\n",
+      "termDef": {
+        "term": "Specimen Monocyte Infiltration Percentage Value",
+        "source": "caDSR",
+        "cde_id": 5455535,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5455535&version=1.0"
+      }
+    },
+    "percent_necrosis": {
+      "description": "Numeric value to represent the percentage of cell death in a malignant tumor sample or specimen.\n",
+      "termDef": {
+        "term": "Malignant Neoplasm Necrosis Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2841237,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2841237&version=1.0"
+      }
+    },
+    "percent_neutrophil_infiltration": {
+      "description": "Numeric value to represent the percentage of infiltration by neutrophils in a tumor sample or specimen.\n",
+      "termDef": {
+        "term": "Malignant Neoplasm Neutrophil Infiltration Percentage Cell Value",
+        "source": "caDSR",
+        "cde_id": 2841267,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2841267&version=1.0"
+      }
+    },
+    "percent_normal_cells": {
+      "description": "Numeric value to represent the percentage of normal cell content in a malignant tumor sample or specimen.\n",
+      "termDef": {
+        "term": "Malignant Neoplasm Normal Cell Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2841233,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2841233&version=1.0"
+      }
+    },
+    "percent_stromal_cells": {
+      "description": "Numeric value to represent the percentage of reactive cells that are present in a malignant tumor sample or specimen but are not malignant such as fibroblasts, vascular structures, etc.\n",
+      "termDef": {
+        "term": "Malignant Neoplasm Stromal Cell Percentage Value",
+        "source": "caDSR",
+        "cde_id": 2841241,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2841241&version=1.0"
+      }
+    },
+    "percent_tumor_cells": {
+      "description": "Numeric value that represents the percentage of infiltration by granulocytes in a sample.\n",
+      "termDef": {
+        "term": "Specimen Tumor Cell Percentage Value",
+        "source": "caDSR",
+        "cde_id": 5432686,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432686&version=1.0"
+      }
+    },
+    "percent_tumor_nuclei": {
+      "description": "Numeric value to represent the percentage of tumor nuclei in a malignant neoplasm sample or specimen.\n",
+      "termDef": {
+        "term": "Malignant Neoplasm Neoplasm Nucleus Percentage Cell Value",
+        "source": "caDSR",
+        "cde_id": 2841225,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2841225&version=1.0"
+      }
+    },
+    "perineural_invasion_present": {
+      "description": "a yes/no indicator to ask if perineural invasion or infiltration of tumor or cancer is present.\n",
+      "termDef": {
+        "term": "Tumor Perineural Invasion Ind",
+        "source": "caDSR",
+        "cde_id": 64181,
+        "cde_version": 3.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=64181&version=3.0"
+      }
+    },
+    "platform": {
+      "description": "Name of the platform used to obtain data.\n"
+    },
+    "portion_number": {
+      "description": "Numeric value that represents the sequential number assigned to a portion of the sample.\n",
+      "termDef": {
+        "term": "Biospecimen Portion Sequence Number",
+        "source": "caDSR",
+        "cde_id": 5432711,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432711&version=1.0"
+      }
+    },
+    "portion_weight": {
+      "description": "Numeric value that represents the sample portion weight, measured in milligrams.\n",
+      "termDef": {
+        "term": "Biospecimen Portion Weight Milligram Value",
+        "source": "caDSR",
+        "cde_id": 5432593,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432593&version=1.0"
+      }
+    },
+    "preservation_method": {
+      "description": "Text term that represents the method used to preserve the sample.\n",
+      "termDef": {
+        "term": "Tissue Sample Preservation Method Type",
+        "source": "caDSR",
+        "cde_id": 5432521,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432521&version=1.0"
+      }
+    },
+    "prior_malignancy": {
+      "description": "Text term to describe the patient's history of prior cancer diagnosis and the spatial location of any previous cancer occurrence.\n",
+      "termDef": {
+        "term": "Prior Cancer Diagnosis Occurrence Description Text",
+        "source": "caDSR",
+        "cde_id": 3382736,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3382736&version=2.0"
+      }
+    },
+    "prior_treatment": {
+      "description": "A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected.\n",
+      "termDef": {
+        "term": "Therapeutic Procedure Prior Specimen Collection Administered Yes No Unknown Not Applicable Indicator",
+        "source": "caDSR",
+        "cde_id": 4231463,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=4231463&version=1.0"
+      }
+    },
+    "progesterone_receptor_percent_positive_ihc": {
+      "description": "Classification to represent Progesterone Receptor Positive results expressed as a percentage value.\n",
+      "termDef": {
+        "term": "Progesterone Receptor Level Cell Percentage Category",
+        "source": "caDSR",
+        "cde_id": 3128342,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3128342&version=1.0"
+      }
+    },
+    "progesterone_receptor_result_ihc": {
+      "description": "Text term to represent the overall result of Progresterone Receptor (PR) testing.\n",
+      "termDef": {
+        "term": "Breast Carcinoma Progesterone Receptor Status",
+        "source": "caDSR",
+        "cde_id": 2957357,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2957357&version=2.0"
+      }
+    },
+    "progression_or_recurrence": {
+      "description": "Yes/No/Unknown indicator to identify whether a patient has had a new tumor event after initial treatment.\n",
+      "termDef": {
+        "term": "New Neoplasm Event Post Initial Therapy Indicator",
+        "source": "caDSR",
+        "cde_id": 3121376,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3121376&version=1.0"
+      }
+    },
+    "qc_metric_state": {
+      "description": "State classification given by FASTQC for the metric. Metric specific details about the states are available on their website.\n",
+      "termDef": {
+        "term": "QC Metric State",
+        "source": "FastQC",
+        "cde_id": null,
+        "cde_version": null,
+        "term_url": "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/"
+      }
+    },
+    "race": {
+      "description": "An arbitrary classification of a taxonomic group that is a division of a species (HARMONIZED). It usually arises as a consequence of geographical isolation within a species and is characterized by shared heredity, physical attributes and behavior, and in the case of humans, by common history, nationality, or geographic distribution. The provided values are based on the categories defined by the U.S. Office of Management and Business and used by the U.S. Census Bureau. (GTEx)\n",
+      "termDef": {
+        "term": "Race Category Text",
+        "source": "caDSR",
+        "cde_id": 2192199,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2192199&version=1.0"
+      }
+    },
+    "read_length": {
+      "description": "The length of the reads.\n"
+    },
+    "read_group_name": {
+      "description": "The name of the read group.\n"
+    },
+    "relationship_age_at_diagnosis": {
+      "description": "The age (in years) when the patient's relative was first diagnosed.\n",
+      "termDef": {
+        "term": "Relative Diagnosis Age Value",
+        "source": "caDSR",
+        "cde_id": 5300571,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5300571&version=1.0"
+      }
+    },
+    "relationship_to_proband": {
+      "description": "The subgroup that describes the state of connectedness between members of the unit of society organized around kinship ties.\n",
+      "termDef": {
+        "term": "Family Member Relationship Type",
+        "source": "caDSR",
+        "cde_id": 2690165,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2690165&version=2.0"
+      }
+    },
+    "relationship_type": {
+      "description": "The subgroup that describes the state of connectedness between members of the unit of society organized around kinship ties.\n",
+      "termDef": {
+        "term": "Family Member Relationship Type",
+        "source": "caDSR",
+        "cde_id": 2690165,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2690165&version=2.0"
+      }
+    },
+    "relative_with_cancer_history": {
+      "description": "Indicator to signify whether or not an individual's biological relative has been diagnosed with another type of cancer.\n",
+      "termDef": {
+        "term": "Other Cancer Biological Relative History Indicator",
+        "source": "caDSR",
+        "cde_id": 3901752,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3901752&version=1.0"
+      }
+    },
+    "residual_disease": {
+      "description": "Text terms to describe the status of a tissue margin following surgical resection.\n",
+      "termDef": {
+        "term": "Surgical Margin Resection Status",
+        "source": "caDSR",
+        "cde_id": 2608702,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2608702&version=1.0"
+      }
+    },
+    "RIN": {
+      "description": "A numerical assessment of the integrity of RNA based on the entire electrophoretic trace of the RNA sample including the presence or absence of degradation products.\n",
+      "termDef": {
+        "term": "Biospecimen RNA Integrity Number Value",
+        "source": "caDSR",
+        "cde_id": 5278775,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5278775&version=1.0"
+      }
+    },
+    "sample_type": {
+      "description": "Text term to describe the source of a biospecimen used for a laboratory test.\n",
+      "termDef": {
+        "term": "Specimen Type Collection Biospecimen Type",
+        "source": "caDSR",
+        "cde_id": 3111302,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3111302&version=2.0"
+      }
+    },
+    "sample_type_id": {
+      "description": "The accompanying sample type id for the sample type.\n"
+    },
+    "section_location": {
+      "description": "Tissue source of the slide.\n"
+    },
+    "sequencing_center": {
+      "description": "Name of the center that provided the sequence files.\n"
+    },
+    "shortest_dimension": {
+      "description": "Numeric value that represents the shortest dimension of the sample, measured in millimeters.\n",
+      "termDef": {
+        "term": "Tissue Sample Short Dimension Millimeter Measurement",
+        "source": "caDSR",
+        "cde_id": 5432603,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432603&version=1.0"
+      }
+    },
+    "site_of_resection_or_biopsy": {
+      "description": "The third edition of the International Classification of Diseases for Oncology, published in 2000, used principally in tumor and cancer registries for coding the site (topography) and the histology (morphology) of neoplasms. The description of an anatomical region or of a body part. Named locations of, or within, the body. A system of numbered categories for representation of data.\n",
+      "termDef": {
+        "term": "International Classification of Diseases for Oncology, Third Edition ICD-O-3 Site Code",
+        "source": "caDSR",
+        "cde_id": 3226281,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3226281&version=1.0"
+      }
+    },
+    "size_selection_range": {
+      "description": "Range of size selection.\n"
+    },
+    "smoking_history": {
+      "description": "Category describing current smoking status and smoking history as self-reported by a patient.\n",
+      "termDef": {
+        "term": "Smoking History",
+        "source": "caDSR",
+        "cde_id": 2181650,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2181650&version=1.0"
+      }
+    },
+    "smoking_intensity": {
+      "description": "Numeric computed value to represent lifetime tobacco exposure defined as number of cigarettes smoked per day x number of years smoked divided by 20\n",
+      "termDef": {
+        "term": "Person Cigarette Smoking History Pack Year Value",
+        "source": "caDSR",
+        "cde_id": 2955385,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2955385&version=1.0"
+      }
+    },
+    "source_center": {
+      "description": "Name of the center that provided the item.\n"
+    },
+    "spectrophotometer_method": {
+      "description": "Name of the method used to determine the concentration of purified nucleic acid within a solution.\n",
+      "termDef": {
+        "term": "Purification Nucleic Acid Solution Concentration Determination Method Type",
+        "source": "caDSR",
+        "cde_id": 3008378,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3008378&version=1.0"
+      }
+    },
+    "spike_ins_fasta": {
+      "description": "Name of the FASTA file that contains the spike-in sequences.\n"
+    },
+    "spike_ins_concentration": {
+      "description": "Spike in concentration.\n"
+    },
+    "target_capture_kit_name": {
+      "description": "Name of Target Capture Kit.\n"
+    },
+    "target_capture_kit_vendor": {
+      "description": "Vendor of Target Capture Kit.\n"
+    },
+    "target_capture_kit_catalog_number": {
+      "description": "Catalog of Target Capture Kit.\n"
+    },
+    "target_capture_kit_version": {
+      "description": "Version of Target Capture Kit.\n"
+    },
+    "target_capture_kit_target_region": {
+      "description": "Target Capture Kit BED file.\n"
+    },
+    "therapeutic_agents": {
+      "description": "Text identification of the individual agent(s) used as part of a prior treatment regimen.\n",
+      "termDef": {
+        "term": "Prior Therapy Regimen Text",
+        "source": "caDSR",
+        "cde_id": 2975232,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2975232&version=1.0"
+      }
+    },
+    "time_between_clamping_and_freezing": {
+      "description": "Numeric representation of the elapsed time between the surgical clamping of blood supply and freezing of the sample, measured in minutes.\n",
+      "termDef": {
+        "term": "Tissue Sample Clamping and Freezing Elapsed Minute Time",
+        "source": "caDSR",
+        "cde_id": 5432611,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432611&version=1.0"
+      }
+    },
+    "time_between_excision_and_freezing": {
+      "description": "Numeric representation of the elapsed time between the excision and freezing of the sample, measured in minutes.\n",
+      "termDef": {
+        "term": "Tissue Sample Excision and Freezing Elapsed Minute Time",
+        "source": "caDSR",
+        "cde_id": 5432612,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432612&version=1.0"
+      }
+    },
+    "tissue_or_organ_of_origin": {
+      "description": "Text term that describes the anatomic site of the tumor or disease.\n",
+      "termDef": {
+        "term": "Tumor Disease Anatomic Site",
+        "source": "caDSR",
+        "cde_id": 3427536,
+        "cde_version": 3.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3427536&version=3.0"
+      }
+    },
+    "tissue_type": {
+      "description": "Text term that represents a description of the kind of tissue collected with respect to disease status or proximity to tumor tissue.\n",
+      "termDef": {
+        "term": "Tissue Sample Description Type",
+        "source": "caDSR",
+        "cde_id": 5432687,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432687&version=1.0"
+      }
+    },
+    "to_trim_adapter_sequence": {
+      "description": "Does the user suggest adapter trimming?\n"
+    },
+    "tobacco_smoking_onset_year": {
+      "description": "The year in which the participant began smoking.\n",
+      "termDef": {
+        "term": "Started Smoking Year",
+        "source": "caDSR",
+        "cde_id": 2228604,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2228604&version=1.0"
+      }
+    },
+    "tobacco_smoking_quit_year": {
+      "description": "The year in which the participant quit smoking.\n",
+      "termDef": {
+        "term": "Stopped Smoking Year",
+        "source": "caDSR",
+        "cde_id": 2228610,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2228610&version=1.0"
+      }
+    },
+    "tobacco_smoking_status": {
+      "description": "Category describing current smoking status and smoking history as self-reported by a patient.\n",
+      "termDef": {
+        "term": "Patient Smoking History Category",
+        "source": "caDSR",
+        "cde_id": 2181650,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2181650&version=1.0"
+      }
+    },
+    "total_sequences": {
+      "description": "A count of the total number of sequences processed.\n",
+      "termDef": {
+        "term": "Total Sequences",
+        "source": "FastQC",
+        "cde_id": null,
+        "cde_version": null,
+        "term_url": "http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/1%20Basic%20Statistics.html"
+      }
+    },
+    "treatment_anatomic_site": {
+      "description": "The anatomic site or field targeted by a treatment regimen or single agent therapy.\n",
+      "termDef": {
+        "term": "Treatment Anatomic Site",
+        "source": null,
+        "cde_id": null,
+        "cde_version": null,
+        "term_url": null
+      }
+    },
+    "treatment_intent_type": {
+      "description": "Text term to identify the reason for the administration of a treatment regimen. [Manually-curated]\n",
+      "termDef": {
+        "term": "Treatment Regimen Intent Type",
+        "source": "caDSR",
+        "cde_id": 2793511,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2793511&version=1.0"
+      }
+    },
+    "treatment_or_therapy": {
+      "description": "A yes/no/unknown/not applicable indicator related to the administration of therapeutic agents received before the body specimen was collected.\n",
+      "termDef": {
+        "term": "Therapeutic Procedure Prior Specimen Collection Administered Yes No Unknown Not Applicable Indicator",
+        "source": "caDSR",
+        "cde_id": 4231463,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=4231463&version=1.0"
+      }
+    },
+    "treatment_outcome": {
+      "description": "Text term that describes the patient\u00bfs final outcome after the treatment was administered.\n",
+      "termDef": {
+        "term": "Treatment Outcome Type",
+        "source": "caDSR",
+        "cde_id": 5102383,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5102383&version=1.0"
+      }
+    },
+    "treatment_type": {
+      "description": "Text term that describes the kind of treatment administered.\n",
+      "termDef": {
+        "term": "Treatment Method Type",
+        "source": "caDSR",
+        "cde_id": 5102381,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5102381&version=1.0"
+      }
+    },
+    "tumor_grade": {
+      "description": "Numeric value to express the degree of abnormality of cancer cells, a measure of differentiation and aggressiveness.\n",
+      "termDef": {
+        "term": "Neoplasm Histologic Grade",
+        "source": "caDSR",
+        "cde_id": 2785839,
+        "cde_version": 2.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2785839&version=2.0"
+      }
+    },
+    "tumor_code": {
+      "description": "Diagnostic tumor code of the tissue sample source.\n"
+    },
+    "tumor_code_id": {
+      "description": "BCR-defined id code for the tumor sample.\n"
+    },
+    "tumor_descriptor": {
+      "description": "Text that describes the kind of disease present in the tumor specimen as related to a specific timepoint.\n",
+      "termDef": {
+        "term": "Tumor Tissue Disease Description Type",
+        "source": "caDSR",
+        "cde_id": 3288124,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3288124&version=1.0"
+      }
+    },
+    "tumor_stage": {
+      "description": "The extent of a cancer in the body. Staging is usually based on the size of the tumor, whether lymph nodes contain cancer, and whether the cancer has spread from the original site to other parts of the body. The accepted values for tumor_stage depend on the tumor site, type, and accepted staging system. These items should accompany the tumor_stage value as associated metadata.\n",
+      "termDef": {
+        "term": "Tumor Stage",
+        "source": "NCIt",
+        "cde_id": "C16899",
+        "cde_version": null,
+        "term_url": "https://ncit.nci.nih.gov/ncitbrowser/pages/concept_details.jsf?dictionary=NCI%20Thesaurus&code=C16899"
+      }
+    },
+    "vascular_invasion_present": {
+      "description": "The yes/no indicator to ask if large vessel or venous invasion was detected by surgery or presence in a tumor specimen.\n",
+      "termDef": {
+        "term": "Tumor Vascular Invasion Ind-3",
+        "source": "caDSR",
+        "cde_id": 64358,
+        "cde_version": 3.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=64358&version=3.0"
+      }
+    },
+    "vital_status": {
+      "description": "The survival state of the person registered on the protocol.\n",
+      "termDef": {
+        "term": "Patient Vital Status",
+        "source": "caDSR",
+        "cde_id": 5,
+        "cde_version": 5.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5&version=5.0"
+      }
+    },
+    "weight": {
+      "description": "The weight of the patient measured in lbs (HARMONIZED).\n",
+      "termDef": {
+        "term": "Patient Weight Measurement",
+        "source": "caDSR",
+        "cde_id": 651,
+        "cde_version": 4.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=651&version=4.0"
+      }
+    },
+    "well_number": {
+      "description": "Numeric value that represents the the well location within a plate for the analyte or aliquot from the sample.\n",
+      "termDef": {
+        "term": "Biospecimen Analyte or Aliquot Plate Well Number",
+        "source": "caDSR",
+        "cde_id": 5432613,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=5432613&version=1.0"
+      }
+    },
+    "workflow_type": {
+      "description": "Generic name for the workflow used to analyze a data set.\n"
+    },
+    "year_of_birth": {
+      "description": "Numeric value to represent the calendar year in which an individual was born.\n",
+      "termDef": {
+        "term": "Year Birth Date Number",
+        "source": "caDSR",
+        "cde_id": 2896954,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2896954&version=1.0"
+      }
+    },
+    "year_of_diagnosis": {
+      "description": "Numeric value to represent the year of an individual's initial pathologic diagnosis of cancer.\n",
+      "termDef": {
+        "term": "Year of initial pathologic diagnosis",
+        "source": "caDSR",
+        "cde_id": 2896960,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2896960&version=1.0"
+      }
+    },
+    "year_of_death": {
+      "description": "Numeric value to represent the year of the death of an individual.\n",
+      "termDef": {
+        "term": "Year Death Number",
+        "source": "caDSR",
+        "cde_id": 2897030,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=2897030&version=1.0"
+      }
+    },
+    "years_smoked_gt89": {
+      "description": "Indicate whether the numeric value to represent the number of years a person has been smoking (HARMONIZED) is greater than 89 years.\n",
+      "termDef": {
+        "term": "Person Smoking Duration Year Count",
+        "source": "caDSR",
+        "cde_id": 3137957,
+        "cde_version": 1.0,
+        "term_url": "https://cdebrowser.nci.nih.gov/CDEBrowser/search?elementDetails=9&FirstTimer=0&PageId=ElementDetailsGroup&publicId=3137957&version=1.0"
+      }
+    },
+    "ga4gh_drs_uri": {
+      "description": "DRS URI as defined by GA4GH DRS spec for pointers to file objects.\n"
+    }
+  }
+}
